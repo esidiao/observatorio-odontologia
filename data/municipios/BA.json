@@ -13,11 +13,23 @@
    "concluintes": 532,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 1143,
+   "estabelecimentos_esp_bucal": 69,
+   "estabelecimentos_esp_bucal_total": 769,
+   "estabelecimentos_lrpd": 6,
+   "estabelecimentos_lrpd_total": 8,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/010",
+    "157/001"
+   ]
   },
   {
    "codigo": "2910800",
@@ -31,11 +43,22 @@
    "concluintes": 245,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 187,
+   "estabelecimentos_esp_bucal": 7,
+   "estabelecimentos_esp_bucal_total": 61,
+   "estabelecimentos_lrpd": 4,
+   "estabelecimentos_lrpd_total": 4,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2933307",
@@ -49,11 +72,24 @@
    "concluintes": 172,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 124,
+   "estabelecimentos_esp_bucal": 3,
+   "estabelecimentos_esp_bucal_total": 14,
+   "estabelecimentos_lrpd": 2,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/010",
+    "114/018",
+    "157/001"
+   ]
   },
   {
    "codigo": "2914802",
@@ -67,11 +103,22 @@
    "concluintes": 112,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
-   "equipes_esb": null,
+   "dentistas_sus": 71,
+   "estabelecimentos_esp_bucal": 3,
+   "estabelecimentos_esp_bucal_total": 85,
    "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "estabelecimentos_lrpd_total": 2,
+   "equipes_esb": null,
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2909802",
@@ -85,11 +132,19 @@
    "concluintes": 39,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 22,
+   "estabelecimentos_esp_bucal": 1,
+   "estabelecimentos_esp_bucal_total": 5,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 1,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/005",
+    "157/001"
+   ]
   },
   {
    "codigo": "2919207",
@@ -103,11 +158,26 @@
    "concluintes": 71,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 70,
+   "estabelecimentos_esp_bucal": 4,
+   "estabelecimentos_esp_bucal_total": 33,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/008",
+    "114/011",
+    "114/013",
+    "114/014",
+    "157/001"
+   ]
   },
   {
    "codigo": "2918407",
@@ -121,11 +191,22 @@
    "concluintes": 46,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 86,
+   "estabelecimentos_esp_bucal": 4,
+   "estabelecimentos_esp_bucal_total": 17,
+   "estabelecimentos_lrpd": 3,
+   "estabelecimentos_lrpd_total": 3,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2918001",
@@ -139,11 +220,25 @@
    "concluintes": 74,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 85,
+   "estabelecimentos_esp_bucal": 5,
+   "estabelecimentos_esp_bucal_total": 31,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 1,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/008",
+    "114/014",
+    "114/018",
+    "157/001"
+   ]
   },
   {
    "codigo": "2904902",
@@ -157,11 +252,19 @@
    "concluintes": 41,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 22,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 8,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2928703",
@@ -175,11 +278,21 @@
    "concluintes": 38,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 42,
+   "estabelecimentos_esp_bucal": 1,
+   "estabelecimentos_esp_bucal_total": 19,
+   "estabelecimentos_lrpd": 3,
+   "estabelecimentos_lrpd_total": 3,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2915601",
@@ -193,11 +306,22 @@
    "concluintes": 9,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 28,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 12,
+   "estabelecimentos_lrpd": 2,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2931350",
@@ -211,11 +335,22 @@
    "concluintes": 54,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 47,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 2,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 3,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2919553",
@@ -229,11 +364,23 @@
    "concluintes": 45,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 42,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 27,
+   "estabelecimentos_lrpd": 3,
+   "estabelecimentos_lrpd_total": 5,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/008",
+    "157/001"
+   ]
   },
   {
    "codigo": "2913606",
@@ -247,11 +394,22 @@
    "concluintes": 40,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 86,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 31,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 1,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2924009",
@@ -265,11 +423,21 @@
    "concluintes": 49,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 46,
+   "estabelecimentos_esp_bucal": 1,
+   "estabelecimentos_esp_bucal_total": 3,
+   "estabelecimentos_lrpd": 3,
+   "estabelecimentos_lrpd_total": 7,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2914604",
@@ -283,11 +451,17 @@
    "concluintes": 0,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 57,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 5,
+   "estabelecimentos_lrpd": 5,
+   "estabelecimentos_lrpd_total": 5,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2923803",
@@ -301,11 +475,16 @@
    "concluintes": 30,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
+   "dentistas_sus": 7,
    "estabelecimentos_esp_bucal": null,
+   "estabelecimentos_esp_bucal_total": 1,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "157/001"
+   ]
   },
   {
    "codigo": "2908408",
@@ -319,11 +498,21 @@
    "concluintes": 0,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 26,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 20,
+   "estabelecimentos_lrpd": 2,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2911709",
@@ -337,11 +526,24 @@
    "concluintes": 66,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 54,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 10,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/016",
+    "114/018",
+    "157/001"
+   ]
   },
   {
    "codigo": "2900702",
@@ -355,11 +557,22 @@
    "concluintes": 43,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 56,
+   "estabelecimentos_esp_bucal": 3,
+   "estabelecimentos_esp_bucal_total": 23,
+   "estabelecimentos_lrpd": 3,
+   "estabelecimentos_lrpd_total": 3,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2903201",
@@ -373,11 +586,22 @@
    "concluintes": 16,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 97,
+   "estabelecimentos_esp_bucal": 3,
+   "estabelecimentos_esp_bucal_total": 24,
+   "estabelecimentos_lrpd": 2,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "2917508",
@@ -391,11 +615,21 @@
    "concluintes": 0,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 40,
+   "estabelecimentos_esp_bucal": 1,
+   "estabelecimentos_esp_bucal_total": 2,
+   "estabelecimentos_lrpd": 4,
+   "estabelecimentos_lrpd_total": 4,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/005",
+    "114/007",
+    "114/008",
+    "157/001"
+   ]
   },
   {
    "codigo": "2930105",
@@ -409,11 +643,22 @@
    "concluintes": 0,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 30,
+   "estabelecimentos_esp_bucal": 1,
+   "estabelecimentos_esp_bucal_total": 26,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 5,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   }
  ]
 }

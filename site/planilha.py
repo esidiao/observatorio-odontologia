@@ -108,7 +108,8 @@ def aba_municipios(wb, dir_municipios, nomes_uf):
     campos = ["vagas_presencial", "cursos_presencial", "n_ies", "matriculas",
               "matriculas_ead", "concluintes", "polos_ead",
               "dentistas_sus", "estabelecimentos_esp_bucal",
-              "equipes_esb", "estabelecimentos_lrpd"]
+              "estabelecimentos_esp_bucal_total", "equipes_esb",
+              "estabelecimentos_lrpd", "estabelecimentos_lrpd_total"]
     colunas = ["UF", "Estado", "Código IBGE", "Município"] + [
         catalogo.POR_CHAVE[c]["sigla"] for c in campos]
     _escrever_cabecalho(aba, colunas, [7, 20, 14, 30] + [14] * len(campos))

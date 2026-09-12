@@ -63,12 +63,15 @@ UF_POR_CODIGO = {
 CAMPOS_CNES_UF = [
     "municipios_com_dentista", "dentistas_sus", "dentistas_por_100k",
     "municipios_com_esp_bucal", "estabelecimentos_esp_bucal",
+    "municipios_com_esp_bucal_total", "estabelecimentos_esp_bucal_total",
     "municipios_com_esb", "equipes_esb_total",
     "municipios_com_lrpd", "estabelecimentos_lrpd",
+    "municipios_com_lrpd_total", "estabelecimentos_lrpd_total",
 ]
 CAMPOS_CNES_MUNICIPIO = [
-    "dentistas_sus", "estabelecimentos_esp_bucal", "equipes_esb",
-    "estabelecimentos_lrpd", "servicos_bucais",
+    "dentistas_sus", "estabelecimentos_esp_bucal",
+    "estabelecimentos_esp_bucal_total", "equipes_esb",
+    "estabelecimentos_lrpd", "estabelecimentos_lrpd_total", "servicos_bucais",
 ]
 
 
@@ -132,16 +135,26 @@ def juntar_cobertura(ufs, municipios_por_uf, cobertura):
     # de equipe. Lê-lo dos metadados evita inferir a ausência de um agregado
     # vazio, que também aconteceria num país sem nenhuma equipe.
     _meta_cob = cobertura.get("metadados") or {}
-    esb_medido = bool(_meta_cob.get("equipes_tipos_bucais")
-                      or _meta_cob.get("equipes_subtipos_bucais"))
+    _diag_cob = _meta_cob.get("diagnostico") or {}
+    # Quem decide se houve medição é o EXTRATOR, não a presença de códigos no
+    # domínio: na competência 202607 o domínio tem sete códigos de saúde bucal
+    # e mesmo assim não há medida, porque esses códigos pertencem a outro
+    # catálogo que não o da coluna TP_EQUIPE. Olhar o domínio fazia o ICSB sair
+    # ZERO — afirmando que nenhum município do país tem equipe de saúde bucal.
+    esb_medido = not (_diag_cob.get("equipes_catalogo_incompativel")
+                      or _diag_cob.get("equipes_sem_dominio"))
 
     com_dentista = defaultdict(int)
     com_esp = defaultdict(int)
+    com_esp_total = defaultdict(int)
     com_esb = defaultdict(int)
     com_lrpd = defaultdict(int)
+    com_lrpd_total = defaultdict(int)
     profissionais = defaultdict(int)
     estab_esp = defaultdict(int)
+    estab_esp_total = defaultdict(int)
     estab_lrpd = defaultdict(int)
+    estab_lrpd_total = defaultdict(int)
     equipes = defaultdict(int)
 
     for codigo, m in por_municipio.items():
@@ -154,9 +167,15 @@ def juntar_cobertura(ufs, municipios_por_uf, cobertura):
         if m.get("estabelecimentos_esp_bucal"):
             com_esp[uf] += 1
             estab_esp[uf] += m["estabelecimentos_esp_bucal"]
+        if m.get("estabelecimentos_esp_bucal_total"):
+            com_esp_total[uf] += 1
+            estab_esp_total[uf] += m["estabelecimentos_esp_bucal_total"]
         if m.get("estabelecimentos_lrpd"):
             com_lrpd[uf] += 1
             estab_lrpd[uf] += m["estabelecimentos_lrpd"]
+        if m.get("estabelecimentos_lrpd_total"):
+            com_lrpd_total[uf] += 1
+            estab_lrpd_total[uf] += m["estabelecimentos_lrpd_total"]
         if esb_medido and m.get("equipes_esb"):
             com_esb[uf] += 1
             equipes[uf] += m["equipes_esb"]
@@ -170,8 +189,12 @@ def juntar_cobertura(ufs, municipios_por_uf, cobertura):
                                            d.get("populacao"))
         d["municipios_com_esp_bucal"] = com_esp.get(sigla, 0)
         d["estabelecimentos_esp_bucal"] = estab_esp.get(sigla, 0)
+        d["municipios_com_esp_bucal_total"] = com_esp_total.get(sigla, 0)
+        d["estabelecimentos_esp_bucal_total"] = estab_esp_total.get(sigla, 0)
         d["municipios_com_lrpd"] = com_lrpd.get(sigla, 0)
         d["estabelecimentos_lrpd"] = estab_lrpd.get(sigla, 0)
+        d["municipios_com_lrpd_total"] = com_lrpd_total.get(sigla, 0)
+        d["estabelecimentos_lrpd_total"] = estab_lrpd_total.get(sigla, 0)
         d["municipios_com_esb"] = com_esb.get(sigla, 0) if esb_medido else None
         d["equipes_esb_total"] = equipes.get(sigla, 0) if esb_medido else None
 
@@ -180,7 +203,11 @@ def juntar_cobertura(ufs, municipios_por_uf, cobertura):
             cnes = por_municipio.get(str(m["codigo"])[:6], {})
             m["dentistas_sus"] = cnes.get("dentistas_sus")
             m["estabelecimentos_esp_bucal"] = cnes.get("estabelecimentos_esp_bucal")
+            m["estabelecimentos_esp_bucal_total"] = cnes.get(
+                "estabelecimentos_esp_bucal_total")
             m["estabelecimentos_lrpd"] = cnes.get("estabelecimentos_lrpd")
+            m["estabelecimentos_lrpd_total"] = cnes.get(
+                "estabelecimentos_lrpd_total")
             m["equipes_esb"] = cnes.get("equipes_esb") if esb_medido else None
             m["servicos_bucais"] = cnes.get("servicos")
 
@@ -255,13 +282,41 @@ def limitacoes(ufs, qualidade, cobertura):
             "O laboratório de prótese dentária (serviço 157) é publicado como "
             "contagem própria e NÃO entra em índice nem se soma à rede "
             "especializada: é outra política, com outra unidade de conta.")
-        if not (meta.get("equipes_tipos_bucais")
-                or meta.get("equipes_subtipos_bucais")):
+        diag = meta.get("diagnostico") or {}
+        if diag.get("equipes_catalogo_incompativel"):
+            itens.append(
+                "As equipes de saúde bucal NÃO são mensuráveis nesta base, e o "
+                "ICSB está nulo — não zerado. A coluna TP_EQUIPE de tbEquipe "
+                "usa os códigos 70, 71, 72…, e nenhuma tabela de domínio do "
+                "export os nomeia: tbTipoEquipe, tbGrupoEquipe e "
+                "tbTipoEqSubTipo numeram de 01 a 30. Casar um catálogo contra "
+                "o outro devolveria "
+                f"{diag.get('equipes_alcancadas_pelo_dominio')} de "
+                f"{diag.get('equipes_lidas')} equipes por coincidência de "
+                "numeração, número plausível e sem sentido. Preferimos a "
+                "lacuna declarada.")
+        elif not (meta.get("equipes_tipos_bucais")
+                  or meta.get("equipes_subtipos_bucais")):
             itens.append(
                 "As equipes de saúde bucal NÃO foram medidas nesta execução: a "
                 "tabela de domínio de tipos de equipe do CNES não pôde ser "
                 "lida, e sem ela não há como saber quais códigos são de saúde "
                 "bucal. O ICSB está nulo, não zerado.")
+        itens.append(
+            "A rede especializada conta apenas os estabelecimentos que ofertam "
+            "o serviço AO SUS. O total declarado — que inclui o consultório "
+            "privado que registra o serviço 114 no cadastro — é publicado ao "
+            "lado, nos campos terminados em `_total`: a distância entre os "
+            "dois diz quanto da rede especializada de saúde bucal do município "
+            "é pública.")
+        if diag.get("st_ativo_sn_vazio_no_export"):
+            itens.append(
+                "A coluna ST_ATIVO_SN de rlEstabServClass vem vazia em todas as "
+                "linhas deste export do CNES, então não há como excluir "
+                "serviço marcado como inativo. O filtro existe no código dos "
+                "observatórios irmãos e, medido aqui, nunca excluiu nada — "
+                "fica registrado como limitação em vez de passar por filtro "
+                "que funciona.")
         else:
             com_dentista = sum(d.get("municipios_com_dentista") or 0
                                for d in ufs.values())

@@ -13,11 +13,22 @@
    "concluintes": 39,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 212,
+   "estabelecimentos_esp_bucal": 20,
+   "estabelecimentos_esp_bucal_total": 170,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "3204609",
@@ -31,11 +42,18 @@
    "concluintes": 34,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
+   "dentistas_sus": 10,
    "estabelecimentos_esp_bucal": null,
-   "equipes_esb": null,
+   "estabelecimentos_esp_bucal_total": 8,
    "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "estabelecimentos_lrpd_total": 1,
+   "equipes_esb": null,
+   "servicos_bucais": [
+    "114/001",
+    "114/005",
+    "114/006",
+    "157/001"
+   ]
   },
   {
    "codigo": "3205309",
@@ -49,11 +67,30 @@
    "concluintes": 183,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 240,
+   "estabelecimentos_esp_bucal": 13,
+   "estabelecimentos_esp_bucal_total": 267,
+   "estabelecimentos_lrpd": 2,
+   "estabelecimentos_lrpd_total": 2,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/008",
+    "114/010",
+    "114/011",
+    "114/013",
+    "114/014",
+    "114/016",
+    "114/017",
+    "114/018",
+    "157/001"
+   ]
   },
   {
    "codigo": "3205200",
@@ -67,11 +104,23 @@
    "concluintes": 28,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 191,
+   "estabelecimentos_esp_bucal": 12,
+   "estabelecimentos_esp_bucal_total": 282,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 5,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/011",
+    "157/001"
+   ]
   },
   {
    "codigo": "3201506",
@@ -85,11 +134,22 @@
    "concluintes": 36,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 73,
+   "estabelecimentos_esp_bucal": 6,
+   "estabelecimentos_esp_bucal_total": 17,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 1,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "157/001"
+   ]
   },
   {
    "codigo": "3202405",
@@ -103,11 +163,21 @@
    "concluintes": 43,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
-   "equipes_esb": null,
+   "dentistas_sus": 32,
+   "estabelecimentos_esp_bucal": 2,
+   "estabelecimentos_esp_bucal_total": 42,
    "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "estabelecimentos_lrpd_total": null,
+   "equipes_esb": null,
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/011"
+   ]
   },
   {
    "codigo": "3201209",
@@ -121,11 +191,23 @@
    "concluintes": 61,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 105,
+   "estabelecimentos_esp_bucal": 7,
+   "estabelecimentos_esp_bucal_total": 37,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 1,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/018",
+    "157/001"
+   ]
   },
   {
    "codigo": "3203908",
@@ -139,11 +221,23 @@
    "concluintes": 34,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 25,
+   "estabelecimentos_esp_bucal": 1,
+   "estabelecimentos_esp_bucal_total": 18,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 1,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/008",
+    "114/018",
+    "157/001"
+   ]
   },
   {
    "codigo": "3203205",
@@ -157,11 +251,24 @@
    "concluintes": 48,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 71,
+   "estabelecimentos_esp_bucal": 5,
+   "estabelecimentos_esp_bucal_total": 149,
+   "estabelecimentos_lrpd": 1,
+   "estabelecimentos_lrpd_total": 7,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/011",
+    "114/013",
+    "157/001"
+   ]
   },
   {
    "codigo": "3204906",
@@ -175,11 +282,27 @@
    "concluintes": 0,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
-   "equipes_esb": null,
+   "dentistas_sus": 27,
+   "estabelecimentos_esp_bucal": 7,
+   "estabelecimentos_esp_bucal_total": 28,
    "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "estabelecimentos_lrpd_total": null,
+   "equipes_esb": null,
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/008",
+    "114/011",
+    "114/012",
+    "114/013",
+    "114/014",
+    "114/015"
+   ]
   }
  ]
 }

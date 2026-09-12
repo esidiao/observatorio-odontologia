@@ -53,6 +53,22 @@ terapêutica. Aqui não há o que separar: o indicador conta o estabelecimento u
 vez, e a lista de classificações declaradas em cada município sai no detalhe,
 para quem quiser olhar.
 
+SERVIÇO DECLARADO NÃO É SERVIÇO PÚBLICO
+-----------------------------------------
+`rlEstabServClass` traz `CO_AMBULATORIAL_SUS` e `CO_HOSPITALAR_SUS` (1 = sim,
+2 = não), e sem olhá-las o indicador conta consultório privado como rede
+pública: existe estabelecimento que declara o serviço 114 com atendimento SUS
+igual a 2. Como a pergunta deste observatório é sobre a rede que absorve quem
+se forma, a rede especializada conta apenas os que ofertam ao SUS — e o total
+declarado, público mais privado, é publicado ao lado, porque a distância entre
+os dois também é informação.
+
+O `ST_ATIVO_SN` da mesma tabela vem VAZIO em 100% das linhas deste export —
+medido aqui e na fatia do observatório de Fonoaudiologia. O filtro de serviço
+inativo herdado dos irmãos nunca filtrou nada; em vez de mantê-lo fingindo
+trabalhar, o extrator conta quantas linhas trazem situação preenchida e registra
+isso no diagnóstico.
+
 O LABORATÓRIO DE PRÓTESE DENTÁRIA É EXTRAÍDO, NÃO FUNDIDO
 -----------------------------------------------------------
 O serviço 157 (LABORATÓRIO DE PRÓTESE DENTÁRIA) aparece na mesma leitura e sai
@@ -60,33 +76,28 @@ em campo próprio. Não entra em índice nem se soma à rede especializada: é o
 política, com outra unidade de conta, e somá-lo mediria duas coisas num número
 só.
 
-AS EQUIPES SÃO DESCOBERTAS PELO DOMÍNIO, NÃO POR CÓDIGO FIXO
---------------------------------------------------------------
-`tbEquipe` diz o tipo de cada equipe por código; o nome por extenso está em
-`tbTipoEquipe` e `tbSubTipoEquipe`. Os códigos de saúde bucal são DESCOBERTOS
-lendo esses nomes, e os que casaram vão para a proveniência com o rótulo que os
-identificou. Fixá-los aqui envelheceria em silêncio: o código continuaria
-válido e passaria a nomear outra coisa. Se o domínio não for lido, a fatia de
-equipes fica sem filtro possível e o indicador sai NULO — declarado ausente,
-nunca zerado.
+AS EQUIPES DE SAÚDE BUCAL NÃO SÃO MENSURÁVEIS NESTA BASE
+----------------------------------------------------------
+Medido na competência 202607, e é o achado que tirou o ICSB do ar: a coluna
+`TP_EQUIPE` de `tbEquipe` usa os códigos 70, 71, 72, 76… e NENHUMA tabela de
+domínio deste export os nomeia. As três candidatas — `tbTipoEquipe`,
+`tbGrupoEquipe` e `tbTipoEqSubTipo` — numeram de 01 a 30, um espaço de códigos
+inteiramente diferente. Não há, dentro da base, como saber qual valor de
+`TP_EQUIPE` significa equipe de saúde bucal.
 
-E os dois conjuntos são casados SEPARADAMENTE, cada um contra a sua coluna.
-Tipo e subtipo têm numeração própria e sobreposta: na competência 202607 o tipo
-`01` é "ESF transitória com saúde bucal", e nada garante que o subtipo `01` de
-uma competência futura seja de saúde bucal. Casar um conjunto único contra
-"tipo ou subtipo" funcionaria hoje e passaria a contar equipe errada no dia em
-que a numeração do subtipo mudasse — sem erro, só com um número maior.
+O perigo aqui não é o dado faltar, é ele parecer existir. Casar os códigos de
+`tbTipoEquipe` contra `TP_EQUIPE` "funciona": devolve 852 equipes de 125.202 e
+157 municípios, números plausíveis à primeira vista e completamente sem
+sentido — são as equipes cujo tipo por acaso tem o mesmo número em dois
+catálogos que não se falam. Um indicador assim não quebra nada e mente em toda
+página.
 
-O QUE ENTRA COMO "EQUIPE DE SAÚDE BUCAL"
-------------------------------------------
-Na competência 202607 casam sete tipos, e eles não são todos a mesma coisa:
-duas são equipes de saúde bucal propriamente ditas (ESB e ESB modalidade II) e
-cinco são equipes de atenção básica que INCLUEM saúde bucal (ESF transitória,
-ESF ribeirinha, ESF fluvial, equipe de agentes comunitários e equipe de atenção
-básica tipo III, todas "com saúde bucal"). O indicador conta as sete, porque a
-pergunta é "há equipe com saúde bucal na atenção primária deste município?" —
-e não "há uma ESB isolada?". Os rótulos ficam na proveniência para quem quiser
-refazer a conta com outro recorte.
+Por isso `_compativel` MEDE a compatibilidade antes de usar: se os códigos
+descobertos no domínio não cobrem uma fração mínima das equipes existentes, o
+catálogo é declarado incompatível e o indicador sai NULO, com o motivo na
+proveniência. A fatia de equipes continua sendo baixada e guardada — se uma
+competência futura passar a exportar o catálogo certo, a medição volta sozinha,
+sem nova leitura de uma hora.
 
 DUAS FASES, COM CACHE ENTRE ELAS
 ---------------------------------
@@ -387,9 +398,12 @@ def baixar_fatias(competencia, cache, rebaixar=False):
                 linhas.append([_limpo(linha.get("CO_UNIDADE")),
                                _limpo(linha.get("CO_SERVICO")),
                                _limpo(linha.get("CO_CLASSIFICACAO")),
-                               _limpo(linha.get("ST_ATIVO_SN"))])
+                               _limpo(linha.get("ST_ATIVO_SN")),
+                               _limpo(linha.get("CO_AMBULATORIAL_SUS")),
+                               _limpo(linha.get("CO_HOSPITALAR_SUS"))])
         _escrever(alvos["servicos"],
-                  ["CO_UNIDADE", "CO_SERVICO", "CO_CLASSIFICACAO", "ST_ATIVO_SN"],
+                  ["CO_UNIDADE", "CO_SERVICO", "CO_CLASSIFICACAO", "ST_ATIVO_SN",
+                   "CO_AMBULATORIAL_SUS", "CO_HOSPITALAR_SUS"],
                   linhas)
         print(f"[CNES] {total} registros de serviço; {len(linhas)} dos serviços "
               f"{SERVICO_ESPECIALIZADO}/{SERVICO_PROTESE} "
@@ -513,55 +527,104 @@ def rede_especializada(caminho, ativos, conhecidos):
     especialidades de cada unidade.
     """
     especializada = defaultdict(set)
+    especializada_sus = defaultdict(set)
     protese = defaultdict(set)
+    protese_sus = defaultdict(set)
     detalhe = defaultdict(lambda: defaultdict(set))
     contadores = defaultdict(int)
-    total = inativos = 0
+    total = com_situacao = 0
 
     with open(caminho, encoding="utf-8") as f:
         for linha in csv.DictReader(f, delimiter=";"):
             total += 1
-            if linha["ST_ATIVO_SN"].upper() == "N":
-                inativos += 1
-                continue
+            if linha.get("ST_ATIVO_SN"):
+                com_situacao += 1
             municipio = _classificar(linha["CO_UNIDADE"], ativos, conhecidos,
                                      contadores)
             if not municipio:
                 continue
             unidade = linha["CO_UNIDADE"]
+            # SUS quando o estabelecimento oferta o serviço ao SUS em regime
+            # ambulatorial OU hospitalar. "1" é sim; "2" é não.
+            sus = (linha.get("CO_AMBULATORIAL_SUS") == "1"
+                   or linha.get("CO_HOSPITALAR_SUS") == "1")
             detalhe[municipio][
                 f"{linha['CO_SERVICO']}/{linha['CO_CLASSIFICACAO']}"].add(unidade)
             if linha["CO_SERVICO"] == SERVICO_ESPECIALIZADO:
                 especializada[municipio].add(unidade)
+                if sus:
+                    especializada_sus[municipio].add(unidade)
             elif linha["CO_SERVICO"] == SERVICO_PROTESE:
                 protese[municipio].add(unidade)
+                if sus:
+                    protese_sus[municipio].add(unidade)
 
-    return especializada, protese, detalhe, {
+    return especializada_sus, especializada, protese_sus, protese, detalhe, {
         "servicos_bucais": total,
-        "servicos_marcados_inativos": inativos,
+        "servicos_com_situacao_preenchida": com_situacao,
+        "st_ativo_sn_vazio_no_export": com_situacao == 0,
         "servicos_em_estabelecimento_desabilitado": contadores["desabilitado"],
         "servicos_sem_cadastro": contadores["sem_cadastro"],
     }
 
 
+# Fração mínima das equipes que os códigos do domínio precisam alcançar para
+# que o catálogo seja considerado compatível com a coluna TP_EQUIPE. Na 202607
+# a interseção cobre 0,7% — coincidência de numeração entre dois catálogos, não
+# correspondência. Uma equipe de saúde bucal em cada mil equipes do país seria
+# um número absurdo, e é isso que a guarda enxerga.
+COBERTURA_MINIMA_CATALOGO = 0.05
+
+
+def _compativel(caminho, tipos, subtipos):
+    """
+    Mede se o catálogo lido descreve mesmo a coluna TP_EQUIPE.
+
+    Existe porque o contrário é indistinguível de dado: casar `tbTipoEquipe`
+    (01..30) contra `TP_EQUIPE` (70, 71, 72…) devolve algumas centenas de
+    equipes, número plausível o bastante para ninguém conferir. A guarda compara
+    a fração de linhas alcançadas com um piso — e, não alcançando, diz que o
+    catálogo é incompatível em vez de deixar passar um indicador de mentira.
+    """
+    total = alcancadas = 0
+    with open(caminho, encoding="utf-8") as f:
+        for linha in csv.DictReader(f, delimiter=";"):
+            total += 1
+            if linha["TIPO"] in tipos or (linha["SUBTIPO"]
+                                          and linha["SUBTIPO"] in subtipos):
+                alcancadas += 1
+    fracao = (alcancadas / total) if total else 0.0
+    return fracao >= COBERTURA_MINIMA_CATALOGO, total, alcancadas, fracao
+
+
 def equipes_saude_bucal(caminho, ativos, conhecidos, tipos, subtipos):
     """
-    Equipes de saúde bucal por município.
+    Equipes de saúde bucal por município — quando a base permitir medi-las.
 
     `tipos` e `subtipos` vêm do domínio, e cada um é casado contra a SUA coluna:
-    as duas numerações são próprias e se sobrepõem, então um conjunto único
-    contra "tipo ou subtipo" contaria equipe errada assim que a numeração do
-    subtipo mudasse.
+    as duas numerações são próprias e se sobrepõem.
 
-    Os dois vazios significam que o domínio não foi lido: o indicador sai NULO,
-    não zero. Zero afirmaria que não existe equipe de saúde bucal no país
-    inteiro — afirmação forte sustentada por uma tabela de nomes que não pôde
-    ser aberta.
+    Devolve NULO em dois casos, e os dois são ausência declarada, nunca zero:
+    quando o domínio não pôde ser lido, e quando o domínio lido não descreve a
+    coluna — que é a situação da competência 202607, onde `TP_EQUIPE` usa 70,
+    71, 72… e o catálogo exportado numera de 01 a 30.
     """
     if not tipos and not subtipos:
         return None, {"equipes_sem_dominio": True}
 
     tipos, subtipos = set(tipos), set(subtipos)
+    ok, total_linhas, alcancadas, fracao = _compativel(caminho, tipos, subtipos)
+    if not ok:
+        print(f"[CNES] catálogo de equipes INCOMPATÍVEL: os códigos do domínio "
+              f"alcançam {alcancadas} de {total_linhas} equipes ({fracao:.2%}), "
+              f"abaixo do piso de {COBERTURA_MINIMA_CATALOGO:.0%}. "
+              "TP_EQUIPE usa outro espaço de códigos; o indicador sai NULO.")
+        return None, {
+            "equipes_catalogo_incompativel": True,
+            "equipes_lidas": total_linhas,
+            "equipes_alcancadas_pelo_dominio": alcancadas,
+            "equipes_fracao_alcancada": round(fracao, 6),
+        }
     por_municipio = defaultdict(set)
     contadores = defaultdict(int)
     total = casadas = desativadas = 0
@@ -622,18 +685,25 @@ def conferir_juncao(casos, limite=LIMITE_SEM_CADASTRO):
                          + "\n  - ".join(problemas))
 
 
-def montar(competencia, sus, todos, especializada, protese, esb, detalhe,
-           dominio, diagnostico):
+def montar(competencia, sus, todos, especializada, especializada_total,
+           protese, protese_total, esb, detalhe, dominio, diagnostico):
     municipios = {}
-    chaves = set(sus) | set(todos) | set(especializada) | set(protese)
+    chaves = (set(sus) | set(todos) | set(especializada_total)
+              | set(protese_total))
     if esb:
         chaves |= set(esb)
     for codigo in chaves:
         municipios[codigo] = {
             "dentistas_sus": len(sus.get(codigo, ())) or None,
             "dentistas_total": len(todos.get(codigo, ())) or None,
+            # O indicador conta o que atende pelo SUS; o total declarado
+            # (público mais privado) sai ao lado, porque a diferença é dado.
             "estabelecimentos_esp_bucal": len(especializada.get(codigo, ())) or None,
+            "estabelecimentos_esp_bucal_total": len(
+                especializada_total.get(codigo, ())) or None,
             "estabelecimentos_lrpd": len(protese.get(codigo, ())) or None,
+            "estabelecimentos_lrpd_total": len(
+                protese_total.get(codigo, ())) or None,
             # None quando o domínio não foi lido — e aí é ausência, não zero.
             "equipes_esb": ((len(esb.get(codigo, ())) or None)
                             if esb is not None else None),
@@ -668,6 +738,20 @@ def montar(competencia, sus, todos, especializada, protese, esb, detalhe,
             ),
             "equipes_tipos_bucais": (dominio or {}).get("tipos_bucais") or {},
             "equipes_subtipos_bucais": (dominio or {}).get("subtipos_bucais") or {},
+            "equipes_catalogo_ausente": (
+                "Nenhuma tabela de domínio deste export nomeia os códigos de "
+                "TP_EQUIPE (70, 71, 72…): tbTipoEquipe, tbGrupoEquipe e "
+                "tbTipoEqSubTipo numeram de 01 a 30. Sem catálogo não há como "
+                "saber qual tipo é equipe de saúde bucal, e o indicador sai "
+                "nulo em vez de contar por coincidência de numeração."
+            ),
+            "servico_criterio_sus": (
+                "A rede especializada conta estabelecimentos que ofertam o "
+                "serviço AO SUS (CO_AMBULATORIAL_SUS ou CO_HOSPITALAR_SUS = 1). "
+                "O total declarado, que inclui o privado, sai no campo "
+                "*_total: consultório particular que declara o serviço 114 não "
+                "é rede pública."
+            ),
             "equipes_criterio": (
                 "tipos e subtipos de equipe cujo nome no domínio contém 'saúde "
                 "bucal' ou 'eSB', descobertos na competência lida e casados "
@@ -732,8 +816,8 @@ def main():
 
     dominio = json.loads(fatias["dominio"].read_text(encoding="utf-8"))
     sus, todos, diag_ch = forca_de_trabalho(fatias["vinculos"], ativos, conhecidos)
-    especializada, protese, detalhe, diag_sc = rede_especializada(
-        fatias["servicos"], ativos, conhecidos)
+    (especializada, especializada_total, protese, protese_total, detalhe,
+     diag_sc) = rede_especializada(fatias["servicos"], ativos, conhecidos)
     esb, diag_eq = equipes_saude_bucal(
         fatias["equipes"], ativos, conhecidos,
         dominio.get("tipos_bucais") or {}, dominio.get("subtipos_bucais") or {})
@@ -755,8 +839,9 @@ def main():
                       diag_eq["equipes_em_estabelecimento_desabilitado"]))
     conferir_juncao(casos)
 
-    saida = montar(competencia, sus, todos, especializada, protese, esb, detalhe,
-                   dominio, {**diag_ch, **diag_sc, **diag_eq})
+    saida = montar(competencia, sus, todos, especializada, especializada_total,
+                   protese, protese_total, esb, detalhe, dominio,
+                   {**diag_ch, **diag_sc, **diag_eq})
     Path(args.saida).parent.mkdir(parents=True, exist_ok=True)
     Path(args.saida).write_text(
         json.dumps(saida, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -764,14 +849,27 @@ def main():
     n_forca = sum(1 for m in saida["municipios"].values() if m["dentistas_sus"])
     n_esp = sum(1 for m in saida["municipios"].values()
                 if m["estabelecimentos_esp_bucal"])
+    n_esp_tot = sum(1 for m in saida["municipios"].values()
+                    if m["estabelecimentos_esp_bucal_total"])
     n_lrpd = sum(1 for m in saida["municipios"].values()
                  if m["estabelecimentos_lrpd"])
+    n_lrpd_tot = sum(1 for m in saida["municipios"].values()
+                     if m["estabelecimentos_lrpd_total"])
     print(f"\n[CNES] municípios com cirurgião-dentista no SUS: {n_forca}")
-    print(f"[CNES] municípios com serviço 114 (rede especializada): {n_esp}")
-    print(f"[CNES] municípios com laboratório de prótese (157): {n_lrpd}")
+    print(f"[CNES] municípios com serviço 114 ofertado ao SUS: {n_esp} "
+          f"(declarado por qualquer natureza: {n_esp_tot})")
+    print(f"[CNES] municípios com laboratório de prótese ao SUS: {n_lrpd} "
+          f"(declarado: {n_lrpd_tot})")
     if esb is None:
-        print("[CNES] equipes de saúde bucal: NULO — o domínio não foi lido, "
-              "e sem ele não há como saber quais códigos são de saúde bucal.")
+        # A mensagem precisa dizer QUAL das duas ausências ocorreu: domínio não
+        # lido e domínio incompatível têm causas e prazos diferentes.
+        if diag_eq.get("equipes_catalogo_incompativel"):
+            print("[CNES] equipes de saúde bucal: NULO — o catálogo exportado "
+                  "não descreve a coluna TP_EQUIPE (numerações diferentes).")
+        else:
+            print("[CNES] equipes de saúde bucal: NULO — o domínio não foi "
+                  "lido, e sem ele não há como saber quais códigos são de "
+                  "saúde bucal.")
     else:
         n_esb = sum(1 for m in saida["municipios"].values() if m["equipes_esb"])
         print(f"[CNES] municípios com equipe de saúde bucal: {n_esb}")

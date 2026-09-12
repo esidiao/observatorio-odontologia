@@ -25,6 +25,10 @@ dependências.
 | Concluintes | **26.883** | 49.065 |
 | IES distintas | **576** | 1.032 |
 | Cursos avaliados | **452** (CPC 2023) | 746 (CPC 2022) |
+| Municípios com cirurgião-dentista no SUS | **5.567** de 5.571 | 5.523 |
+| Cirurgiões-dentistas no SUS | **95.952** | 71.542 |
+| Municípios com serviço especializado ao SUS | **2.470** | — |
+| Municípios com laboratório de prótese ao SUS | **4.345** | — |
 
 ### A manchete é uma ausência
 
@@ -82,7 +86,7 @@ python etl/extrair_censo.py --ano 2024 --listar-rotulos odont
 | CPC, IDD, ENADE, perfil docente | **CPC 2023** (INEP), área ODONTOLOGIA | HTTPS |
 | Cirurgiões-dentistas no SUS | CNES — vínculos com CBO `2232xx` | FTP DATASUS |
 | Rede especializada | CNES — serviço **114**, atenção especializada à saúde bucal | FTP DATASUS |
-| Equipes de saúde bucal | CNES — `tbEquipe`, tipos com saúde bucal | FTP DATASUS |
+| Equipes de saúde bucal | CNES — `tbEquipe`; **sem catálogo para `TP_EQUIPE`**, indicador nulo | FTP DATASUS |
 | Laboratório de prótese | CNES — serviço **157** | FTP DATASUS |
 | População e municípios | IBGE (agregado 6579; API de localidades) | HTTPS |
 
@@ -94,15 +98,37 @@ municípios com psicólogo no SUS. Nenhum transfere. Para Odontologia a pergunta
 nenhuma fonte única as dá:
 
 * **ICAB** — municípios com ao menos um cirurgião-dentista vinculado ao SUS
-  (família CBO 2232, por prefixo exato);
-* **ICRE** — municípios com estabelecimento que declara o serviço 114 do CNES,
-  a atenção especializada à saúde bucal;
+  (família CBO 2232, por prefixo exato). Medido: **5.567 dos 5.571**;
+* **ICRE** — municípios com estabelecimento que oferta **ao SUS** atenção
+  especializada à saúde bucal (serviço 114). Medido: **2.470**;
 * **ICSB** — municípios com equipe de saúde bucal na atenção primária.
+  **Não é mensurável nesta base** — ver abaixo — e sai nulo, nunca zero.
 
 São publicados separadamente. Fundi-los exigiria arbitrar um peso entre "tem
 dentista", "tem centro de especialidades" e "tem equipe na atenção básica" — e
 peso arbitrário é estimativa disfarçada. Foi a mesma decisão tomada em
 Fonoaudiologia e em Psicologia.
+
+O contraste entre o primeiro e o segundo é o assunto: **quase todo município do
+país tem dentista no SUS, e menos da metade tem serviço especializado**. O ICAB
+satura — vai de 0,942 a 1,000 —, então quem quiser comparar estados deve olhar
+a densidade, que vai de 26,9 a 80,5 dentistas por 100 mil habitantes. Já o ICRE
+separa de verdade: de 0,211 a 1,000.
+
+### Serviço declarado não é serviço público
+
+`rlEstabServClass` traz `CO_AMBULATORIAL_SUS` e `CO_HOSPITALAR_SUS`, e sem
+olhá-las o indicador conta consultório privado como rede pública. Medida a
+diferença: o serviço 114 é **declarado** em 3.105 municípios por 28.819
+estabelecimentos, e **ofertado ao SUS** em 2.470 municípios por 6.014. A
+cobertura pública é publicada como índice; o total declarado sai ao lado, nos
+campos terminados em `_total`, porque a distância entre os dois diz quanto da
+rede especializada de saúde bucal do município é acessível pelo SUS.
+
+Na mesma tabela, a coluna `ST_ATIVO_SN` vem **vazia em todas as linhas** deste
+export — medido aqui e também na fatia do observatório de Fonoaudiologia. O
+filtro de serviço inativo herdado dos projetos irmãos nunca excluiu nada; aqui
+isso é contado e declarado em vez de passar por filtro que funciona.
 
 ### O indicador não se chama CEO, e isso é deliberado
 
@@ -117,22 +143,29 @@ Pela mesma razão o **laboratório de prótese dentária** (serviço 157) sai co
 contagem própria, fora de qualquer índice: ele atende uma região, não o
 município onde está instalado.
 
-### O que o CNES entende por "equipe de saúde bucal"
+### As equipes de saúde bucal não são mensuráveis nesta base
 
-Os códigos não estão fixados no extrator: ele lê `tbTipoEquipe` e
-`tbSubTipoEquipe` e seleciona os tipos cujo nome contém "saúde bucal" ou "eSB",
-gravando na proveniência os que casaram. Na competência 202607 são sete, e não
-são a mesma coisa: duas são equipes de saúde bucal propriamente ditas (ESB e
-ESB modalidade II) e cinco são equipes de atenção básica que **incluem** saúde
-bucal — ESF transitória, ESF ribeirinha, ESF fluvial, equipe de agentes
-comunitários e equipe de atenção básica tipo III. O indicador conta as sete,
-porque a pergunta é se há equipe com saúde bucal na atenção primária do
-município; os rótulos ficam registrados para quem quiser refazer a conta com
-outro recorte.
+Este é o achado mais desconfortável da apuração, e o motivo de o ICSB sair em
+branco. A coluna `TP_EQUIPE` de `tbEquipe` usa os códigos **70, 71, 72, 76…**,
+e **nenhuma tabela de domínio deste export os nomeia**: as três candidatas —
+`tbTipoEquipe`, `tbGrupoEquipe` e `tbTipoEqSubTipo` — numeram de 01 a 30, um
+espaço de códigos inteiramente diferente. Sem catálogo não há como saber qual
+tipo é equipe de saúde bucal.
 
-Se essas tabelas de nomes não puderem ser lidas — o FTP do DATASUS derruba a
-maior parte das conexões —, o ICSB sai **nulo**, nunca zero, e a execução
-seguinte tenta de novo apenas o que faltou.
+O perigo aqui não é o dado faltar, é ele **parecer existir**. Casar os códigos
+de `tbTipoEquipe` contra `TP_EQUIPE` "funciona": devolve 846 equipes de 125.202
+e 157 municípios — números plausíveis à primeira vista e completamente sem
+sentido, porque são as equipes cujo tipo por acaso tem o mesmo número em dois
+catálogos que não se falam. Foi assim que a primeira execução deste projeto
+mediu, e o número só se denunciou por ser pequeno demais para um país com
+dezenas de milhares de equipes de saúde bucal.
+
+Por isso `_compativel` **mede** a cobertura do catálogo antes de usá-lo: se os
+códigos descobertos não alcançam ao menos 5% das equipes, o catálogo é
+declarado incompatível e o indicador sai nulo, com o motivo na proveniência.
+Na 202607 a interseção cobre 0,68%. A fatia de equipes continua sendo baixada e
+guardada: se uma competência futura exportar o catálogo correspondente, a
+medição volta sozinha, sem nova leitura de uma hora.
 
 ## Rodar localmente
 

@@ -1,0 +1,258 @@
+{
+  "autor": {
+    "nome": "Edson Sidião de Souza Júnior",
+    "contato": "sidiao@i9educar.com",
+    "lattes": "http://lattes.cnpq.br/9464330669014306",
+    "vinculo": "I9 Educar — Consultoria em Gestão Educacional",
+    "qualificacao": "Farmacêutico (UFG), Mestre e Doutor em Medicina Tropical (UFG); avaliador ad hoc do INEP/MEC há mais de quinze anos e avaliador do Conselho Estadual de Educação de Goiás.",
+    "obra": "Observatório Nacional da Formação em Odontologia",
+    "descricao": "Sítio estático data-driven com indicadores de acesso territorial, qualidade e cobertura assistencial dos cursos de Odontologia no Brasil: formulação e cálculo dos índices ICT, E, IAF, ICAB, ICRE e ICSB, catálogo de indicadores, textos e desenho editorial."
+  },
+  "registrado_em": "2026-09-12T14:31:17+00:00",
+  "git_commit_ancora": "753f75c4f7bcd31098cf3da9b64d30b9acc1fb79",
+  "algoritmo": "SHA-256 sobre o conteúdo com fim de linha normalizado em LF",
+  "fundamento": "Lei 9.610/1998 (direitos autorais) e Lei 9.609/1998 (programa de computador). O resumo combinado é impressão digital única do conjunto; o commit Git ancora a data no histórico versionado.",
+  "como_verificar": [
+    "1. Obtenha os arquivos listados em 'arquivos'.",
+    "2. Normalize o fim de linha de cada um para LF.",
+    "3. Calcule o SHA-256 de cada arquivo normalizado e compare com o campo 'sha256' da respectiva entrada.",
+    "4. Para o conjunto: concatene, na ordem em que aparecem em 'arquivos', o caminho seguido do seu resumo, sem separador, e calcule o SHA-256 do resultado. Deve ser igual a 'sha256_combinado'.",
+    "5. Ou, direto: rode `python etl/registro_autoral.py --verificar`.",
+    "6. O commit indicado em 'git_commit_ancora' comprova a data no histórico do repositório."
+  ],
+  "natureza": "Declaração datada de conteúdo, com anterioridade ancorada no histórico do repositório. Permite comparar uma cópia com o original arquivo a arquivo. Não é registro em cartório nem depósito no INPI, e não substitui nenhum dos dois.",
+  "escopo": "Apenas material autoral: código, textos, templates e o desenho dos índices. Não inclui os dados públicos (INEP, DATASUS, IBGE), que pertencem às respectivas fontes, nem bibliotecas de terceiros.",
+  "n_arquivos": 38,
+  "bytes_totais": 511696,
+  "sha256_combinado": "b9a341af2b00a912799a8fc8f96537a6d7a46672099895504ab212dcf9b91282",
+  "arquivos": [
+    {
+      "arquivo": "README.md",
+      "bytes": 14352,
+      "linhas": 298,
+      "sha256": "bee96b137f1d63185e696fcfa36b5df0fcd7128d798b42d881ac312e359b95b8"
+    },
+    {
+      "arquivo": "SECURITY.md",
+      "bytes": 4779,
+      "linhas": 80,
+      "sha256": "801f0fd6f8f41c6c283bdc6f889a6f4b2510b76241c79ec9c0bdb1efe421c8e4"
+    },
+    {
+      "arquivo": "DIREITOS.md",
+      "bytes": 4035,
+      "linhas": 89,
+      "sha256": "a016f3407388affb87a90618a6e2f0bbdba5d8ba822b6c0aafa3a89489479a19"
+    },
+    {
+      "arquivo": "requirements.txt",
+      "bytes": 66,
+      "linhas": 6,
+      "sha256": "adb2109f20d694ea989b646100526176e60ef7fec2c37e144085ce7f16b190b8"
+    },
+    {
+      "arquivo": "etl/consolidar.py",
+      "bytes": 20200,
+      "linhas": 424,
+      "sha256": "711fc8d718053262274889a56b38bbe65c044a1089c177d7dd3b6d0e63b737f2"
+    },
+    {
+      "arquivo": "etl/extrair_censo.py",
+      "bytes": 9477,
+      "linhas": 225,
+      "sha256": "c2ac9360dc2ef0f8dcac63d3ad93bc7af2b26a0aeecc95dba1da432fb141b497"
+    },
+    {
+      "arquivo": "etl/extrair_cnes.py",
+      "bytes": 42159,
+      "linhas": 881,
+      "sha256": "201be02d251adf26a111fb9c19cc41f8f0a1a0b66eeee77a32dc2920e481095a"
+    },
+    {
+      "arquivo": "etl/extrair_cpc.py",
+      "bytes": 16594,
+      "linhas": 387,
+      "sha256": "06a3a41c82edc1bd7255cc40d3a74b2f8ebaaab025ed5c24a4c8fa45ebf41e33"
+    },
+    {
+      "arquivo": "etl/indices.py",
+      "bytes": 18423,
+      "linhas": 465,
+      "sha256": "10827d3e5d8f57f08b6ab390265fef6b9274e78c46e659b10a9b3a030841ed91"
+    },
+    {
+      "arquivo": "etl/ingestao.py",
+      "bytes": 18162,
+      "linhas": 443,
+      "sha256": "a625a6f5bbb25a4e1e149dd6566b0d662033d6ea377b90cb7087e8a52592ea84"
+    },
+    {
+      "arquivo": "etl/pipeline.py",
+      "bytes": 14315,
+      "linhas": 364,
+      "sha256": "3f033b5df8a419d9fcc67533a8d104b3d050f399d9b2c79403d9c48a0c547b4d"
+    },
+    {
+      "arquivo": "etl/rede.py",
+      "bytes": 19893,
+      "linhas": 506,
+      "sha256": "2bc07a5d0a48df591c0a1fbb3807c421d47f73bf2ab0d152e01228e3a5637c12"
+    },
+    {
+      "arquivo": "etl/registro_autoral.py",
+      "bytes": 9302,
+      "linhas": 240,
+      "sha256": "9de5c5ef0273c9e2f2b9b3f304a82cd313eab8eb8cd74b02e90b1e99cab33ce0"
+    },
+    {
+      "arquivo": "etl/serie.py",
+      "bytes": 11442,
+      "linhas": 275,
+      "sha256": "6ff2a66d49e4ca5bcfeafe7a42e4f471728534a380aef9f67c21ece4247f1e54"
+    },
+    {
+      "arquivo": "site/build.py",
+      "bytes": 31841,
+      "linhas": 733,
+      "sha256": "43b74a86c922b5984ba3c728eb170fc3fbdffecf27c0073cb52dec9e42a31e24"
+    },
+    {
+      "arquivo": "site/catalogo.py",
+      "bytes": 33272,
+      "linhas": 659,
+      "sha256": "a819a59c7d03d9b327191b07286147e045b021bbb2613d78519a6fc560f57cbf"
+    },
+    {
+      "arquivo": "site/estatistica.py",
+      "bytes": 10337,
+      "linhas": 286,
+      "sha256": "2dfa4e93700327d59ed102654d44fe9908adf73b09dd1f98d1806427c8edbe10"
+    },
+    {
+      "arquivo": "site/marca.py",
+      "bytes": 4542,
+      "linhas": 123,
+      "sha256": "1e60c5a599f0b55707a0432c97c0a59fd058340cc52f7a1239cf124796e3186b"
+    },
+    {
+      "arquivo": "site/planilha.py",
+      "bytes": 13204,
+      "linhas": 313,
+      "sha256": "121c2fd4442177f47caf29edf95f04872b1338bb81494113407233af2909254a"
+    },
+    {
+      "arquivo": "site/templates/autor.html.j2",
+      "bytes": 11847,
+      "linhas": 256,
+      "sha256": "bbeccd292681423bf480f71a7285c7ebf11e2cd660bc4b49d5466d3af08a8bd0"
+    },
+    {
+      "arquivo": "site/templates/aviso-legal.html.j2",
+      "bytes": 6626,
+      "linhas": 151,
+      "sha256": "03e9f6ebcad40c3c14c34b1664b5b9224b5e7955f64d27362ab3218a33888db8"
+    },
+    {
+      "arquivo": "site/templates/base.html.j2",
+      "bytes": 4849,
+      "linhas": 111,
+      "sha256": "34fb83d9a658a3879a383e672449f40202ec9a93c68a0b03b87652b69472c7c7"
+    },
+    {
+      "arquivo": "site/templates/comparar.html.j2",
+      "bytes": 12501,
+      "linhas": 334,
+      "sha256": "244132b4f6500d15a8feac2cc26ba71a171c3661fd26144744ed8102c20cbfa9"
+    },
+    {
+      "arquivo": "site/templates/correlacoes.html.j2",
+      "bytes": 9870,
+      "linhas": 257,
+      "sha256": "ae85d8e207984d562654dba5642a62256a4cef1da4bf8170534dfaffc5a3c68d"
+    },
+    {
+      "arquivo": "site/templates/glossario.html.j2",
+      "bytes": 3502,
+      "linhas": 80,
+      "sha256": "fc059838e0d40b7242c75c3c7ba54be3362129c07b94899b676a8475d8e72938"
+    },
+    {
+      "arquivo": "site/templates/index.html.j2",
+      "bytes": 12366,
+      "linhas": 301,
+      "sha256": "6b7de0d54a45541a5cf3846e732491cddc8e4599e658a0f917fda769c44f5782"
+    },
+    {
+      "arquivo": "site/templates/indice.html.j2",
+      "bytes": 8479,
+      "linhas": 232,
+      "sha256": "be1839b930c23b15278dae9e9772abe7f3b71f6f855e69b76fd0378e5adf8ebe"
+    },
+    {
+      "arquivo": "site/templates/municipio.html.j2",
+      "bytes": 3948,
+      "linhas": 97,
+      "sha256": "132a742f6ef8b211f701cfaefc91cae14f701a9be5c5abade02c620bff463095"
+    },
+    {
+      "arquivo": "site/templates/offline.html.j2",
+      "bytes": 1567,
+      "linhas": 42,
+      "sha256": "2fc2958b0479a9f7c8a5b525d2b0533d7c93446d5c6f4bb7197759f1a42e682c"
+    },
+    {
+      "arquivo": "site/templates/serie.html.j2",
+      "bytes": 7525,
+      "linhas": 209,
+      "sha256": "63d6e7bdcca9afecd9886d7b43be7076e1a3d3b7f6e107dd92f904a1d4615553"
+    },
+    {
+      "arquivo": "site/templates/uf.html.j2",
+      "bytes": 16074,
+      "linhas": 379,
+      "sha256": "46107599290ca8fc208ad77763406415bca599e42549202fb42619f66705c787"
+    },
+    {
+      "arquivo": "site/static/css/style.css",
+      "bytes": 26617,
+      "linhas": 673,
+      "sha256": "f72e8099e3782bb531aaa98ed0bd5c01a2a928ca5cabb282039b5e6f4053fec6"
+    },
+    {
+      "arquivo": "site/static/js/app.js",
+      "bytes": 23953,
+      "linhas": 621,
+      "sha256": "e458ef379ba2c081639ed1557b4d9541b45fbff476985d579d1a59b308999ca3"
+    },
+    {
+      "arquivo": "tests/test_acessibilidade.py",
+      "bytes": 13881,
+      "linhas": 344,
+      "sha256": "dcd34fac32fa6314a76d2cae356a546baabb679c24da910a0dda066ff47c7807"
+    },
+    {
+      "arquivo": "tests/test_catalogo.py",
+      "bytes": 7609,
+      "linhas": 192,
+      "sha256": "c02d436a16ee1e7dfb7392ab2bff1ffe568ac27b9fb2a9e484698b5123854b81"
+    },
+    {
+      "arquivo": "tests/test_check_fontes.py",
+      "bytes": 8989,
+      "linhas": 256,
+      "sha256": "3594e6ef48427727ce2469a63e5caae2ca4db536d55bd5391826b221e0f09d77"
+    },
+    {
+      "arquivo": "tests/test_validacao.py",
+      "bytes": 25215,
+      "linhas": 574,
+      "sha256": "ce753eb96594b750858cb2b1f23c30287244fbeb4ec494ab54b3ec1a09f8171f"
+    },
+    {
+      "arquivo": ".github/workflows/ci.yml",
+      "bytes": 9883,
+      "linhas": 233,
+      "sha256": "77bcbff5d14711fed9a2a92b103863bb389bb50124935e2132a4b8482c47c03b"
+    }
+  ]
+}

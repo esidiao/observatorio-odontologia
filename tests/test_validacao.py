@@ -46,6 +46,18 @@ CURSOS_COM_CPC = 448
 CURSOS_COM_IDD = 445
 CONCLUINTES_PARTICIPANTES = 23278
 
+# --------------------------------------------------------- âncoras: CNES 202607
+MUNICIPIOS_COM_DENTISTA = 5567
+DENTISTAS_SUS = 95952
+# Rede especializada: só o que é ofertado AO SUS entra no índice. O total
+# declarado — que inclui clínica e consultório privados — fica ao lado, e a
+# diferença entre os dois é grande o bastante para merecer âncora própria.
+MUNICIPIOS_COM_ESP_BUCAL = 2470
+ESTABELECIMENTOS_ESP_BUCAL = 6014
+MUNICIPIOS_COM_ESP_BUCAL_TOTAL = 3105
+ESTABELECIMENTOS_ESP_BUCAL_TOTAL = 28819
+MUNICIPIOS_COM_LRPD = 4345
+
 MUNICIPIOS_BRASIL = 5571          # IBGE, desde a instalação de Boa Esperança
 MUNICIPIOS_MT = 142               # do Norte (MT) em 01/01/2025
 
@@ -289,8 +301,8 @@ def test_tres_coberturas_existem_e_sao_separadas():
 
     icsb = [d.get("ICSB") for d in ufs.values()]
     if all(v is None for v in icsb):
-        print("          (ICSB nulo em todas as UFs: o domínio de equipes do "
-              "CNES não foi lido nesta execução — ausência declarada)")
+        print("          (ICSB nulo nas 27 UFs — ausência declarada; o "
+              "catálogo de TP_EQUIPE não existe neste export do CNES)")
     else:
         faltando = [u for u, d in ufs.items() if d.get("ICSB") is None]
         assert not faltando, (
@@ -300,6 +312,72 @@ def test_tres_coberturas_existem_e_sao_separadas():
         fora = [(u, d["ICSB"]) for u, d in ufs.items()
                 if not 0 <= d["ICSB"] <= 1]
         assert not fora, f"ICSB fora de 0..1: {fora}"
+
+
+def test_ancoras_da_cobertura_do_cnes():
+    """Totais conhecidos do CNES 202607, como teste de regressão."""
+    ufs = _ler("nacional.json")["ufs"]
+    for campo, esperado in [
+        ("municipios_com_dentista", MUNICIPIOS_COM_DENTISTA),
+        ("dentistas_sus", DENTISTAS_SUS),
+        ("municipios_com_esp_bucal", MUNICIPIOS_COM_ESP_BUCAL),
+        ("estabelecimentos_esp_bucal", ESTABELECIMENTOS_ESP_BUCAL),
+        ("municipios_com_esp_bucal_total", MUNICIPIOS_COM_ESP_BUCAL_TOTAL),
+        ("estabelecimentos_esp_bucal_total", ESTABELECIMENTOS_ESP_BUCAL_TOTAL),
+        ("municipios_com_lrpd", MUNICIPIOS_COM_LRPD),
+    ]:
+        obtido = _soma(ufs, campo)
+        assert obtido == esperado, (
+            f"{campo}: esperado {esperado}, veio {obtido}")
+
+
+def test_rede_especializada_publica_e_menor_que_a_declarada():
+    """
+    O filtro de SUS precisa continuar existindo.
+
+    Sem ele, consultório privado que declara o serviço 114 entra como rede
+    pública: medido, isso levaria a cobertura de 2.470 para 3.105 municípios e
+    de 6.014 para 28.819 estabelecimentos. Se os dois números empatarem, o
+    filtro caiu — e o site passaria a chamar de pública uma rede que não é.
+    """
+    ufs = _ler("nacional.json")["ufs"]
+    sus = _soma(ufs, "municipios_com_esp_bucal")
+    total = _soma(ufs, "municipios_com_esp_bucal_total")
+    assert sus < total, (
+        f"municípios com serviço ao SUS ({sus}) igualou o total declarado "
+        f"({total}) — o filtro CO_AMBULATORIAL_SUS/CO_HOSPITALAR_SUS caiu")
+    estab_sus = _soma(ufs, "estabelecimentos_esp_bucal")
+    estab_total = _soma(ufs, "estabelecimentos_esp_bucal_total")
+    assert estab_sus < estab_total
+
+
+def test_icsb_e_ausencia_declarada_nao_zero():
+    """
+    O ICSB tem de estar NULO nas 27 UFs, e o motivo tem de estar escrito.
+
+    Zero aqui afirmaria que nenhum município do país tem equipe de saúde bucal,
+    o que é falso e absurdo. A causa é conhecida e medida: a coluna TP_EQUIPE
+    do CNES usa 70, 71, 72… e nenhuma tabela de domínio do export nomeia esses
+    códigos. Casar o catálogo errado devolve 846 de 125.202 equipes — plausível
+    à primeira vista, sem sentido nenhum.
+
+    Se um dia o CNES exportar o catálogo certo, este teste falha: é o sinal de
+    que o indicador pode voltar, e de que as âncoras precisam ser escritas.
+    """
+    ufs = _ler("nacional.json")["ufs"]
+    com_valor = {u: d["ICSB"] for u, d in ufs.items() if d.get("ICSB") is not None}
+    assert not com_valor, (
+        f"ICSB passou a ter valor em {sorted(com_valor)}. Se o CNES publicou o "
+        "catálogo de TP_EQUIPE, ótimo — confira a medição e escreva as âncoras. "
+        "Se não, alguém está contando equipe por coincidência de numeração.")
+    for campo in ("municipios_com_esb", "equipes_esb_total"):
+        valores = [d.get(campo) for d in ufs.values()]
+        assert all(v is None for v in valores), (
+            f"{campo} saiu com valor onde não há medição — ausência virou zero")
+
+    texto = " ".join(_ler("_proveniencia.json")["limitacoes_conhecidas"]).lower()
+    assert "tp_equipe" in texto, (
+        "a razão da ausência do ICSB não está declarada nas limitações")
 
 
 def test_as_tres_coberturas_nao_sao_o_mesmo_numero():
@@ -330,6 +408,33 @@ def test_as_tres_coberturas_nao_sao_o_mesmo_numero():
         f"a rede especializada (média {media_icre:.3f}) deveria alcançar menos "
         f"municípios que a força de trabalho (média {media_icab:.3f}); se "
         "inverteu, confira o que cada um está contando")
+
+
+def test_icab_esta_saturado_e_a_densidade_e_que_separa():
+    """
+    Registra a saturação do ICAB, que muda como ele deve ser lido.
+
+    5.567 dos 5.571 municípios têm cirurgião-dentista vinculado ao SUS — uma
+    saturação ainda maior que a do observatório de Psicologia. O índice continua
+    legítimo, mas separa pouquíssimo: quem o ler como retrato da rede vai
+    concluir que o país inteiro está igualmente atendido. A medida que separa é
+    a densidade, e este teste existe para que a ressalva não sobreviva ao dia em
+    que ela deixar de ser verdade.
+    """
+    ufs = _ler("nacional.json")["ufs"]
+    valores = [d["ICAB"] for d in ufs.values() if d.get("ICAB") is not None]
+    assert len(valores) == 27
+    assert min(valores) > 0.9, (
+        f"ICAB mínimo em {min(valores):.3f}. Abaixo de 0,9 a amplitude deixa de "
+        "ser estreita e as ressalvas de saturação precisam ser revistas.")
+
+    densidades = [d.get("dentistas_por_100k") for d in ufs.values()]
+    assert all(v is not None for v in densidades), (
+        "dentistas_por_100k ausente em alguma UF — é ela que separa os estados "
+        "onde o ICAB satura")
+    assert max(densidades) / min(densidades) > 1.5, (
+        "a densidade deveria variar bem mais que o ICAB; se não varia, o "
+        "argumento de que ela é a medida discriminante caiu")
 
 
 def test_laboratorio_de_protese_e_contagem_nunca_indice():

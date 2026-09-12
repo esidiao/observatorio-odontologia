@@ -13,11 +13,33 @@
    "concluintes": 863,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": null,
-   "estabelecimentos_esp_bucal": null,
+   "dentistas_sus": 935,
+   "estabelecimentos_esp_bucal": 36,
+   "estabelecimentos_esp_bucal_total": 761,
+   "estabelecimentos_lrpd": 4,
+   "estabelecimentos_lrpd_total": 10,
    "equipes_esb": null,
-   "estabelecimentos_lrpd": null,
-   "servicos_bucais": null
+   "servicos_bucais": [
+    "114/001",
+    "114/002",
+    "114/003",
+    "114/004",
+    "114/005",
+    "114/006",
+    "114/007",
+    "114/008",
+    "114/009",
+    "114/011",
+    "114/012",
+    "114/013",
+    "114/014",
+    "114/015",
+    "114/016",
+    "114/017",
+    "114/018",
+    "114/020",
+    "157/001"
+   ]
   }
  ]
 }

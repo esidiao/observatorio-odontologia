@@ -25,8 +25,11 @@
 <section class="secao">
   <h2 class="secao-titulo">Formação</h2>
   <div class="kpis kpis-compacto" data-cartoes>
+    {# Sem `polos_ead` e `matriculas_ead`: não há EaD em Odontologia, e dois
+       cartões sempre em zero em cada uma das 303 páginas municipais é ruído,
+       não informação. A ausência está declarada na home, uma vez. #}
     {% for campo in ['vagas_presencial', 'cursos_presencial', 'n_ies',
-                     'matriculas', 'concluintes', 'polos_ead', 'matriculas_ead'] %}
+                     'matriculas', 'concluintes'] %}
     <div class="kpi" data-campo="{{ campo }}"
          data-valor="{{ m[campo] if m[campo] is not none else '' }}"></div>
     {% endfor %}
@@ -37,7 +40,8 @@
   <h2 class="secao-titulo">Cobertura assistencial — saúde</h2>
   <div class="kpis kpis-compacto" data-cartoes>
     {% for campo in ['dentistas_sus', 'estabelecimentos_esp_bucal',
-                     'equipes_esb', 'estabelecimentos_lrpd'] %}
+                     'estabelecimentos_esp_bucal_total', 'equipes_esb',
+                     'estabelecimentos_lrpd'] %}
     <div class="kpi" data-campo="{{ campo }}"
          data-valor="{{ m[campo] if m[campo] is not none else '' }}"></div>
     {% endfor %}

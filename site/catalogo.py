@@ -98,26 +98,29 @@ INDICADORES = [
        aliases=["icab", "cobertura", "dentistas por município"]),
 
     _i("ICRE", "ICRE", "Cobertura da Rede Especializada", "Cobertura — saúde",
-       "Fração dos municípios do estado com estabelecimento que declara "
-       "atenção especializada à saúde bucal no CNES (serviço 114, em qualquer "
+       "Fração dos municípios do estado com estabelecimento que oferta AO SUS "
+       "atenção especializada à saúde bucal (serviço 114 do CNES, em qualquer "
        "das vinte classificações: endodontia, periodontia, cirurgia oral, "
-       "atendimento a pessoa com deficiência e as demais). Mede SERVIÇO "
-       "DECLARADO, não habilitação de CEO — a habilitação existe na tabela de "
-       "domínio do CNES e não é ligada a estabelecimento em tabela-fato "
-       "nenhuma. Índice naturalmente baixo: a atenção especializada é "
-       "regionalizada por desenho, e um município sem ela pode ser atendido "
-       "pelo município vizinho.",
+       "atendimento a pessoa com deficiência e as demais). Só o que atende pelo "
+       "SUS entra: consultório privado que declara o mesmo serviço aparece no "
+       "total declarado, à parte. Mede SERVIÇO DECLARADO, não habilitação de "
+       "CEO — a habilitação existe na tabela de domínio do CNES e não é ligada "
+       "a estabelecimento em tabela-fato nenhuma. Índice naturalmente baixo: a "
+       "atenção especializada é regionalizada por desenho, e um município sem "
+       "ela pode ser atendido pelo vizinho.",
        "0 a 1", "maior", "CNES/DATASUS", dec=3, min=0, max=1,
        aliases=["icre", "rede especializada", "ceo", "especialidades"]),
 
     _i("ICSB", "ICSB", "Cobertura por Saúde Bucal na atenção primária",
        "Cobertura — saúde",
        "Fração dos municípios do estado com ao menos uma equipe de saúde bucal "
-       "(eSB) cadastrada no CNES. Mede porta de entrada, que é coisa diferente "
-       "de força de trabalho: um município pode ter cirurgião-dentista sem ter "
-       "equipe de saúde bucal na atenção básica. Fica em branco — nunca zero — "
-       "quando a tabela de tipos de equipe do CNES não pôde ser lida, porque "
-       "sem ela não há como saber quais códigos são de saúde bucal.",
+       "na atenção primária. Está EM BRANCO em todo o país, e a razão é do "
+       "dado, não do cálculo: a coluna de tipo de equipe do CNES usa os "
+       "códigos 70, 71, 72…, e nenhuma tabela de domínio do export os nomeia — "
+       "as três que existem numeram de 01 a 30. Sem catálogo não há como saber "
+       "qual tipo é equipe de saúde bucal, e contar por coincidência de "
+       "numeração daria um número plausível e falso. Volta a ser publicado na "
+       "competência em que o CNES exportar o catálogo correspondente.",
        "0 a 1", "maior", "CNES/DATASUS", dec=3, min=0, max=1,
        aliases=["icsb", "equipe de saúde bucal", "esb", "atenção primária"]),
 
@@ -298,20 +301,38 @@ INDICADORES = [
        "profissionais/100 mil", "maior", "CNES/DATASUS + IBGE", dec=1),
 
     _i("municipios_com_esp_bucal", "Municípios com serviço especializado",
-       "Municípios com atenção especializada à saúde bucal", "Cobertura — saúde",
-       "Municípios com estabelecimento que declara o serviço 114 no CNES, em "
-       "qualquer das vinte classificações.",
+       "Municípios com atenção especializada à saúde bucal no SUS",
+       "Cobertura — saúde",
+       "Municípios com estabelecimento que oferta ao SUS o serviço 114 do "
+       "CNES, em qualquer das vinte classificações.",
        "municípios", "maior", "CNES/DATASUS", dec=0,
        aliases=["especializada", "ceo"]),
 
-    _i("estabelecimentos_esp_bucal", "Estabelecimentos especializados",
-       "Estabelecimentos com atenção especializada à saúde bucal",
+    _i("municipios_com_esp_bucal_total", "Municípios — serviço declarado",
+       "Municípios com serviço especializado declarado (SUS ou privado)",
        "Cobertura — saúde",
-       "Estabelecimentos distintos que declaram o serviço 114. Um mesmo "
+       "O mesmo serviço 114, sem o filtro de atendimento ao SUS: inclui o "
+       "consultório e a clínica privados que declaram atenção especializada à "
+       "saúde bucal no cadastro. Publicado ao lado do indicador público porque "
+       "a distância entre os dois diz quanto da rede especializada do "
+       "município é acessível pelo SUS.",
+       "municípios", "contextual", "CNES/DATASUS", dec=0),
+
+    _i("estabelecimentos_esp_bucal", "Estabelecimentos especializados",
+       "Estabelecimentos com atenção especializada à saúde bucal no SUS",
+       "Cobertura — saúde",
+       "Estabelecimentos distintos que ofertam ao SUS o serviço 114. Um mesmo "
        "estabelecimento declara várias especialidades e é contado uma vez — "
        "contar classificações inflaria a rede pelo número de especialidades de "
        "cada unidade.",
        "estabelecimentos", "maior", "CNES/DATASUS", dec=0),
+
+    _i("estabelecimentos_esp_bucal_total", "Estabelecimentos — declarado",
+       "Estabelecimentos com serviço especializado declarado (SUS ou privado)",
+       "Cobertura — saúde",
+       "Estabelecimentos distintos que declaram o serviço 114, com ou sem "
+       "atendimento pelo SUS.",
+       "estabelecimentos", "contextual", "CNES/DATASUS", dec=0),
 
     _i("municipios_com_esb", "Municípios com equipe de saúde bucal",
        "Municípios com eSB na atenção primária", "Cobertura — saúde",
@@ -328,19 +349,35 @@ INDICADORES = [
        "equipes", "maior", "CNES/DATASUS", dec=0),
 
     _i("municipios_com_lrpd", "Municípios com laboratório de prótese",
-       "Municípios com laboratório de prótese dentária", "Cobertura — saúde",
-       "Municípios com estabelecimento que declara o serviço 157, laboratório "
-       "de prótese dentária. Publicado à parte e fora de qualquer índice: é "
-       "outra política, com outra unidade de conta, e somá-la à rede "
-       "especializada mediria duas coisas num número só.",
+       "Municípios com laboratório de prótese dentária no SUS",
+       "Cobertura — saúde",
+       "Municípios com estabelecimento que oferta ao SUS o serviço 157, "
+       "laboratório de prótese dentária. Publicado à parte e fora de qualquer "
+       "índice: é outra política, com outra unidade de conta, e o laboratório "
+       "atende uma região, não o município onde está instalado. Também não se "
+       "confunde com o LRPD custeado pelo Ministério da Saúde — aqui é o "
+       "serviço declarado no cadastro.",
        "municípios", "maior", "CNES/DATASUS", dec=0,
        aliases=["lrpd", "prótese"]),
 
-    _i("estabelecimentos_lrpd", "Laboratórios de prótese",
-       "Estabelecimentos com laboratório de prótese dentária",
+    _i("municipios_com_lrpd_total", "Municípios — prótese declarada",
+       "Municípios com laboratório de prótese declarado (SUS ou privado)",
        "Cobertura — saúde",
-       "Estabelecimentos distintos que declaram o serviço 157.",
+       "O mesmo serviço 157, sem o filtro de atendimento ao SUS.",
+       "municípios", "contextual", "CNES/DATASUS", dec=0),
+
+    _i("estabelecimentos_lrpd", "Laboratórios de prótese",
+       "Estabelecimentos com laboratório de prótese dentária no SUS",
+       "Cobertura — saúde",
+       "Estabelecimentos distintos que ofertam ao SUS o serviço 157.",
        "estabelecimentos", "maior", "CNES/DATASUS", dec=0),
+
+    _i("estabelecimentos_lrpd_total", "Laboratórios — declarado",
+       "Estabelecimentos com laboratório de prótese declarado (SUS ou privado)",
+       "Cobertura — saúde",
+       "Estabelecimentos distintos que declaram o serviço 157, com ou sem "
+       "atendimento pelo SUS.",
+       "estabelecimentos", "contextual", "CNES/DATASUS", dec=0),
 
 
 

@@ -91,6 +91,7 @@
     {% for campo in ['ICAB', 'ICRE', 'ICSB', 'municipios_com_dentista',
                      'dentistas_sus', 'dentistas_por_100k',
                      'municipios_com_esp_bucal', 'estabelecimentos_esp_bucal',
+                     'municipios_com_esp_bucal_total',
                      'municipios_com_esb', 'equipes_esb_total'] %}
     <div class="kpi" data-campo="{{ campo }}"
          data-valor="{{ d[campo] if d[campo] is not none else '' }}"></div>
@@ -104,11 +105,14 @@
     cirurgião-dentista vinculado ao SUS
     {%- if d.municipios_com_esp_bucal is not none %}, e
     {{ d.municipios_com_esp_bucal | numero }} têm serviço especializado de
-    saúde bucal{% endif %}. A distância entre os dois números não é falha de
-    cadastro: a atenção especializada é regionalizada por desenho, e um
-    município sem ela costuma ser atendido pelo vizinho. Para comparar
-    <em>quanto</em>, e não apenas <em>se</em>, veja a densidade por 100 mil
-    habitantes acima.
+    saúde bucal <strong>ofertado ao SUS</strong>
+    {%- if d.municipios_com_esp_bucal_total is not none %} —
+    {{ d.municipios_com_esp_bucal_total | numero }} contando também o privado
+    que declara o mesmo serviço{% endif %}{% endif %}. A distância entre esses
+    números não é falha de cadastro: a atenção especializada é regionalizada
+    por desenho, e um município sem ela costuma ser atendido pelo vizinho. Para
+    comparar <em>quanto</em>, e não apenas <em>se</em>, veja a densidade por
+    100 mil habitantes acima.
   </p>
   {% endif %}
 
@@ -121,7 +125,8 @@
     protética, que é coisa que este cadastro não mede.
   </p>
   <div class="kpis kpis-compacto" data-cartoes>
-    {% for campo in ['municipios_com_lrpd', 'estabelecimentos_lrpd'] %}
+    {% for campo in ['municipios_com_lrpd', 'estabelecimentos_lrpd',
+                     'municipios_com_lrpd_total'] %}
     <div class="kpi" data-campo="{{ campo }}"
          data-valor="{{ d[campo] if d[campo] is not none else '' }}"></div>
     {% endfor %}
