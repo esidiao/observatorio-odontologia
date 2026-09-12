@@ -1,0 +1,23 @@
+{
+ "uf": "RR",
+ "municipios": [
+  {
+   "codigo": "1400100",
+   "nome": "Boa Vista",
+   "uf": "RR",
+   "vagas_presencial": 538,
+   "cursos_presencial": 2,
+   "n_ies": 2,
+   "matriculas": 587,
+   "matriculas_ead": 0,
+   "concluintes": 46,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}

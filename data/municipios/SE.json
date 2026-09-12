@@ -1,0 +1,59 @@
+{
+ "uf": "SE",
+ "municipios": [
+  {
+   "codigo": "2800308",
+   "nome": "Aracaju",
+   "uf": "SE",
+   "vagas_presencial": 568,
+   "cursos_presencial": 4,
+   "n_ies": 4,
+   "matriculas": 1297,
+   "matriculas_ead": 0,
+   "concluintes": 252,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  },
+  {
+   "codigo": "2803500",
+   "nome": "Lagarto",
+   "uf": "SE",
+   "vagas_presencial": 57,
+   "cursos_presencial": 1,
+   "n_ies": 1,
+   "matriculas": 198,
+   "matriculas_ead": 0,
+   "concluintes": 36,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  },
+  {
+   "codigo": "2807402",
+   "nome": "Tobias Barreto",
+   "uf": "SE",
+   "vagas_presencial": 42,
+   "cursos_presencial": 1,
+   "n_ies": 1,
+   "matriculas": 9,
+   "matriculas_ead": 0,
+   "concluintes": 0,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}

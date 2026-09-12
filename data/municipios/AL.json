@@ -1,0 +1,41 @@
+{
+ "uf": "AL",
+ "municipios": [
+  {
+   "codigo": "2704302",
+   "nome": "Maceió",
+   "uf": "AL",
+   "vagas_presencial": 1078,
+   "cursos_presencial": 6,
+   "n_ies": 6,
+   "matriculas": 1506,
+   "matriculas_ead": 0,
+   "concluintes": 248,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  },
+  {
+   "codigo": "2700300",
+   "nome": "Arapiraca",
+   "uf": "AL",
+   "vagas_presencial": 446,
+   "cursos_presencial": 2,
+   "n_ies": 2,
+   "matriculas": 653,
+   "matriculas_ead": 0,
+   "concluintes": 57,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}

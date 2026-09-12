@@ -1,0 +1,59 @@
+{
+ "uf": "MS",
+ "municipios": [
+  {
+   "codigo": "5002704",
+   "nome": "Campo Grande",
+   "uf": "MS",
+   "vagas_presencial": 496,
+   "cursos_presencial": 3,
+   "n_ies": 3,
+   "matriculas": 1292,
+   "matriculas_ead": 0,
+   "concluintes": 252,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  },
+  {
+   "codigo": "5003702",
+   "nome": "Dourados",
+   "uf": "MS",
+   "vagas_presencial": 107,
+   "cursos_presencial": 1,
+   "n_ies": 1,
+   "matriculas": 301,
+   "matriculas_ead": 0,
+   "concluintes": 48,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  },
+  {
+   "codigo": "5008305",
+   "nome": "Três Lagoas",
+   "uf": "MS",
+   "vagas_presencial": 100,
+   "cursos_presencial": 1,
+   "n_ies": 1,
+   "matriculas": 167,
+   "matriculas_ead": 0,
+   "concluintes": 20,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}

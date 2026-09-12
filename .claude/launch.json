@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "observatorio-odontologia",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "7378", "--directory", "site/dist"],
+      "port": 7378,
+      "autoPort": false
+    }
+  ]
+}

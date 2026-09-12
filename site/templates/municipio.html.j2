@@ -1,0 +1,92 @@
+{% extends "base.html.j2" %}
+{% block titulo %}{{ m.nome }} ({{ sigla }}) — Observatório Nacional da Formação em Odontologia{% endblock %}
+{% block descricao %}Formação e cobertura assistencial em Odontologia no município de {{ m.nome }}, {{ nome_uf }}.{% endblock %}
+
+{% block conteudo %}
+
+<nav class="migalhas" aria-label="Trilha">
+  <a href="{{ depth }}index.html">Panorama</a> ›
+  <a href="{{ depth }}uf/{{ sigla }}.html">{{ nome_uf }}</a> ›
+  <span>{{ m.nome }}</span>
+</nav>
+
+<section class="cabecalho-uf">
+  <h1>{{ m.nome }} <span class="sigla-uf">{{ sigla }}</span></h1>
+  <p class="linha-contexto">
+    {% if m.tem_curso_presencial %}
+      Município com oferta presencial de Odontologia.
+    {% else %}
+      Município sem curso presencial de Odontologia. Não há a alternativa da
+      EaD: o curso não é ofertado a distância no país.
+    {% endif %}
+  </p>
+</section>
+
+<section class="secao">
+  <h2 class="secao-titulo">Formação</h2>
+  <div class="kpis kpis-compacto" data-cartoes>
+    {% for campo in ['vagas_presencial', 'cursos_presencial', 'n_ies',
+                     'matriculas', 'concluintes', 'polos_ead', 'matriculas_ead'] %}
+    <div class="kpi" data-campo="{{ campo }}"
+         data-valor="{{ m[campo] if m[campo] is not none else '' }}"></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="secao">
+  <h2 class="secao-titulo">Cobertura assistencial — saúde</h2>
+  <div class="kpis kpis-compacto" data-cartoes>
+    {% for campo in ['dentistas_sus', 'estabelecimentos_esp_bucal',
+                     'equipes_esb', 'estabelecimentos_lrpd'] %}
+    <div class="kpi" data-campo="{{ campo }}"
+         data-valor="{{ m[campo] if m[campo] is not none else '' }}"></div>
+    {% endfor %}
+  </div>
+  {% if m.servicos_bucais %}
+  <p class="nota">
+    Serviços declarados no CNES:
+    {% for s in m.servicos_bucais %}<code>{{ s }}</code>{% if not loop.last %}, {% endif %}{% endfor %}.
+    O código antes da barra é o serviço especializado — 114, atenção
+    especializada à saúde bucal; 157, laboratório de prótese dentária —, e
+    depois da barra vem a classificação, que é a especialidade. Um mesmo
+    estabelecimento declara várias e é contado uma vez só.
+  </p>
+  {% elif m.dentistas_sus %}
+  <p class="nota">
+    Há cirurgião-dentista vinculado ao SUS, e nenhum estabelecimento do
+    município declara serviço especializado de saúde bucal no CNES. As duas
+    coisas são medidas diferentes — profissional e serviço —, e é por isso que
+    aparecem separadas: a atenção especializada é regionalizada, e o município
+    pode ser atendido pela referência regional.
+  </p>
+  {% endif %}
+</section>
+<section class="secao">
+  <h2 class="secao-titulo">Contexto estadual</h2>
+  <p>
+    {{ nome_uf }} tem {{ d.municipios_oferta | numero }} municípios com curso
+    presencial, de {{ d.municipios_total | numero }} no total.
+  </p>
+  <p><a class="botao" href="{{ depth }}uf/{{ sigla }}.html">Ver o estado inteiro</a></p>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('[data-cartoes] .kpi').forEach(function (cartao) {
+  const campo = cartao.dataset.campo;
+  const bruto = cartao.dataset.valor;
+  const valor = bruto === '' ? null : parseFloat(bruto);
+  const valorEl = document.createElement('span');
+  valorEl.className = 'kpi-valor';
+  valorEl.textContent = fmt(valor, campo);
+  if (valor === null) valorEl.classList.add('sem-dados');
+  const rotuloEl = document.createElement('span');
+  rotuloEl.className = 'kpi-rotulo';
+  rotuloEl.textContent = nomeCompleto(campo);
+  cartao.appendChild(valorEl);
+  cartao.appendChild(rotuloEl);
+});
+</script>
+{% endblock %}

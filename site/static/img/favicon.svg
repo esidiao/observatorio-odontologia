@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Observatório Nacional da Formação em Odontologia">
+  <rect width="64" height="64" rx="12" fill="#232B29"/>
+  <!-- Dente: coroa em papel, raízes nas duas cores secundárias.
+       As raízes começam DENTRO da coroa, para que a junção não
+       apareça como emenda em tamanho pequeno. -->
+  <path d="M21 33L30 33L27.5 53L23.5 53Z" fill="#8FB4A9"/>
+  <path d="M34 33L43 33L40.5 53L36.5 53Z" fill="#D8A73A"/>
+  <ellipse cx="32" cy="27" rx="17" ry="15" fill="#F2F6F4"/>
+</svg>

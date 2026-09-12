@@ -1,0 +1,23 @@
+{
+ "uf": "AP",
+ "municipios": [
+  {
+   "codigo": "1600303",
+   "nome": "Macapá",
+   "uf": "AP",
+   "vagas_presencial": 737,
+   "cursos_presencial": 4,
+   "n_ies": 4,
+   "matriculas": 482,
+   "matriculas_ead": 0,
+   "concluintes": 61,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}

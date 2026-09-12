@@ -1,0 +1,59 @@
+{
+ "uf": "RN",
+ "municipios": [
+  {
+   "codigo": "2408102",
+   "nome": "Natal",
+   "uf": "RN",
+   "vagas_presencial": 937,
+   "cursos_presencial": 4,
+   "n_ies": 4,
+   "matriculas": 1942,
+   "matriculas_ead": 0,
+   "concluintes": 265,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  },
+  {
+   "codigo": "2408003",
+   "nome": "Mossoró",
+   "uf": "RN",
+   "vagas_presencial": 478,
+   "cursos_presencial": 3,
+   "n_ies": 3,
+   "matriculas": 1032,
+   "matriculas_ead": 0,
+   "concluintes": 114,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  },
+  {
+   "codigo": "2402006",
+   "nome": "Caicó",
+   "uf": "RN",
+   "vagas_presencial": 20,
+   "cursos_presencial": 1,
+   "n_ies": 1,
+   "matriculas": 114,
+   "matriculas_ead": 0,
+   "concluintes": 20,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}

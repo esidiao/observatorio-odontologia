@@ -1,0 +1,54 @@
+{
+  "gerado_em": "2026-09-12",
+  "fontes": {
+    "censo": {
+      "presente": true,
+      "fonte": "Censo da Educação Superior (INEP)",
+      "url": "https://download.inep.gov.br/microdados/microdados_censo_da_educacao_superior_2024.zip",
+      "ano_censo": 2024,
+      "membro_cursos": "microdados_censo_da_educacao_superior_2024/dados/MICRODADOS_CADASTRO_CURSOS_2024.CSV",
+      "membro_ies": "microdados_censo_da_educacao_superior_2024/dados/MICRODADOS_ED_SUP_IES_2024.CSV",
+      "rotulo_cine": "Odontologia",
+      "md5_publicado": "dbe25e67857aa68b12beaeffa194f53f *MICRODADOS_CADASTRO_IES_2024.csv\r\n4ada15841c698a47ec19d6cb53ac2c13 *MICRODADOS_CADASTRO_CURSOS_2024.csv",
+      "linhas_cadastro": 720349,
+      "linhas_curso": 650,
+      "ies_cadastradas": 2561,
+      "extraido_em": "2026-09-11"
+    },
+    "cpc": {
+      "presente": true,
+      "fonte": "Conceito Preliminar de Curso (INEP)",
+      "url": "https://download.inep.gov.br/educacao_superior/indicadores/resultados/2023/CPC_2023.xlsx",
+      "ciclo": "2023",
+      "area_avaliacao": "ODONTOLOGIA",
+      "match": "igualdade sobre o rótulo normalizado, nunca substring",
+      "ponderacao": "média ponderada por concluintes participantes, 3 casas",
+      "componente_q_do_iaf": "CPC (Faixa), escala 1 a 5",
+      "cursos_avaliados": 452,
+      "ufs_avaliadas": 27,
+      "extraido_em": "2026-09-11"
+    },
+    "cnes": {
+      "presente": false,
+      "motivo": "data/cobertura_cnes.json não gerado"
+    },
+    "ibge_municipios": {
+      "presente": true,
+      "fonte": "https://servicodados.ibge.gov.br/api/v1/localidades/municipios?view=nivelado",
+      "total": 5571
+    },
+    "ibge_populacao": {
+      "presente": true,
+      "agregado": 6579,
+      "variavel": 9324,
+      "nivel": "N3",
+      "ano": "2026"
+    }
+  },
+  "limitacoes_conhecidas": [
+    "Não existe oferta de Odontologia a distância no Censo 2024: as 650 ofertas do recorte são presenciais, com 0 vaga EaD e nenhum polo em 27 das 27 UFs. Esse zero é MEDIDO — o Censo varreu as três camadas de TP_DIMENSAO e não encontrou linha alguma de EaD —, não é lacuna de apuração. Os indicadores de EaD continuam publicados no conjunto de dados, valendo zero, e o site declara a ausência numa seção própria em vez de espalhar colunas vazias pelas páginas.",
+    "Como pct_ead é constante em zero, ele fica FORA da matriz de correlação: variável sem variância não tem correlação fraca, tem correlação indefinida. Calculá-la assim mesmo devolveria ruído com aparência de resultado.",
+    "Todas as 27 UFs têm curso avaliado no ciclo do CPC 2023. A cobertura de indicador, porém, não é total: parte dos cursos avaliados sai sem CPC contínuo e sem IDD, e esses ficam fora das médias ponderadas em vez de entrarem como zero.",
+    "A base do CNES não foi lida; a cobertura assistencial está nula, não zerada."
+  ]
+}

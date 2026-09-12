@@ -1,0 +1,23 @@
+{
+ "uf": "AC",
+ "municipios": [
+  {
+   "codigo": "1200401",
+   "nome": "Rio Branco",
+   "uf": "AC",
+   "vagas_presencial": 1142,
+   "cursos_presencial": 2,
+   "n_ies": 2,
+   "matriculas": 289,
+   "matriculas_ead": 0,
+   "concluintes": 74,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}

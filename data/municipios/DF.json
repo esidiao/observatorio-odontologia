@@ -1,0 +1,23 @@
+{
+ "uf": "DF",
+ "municipios": [
+  {
+   "codigo": "5300108",
+   "nome": "Brasília",
+   "uf": "DF",
+   "vagas_presencial": 3116,
+   "cursos_presencial": 17,
+   "n_ies": 16,
+   "matriculas": 5295,
+   "matriculas_ead": 0,
+   "concluintes": 863,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}

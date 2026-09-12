@@ -1,0 +1,23 @@
+{
+ "uf": "AM",
+ "municipios": [
+  {
+   "codigo": "1302603",
+   "nome": "Manaus",
+   "uf": "AM",
+   "vagas_presencial": 2461,
+   "cursos_presencial": 10,
+   "n_ies": 8,
+   "matriculas": 3781,
+   "matriculas_ead": 0,
+   "concluintes": 436,
+   "polos_ead": 0,
+   "tem_curso_presencial": true,
+   "dentistas_sus": null,
+   "estabelecimentos_esp_bucal": null,
+   "equipes_esb": null,
+   "estabelecimentos_lrpd": null,
+   "servicos_bucais": null
+  }
+ ]
+}
