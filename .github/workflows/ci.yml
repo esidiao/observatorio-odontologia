@@ -57,14 +57,14 @@ jobs:
        inputs.acao != 'verificar-fontes')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # A guarda de riqueza compara com `git show HEAD:data/nacional.json`.
           # Com fetch-depth 1 em push isso funciona; sem histórico algum, ela
           # degrada para "sem versão anterior" e não protege nada.
           fetch-depth: 2
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: pip
@@ -124,7 +124,7 @@ jobs:
           github.ref == 'refs/heads/main' &&
           (github.event_name == 'push' ||
            (github.event_name == 'workflow_dispatch' && inputs.acao == 'publicar'))
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: site/dist
 
@@ -145,7 +145,7 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - id: deploy
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   # ──────────────────────────────────────────────────────────────
   # Verificação semanal de frescor das fontes
@@ -157,9 +157,9 @@ jobs:
        inputs.acao == 'verificar-fontes')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: pip
@@ -174,7 +174,7 @@ jobs:
 
       - name: Abrir issue quando houver edição nova
         if: steps.check.outputs.fontes_novas == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           DETALHE: ${{ steps.check.outputs.fontes_novas_detalhe }}
         with:
@@ -211,7 +211,7 @@ jobs:
       # que é exatamente a falha que este projeto herdou documentada.
       - name: Abrir issue quando a verificação for indeterminada
         if: steps.check.outputs.fontes_indeterminadas == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           DETALHE: ${{ steps.check.outputs.fontes_indeterminadas_detalhe }}
         with:

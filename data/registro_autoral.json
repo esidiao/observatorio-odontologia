@@ -8,8 +8,8 @@
     "obra": "Observatório Nacional da Formação em Odontologia",
     "descricao": "Sítio estático data-driven com indicadores de acesso territorial, qualidade e cobertura assistencial dos cursos de Odontologia no Brasil: formulação e cálculo dos índices ICT, E, IAF, ICAB, ICRE e ICSB, catálogo de indicadores, textos e desenho editorial."
   },
-  "registrado_em": "2026-09-12T14:31:17+00:00",
-  "git_commit_ancora": "753f75c4f7bcd31098cf3da9b64d30b9acc1fb79",
+  "registrado_em": "2026-09-12T14:35:09+00:00",
+  "git_commit_ancora": "115c62b6537751470cc224d5561a78d1abe1084d",
   "algoritmo": "SHA-256 sobre o conteúdo com fim de linha normalizado em LF",
   "fundamento": "Lei 9.610/1998 (direitos autorais) e Lei 9.609/1998 (programa de computador). O resumo combinado é impressão digital única do conjunto; o commit Git ancora a data no histórico versionado.",
   "como_verificar": [
@@ -24,7 +24,7 @@
   "escopo": "Apenas material autoral: código, textos, templates e o desenho dos índices. Não inclui os dados públicos (INEP, DATASUS, IBGE), que pertencem às respectivas fontes, nem bibliotecas de terceiros.",
   "n_arquivos": 38,
   "bytes_totais": 511696,
-  "sha256_combinado": "b9a341af2b00a912799a8fc8f96537a6d7a46672099895504ab212dcf9b91282",
+  "sha256_combinado": "d1d44bb084888a76dcac25d7047977b86a7d046138b80373173f6c4960beb4ba",
   "arquivos": [
     {
       "arquivo": "README.md",
@@ -252,7 +252,7 @@
       "arquivo": ".github/workflows/ci.yml",
       "bytes": 9883,
       "linhas": 233,
-      "sha256": "77bcbff5d14711fed9a2a92b103863bb389bb50124935e2132a4b8482c47c03b"
+      "sha256": "9e4d2fbe3e8290ce060b1fd23382d7d2a83b4999fa57b69bc82cfdbabd0726e6"
     }
   ]
 }
