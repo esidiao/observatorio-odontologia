@@ -8,8 +8,8 @@
     "obra": "Observatório Nacional da Formação em Odontologia",
     "descricao": "Sítio estático data-driven com indicadores de acesso territorial, qualidade e cobertura assistencial dos cursos de Odontologia no Brasil: formulação e cálculo dos índices ICT, E, IAF, ICAB, ICRE e ICSB, catálogo de indicadores, textos e desenho editorial."
   },
-  "registrado_em": "2026-09-12T14:38:31+00:00",
-  "git_commit_ancora": "883ce4ff7f6041d79960caa11c7cfac12c921c7a",
+  "registrado_em": "2026-09-12T15:44:13+00:00",
+  "git_commit_ancora": "a0def6bf9258b60401ca2a01376df4fe3ce5a1d2",
   "algoritmo": "SHA-256 sobre o conteúdo com fim de linha normalizado em LF",
   "fundamento": "Lei 9.610/1998 (direitos autorais) e Lei 9.609/1998 (programa de computador). O resumo combinado é impressão digital única do conjunto; o commit Git ancora a data no histórico versionado.",
   "como_verificar": [
@@ -23,8 +23,8 @@
   "natureza": "Declaração datada de conteúdo, com anterioridade ancorada no histórico do repositório. Permite comparar uma cópia com o original arquivo a arquivo. Não é registro em cartório nem depósito no INPI, e não substitui nenhum dos dois.",
   "escopo": "Apenas material autoral: código, textos, templates e o desenho dos índices. Não inclui os dados públicos (INEP, DATASUS, IBGE), que pertencem às respectivas fontes, nem bibliotecas de terceiros.",
   "n_arquivos": 39,
-  "bytes_totais": 516956,
-  "sha256_combinado": "85620694c667daf66f1311de120b494bf3452f648d3d0e2ffcf0e03b267b5b29",
+  "bytes_totais": 519440,
+  "sha256_combinado": "4830e5283aa1e54458f5181827942f790f6df8ff1ad2a6b90426af3d185a333c",
   "arquivos": [
     {
       "arquivo": "README.md",
@@ -244,9 +244,9 @@
     },
     {
       "arquivo": "tests/test_links.py",
-      "bytes": 4858,
-      "linhas": 127,
-      "sha256": "d451eb93fca9a5c559c5f03bce11dbc72613e66b706717c991302df9010b102a"
+      "bytes": 7342,
+      "linhas": 181,
+      "sha256": "37c4f21610aa9485585ff5d22d3dec7575069c8fc848d3ec52472dab049537db"
     },
     {
       "arquivo": "tests/test_validacao.py",
