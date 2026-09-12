@@ -8,8 +8,8 @@
     "obra": "Observatório Nacional da Formação em Odontologia",
     "descricao": "Sítio estático data-driven com indicadores de acesso territorial, qualidade e cobertura assistencial dos cursos de Odontologia no Brasil: formulação e cálculo dos índices ICT, E, IAF, ICAB, ICRE e ICSB, catálogo de indicadores, textos e desenho editorial."
   },
-  "registrado_em": "2026-09-12T14:35:09+00:00",
-  "git_commit_ancora": "115c62b6537751470cc224d5561a78d1abe1084d",
+  "registrado_em": "2026-09-12T14:38:31+00:00",
+  "git_commit_ancora": "883ce4ff7f6041d79960caa11c7cfac12c921c7a",
   "algoritmo": "SHA-256 sobre o conteúdo com fim de linha normalizado em LF",
   "fundamento": "Lei 9.610/1998 (direitos autorais) e Lei 9.609/1998 (programa de computador). O resumo combinado é impressão digital única do conjunto; o commit Git ancora a data no histórico versionado.",
   "como_verificar": [
@@ -22,9 +22,9 @@
   ],
   "natureza": "Declaração datada de conteúdo, com anterioridade ancorada no histórico do repositório. Permite comparar uma cópia com o original arquivo a arquivo. Não é registro em cartório nem depósito no INPI, e não substitui nenhum dos dois.",
   "escopo": "Apenas material autoral: código, textos, templates e o desenho dos índices. Não inclui os dados públicos (INEP, DATASUS, IBGE), que pertencem às respectivas fontes, nem bibliotecas de terceiros.",
-  "n_arquivos": 38,
-  "bytes_totais": 511696,
-  "sha256_combinado": "d1d44bb084888a76dcac25d7047977b86a7d046138b80373173f6c4960beb4ba",
+  "n_arquivos": 39,
+  "bytes_totais": 516956,
+  "sha256_combinado": "85620694c667daf66f1311de120b494bf3452f648d3d0e2ffcf0e03b267b5b29",
   "arquivos": [
     {
       "arquivo": "README.md",
@@ -112,9 +112,9 @@
     },
     {
       "arquivo": "site/build.py",
-      "bytes": 31841,
+      "bytes": 31842,
       "linhas": 733,
-      "sha256": "43b74a86c922b5984ba3c728eb170fc3fbdffecf27c0073cb52dec9e42a31e24"
+      "sha256": "949d0f745943df06c4ebccae577d265779bfda592dcb903bb16f7312934bef2e"
     },
     {
       "arquivo": "site/catalogo.py",
@@ -136,9 +136,9 @@
     },
     {
       "arquivo": "site/planilha.py",
-      "bytes": 13204,
+      "bytes": 13206,
       "linhas": 313,
-      "sha256": "121c2fd4442177f47caf29edf95f04872b1338bb81494113407233af2909254a"
+      "sha256": "f24fcd4f81f92fffa90d11749cbdaa4431c2f7f6123c14fdbd77ba79365f0daf"
     },
     {
       "arquivo": "site/templates/autor.html.j2",
@@ -243,6 +243,12 @@
       "sha256": "3594e6ef48427727ce2469a63e5caae2ca4db536d55bd5391826b221e0f09d77"
     },
     {
+      "arquivo": "tests/test_links.py",
+      "bytes": 4858,
+      "linhas": 127,
+      "sha256": "d451eb93fca9a5c559c5f03bce11dbc72613e66b706717c991302df9010b102a"
+    },
+    {
       "arquivo": "tests/test_validacao.py",
       "bytes": 25215,
       "linhas": 574,
@@ -250,9 +256,9 @@
     },
     {
       "arquivo": ".github/workflows/ci.yml",
-      "bytes": 9883,
-      "linhas": 233,
-      "sha256": "9e4d2fbe3e8290ce060b1fd23382d7d2a83b4999fa57b69bc82cfdbabd0726e6"
+      "bytes": 10282,
+      "linhas": 240,
+      "sha256": "9e0af9f8c339b4010b303d000e9ca3126a71c01a90b7c134d0d2ba717b76b9c3"
     }
   ]
 }

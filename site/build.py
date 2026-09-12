@@ -524,7 +524,7 @@ def construir(caminho_dados, saida, templates):
     shutil.copy(caminho_dados, saida / "dados" / "nacional.json")
     (saida / "dados" / "indicadores.csv").write_text(
         exportar_csv(ufs), encoding="utf-8-sig")
-    xlsx = planilha.gerar(saida / "dados" / "observatorio-psicologia.xlsx",
+    xlsx = planilha.gerar(saida / "dados" / "observatorio-odontologia.xlsx",
                           Path(caminho_dados).parent, NOMES_UF)
     print(f"[BUILD] planilha XLSX ({xlsx.stat().st_size // 1024} KB)")
     for nome in ("_proveniencia.json", "qualidade.json", "cobertura_cnes.json",

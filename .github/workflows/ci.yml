@@ -106,6 +106,13 @@ jobs:
       - name: "Acessibilidade: contraste, escalas e HTML gerado"
         run: python tests/test_acessibilidade.py
 
+      # Também depois do build, e também contra o HTML gerado: confere que todo
+      # link e todo recurso referenciado existe no que vai ao ar. Um 404 não
+      # quebra build nenhum — foi assim que o link da planilha ficou apontando
+      # para o nome do observatório irmão sem nada acusar.
+      - name: "Links internos e recursos referenciados"
+        run: python tests/test_links.py
+
       - name: "Conferir o que foi gerado"
         run: |
           echo "UFs:        $(ls site/dist/uf/*.html | wc -l)"

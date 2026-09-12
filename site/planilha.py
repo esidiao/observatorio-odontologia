@@ -3,7 +3,7 @@ site/planilha.py
 Gera a pasta de trabalho XLSX publicada junto com o site.
 
 Uso (normalmente chamado por site/build.py):
-    python site/planilha.py --saida site/dist/dados/observatorio-psicologia.xlsx
+    python site/planilha.py --saida site/dist/dados/observatorio-odontologia.xlsx
 
 NÚMERO É NÚMERO, AUSÊNCIA É CÉLULA VAZIA
 -----------------------------------------
@@ -299,7 +299,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--saida", default=str(
-        RAIZ / "site" / "dist" / "dados" / "observatorio-psicologia.xlsx"))
+        RAIZ / "site" / "dist" / "dados" / "observatorio-odontologia.xlsx"))
     p.add_argument("--dados", default=str(RAIZ / "data"))
     args = p.parse_args()
 
