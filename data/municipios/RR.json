@@ -13,9 +13,9 @@
    "concluintes": 46,
    "polos_ead": 0,
    "tem_curso_presencial": true,
-   "dentistas_sus": 176,
-   "estabelecimentos_esp_bucal": 7,
-   "estabelecimentos_esp_bucal_total": 87,
+   "dentistas_sus": 170,
+   "estabelecimentos_esp_bucal": 8,
+   "estabelecimentos_esp_bucal_total": 93,
    "estabelecimentos_lrpd": 3,
    "estabelecimentos_lrpd_total": 3,
    "equipes_esb": null,
@@ -27,7 +27,9 @@
     "114/005",
     "114/006",
     "114/007",
+    "114/008",
     "114/011",
+    "114/018",
     "157/001"
    ]
   }

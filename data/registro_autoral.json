@@ -8,8 +8,8 @@
     "obra": "Observatório Nacional da Formação em Odontologia",
     "descricao": "Sítio estático data-driven com indicadores de acesso territorial, qualidade e cobertura assistencial dos cursos de Odontologia no Brasil: formulação e cálculo dos índices ICT, E, IAF, ICAB, ICRE e ICSB, catálogo de indicadores, textos e desenho editorial."
   },
-  "registrado_em": "2026-09-12T15:44:13+00:00",
-  "git_commit_ancora": "a0def6bf9258b60401ca2a01376df4fe3ce5a1d2",
+  "registrado_em": "2026-10-23T23:12:05+00:00",
+  "git_commit_ancora": "566879ff4d1225647b6bce9199af071fcdebde5e",
   "algoritmo": "SHA-256 sobre o conteúdo com fim de linha normalizado em LF",
   "fundamento": "Lei 9.610/1998 (direitos autorais) e Lei 9.609/1998 (programa de computador). O resumo combinado é impressão digital única do conjunto; o commit Git ancora a data no histórico versionado.",
   "como_verificar": [
@@ -23,14 +23,14 @@
   "natureza": "Declaração datada de conteúdo, com anterioridade ancorada no histórico do repositório. Permite comparar uma cópia com o original arquivo a arquivo. Não é registro em cartório nem depósito no INPI, e não substitui nenhum dos dois.",
   "escopo": "Apenas material autoral: código, textos, templates e o desenho dos índices. Não inclui os dados públicos (INEP, DATASUS, IBGE), que pertencem às respectivas fontes, nem bibliotecas de terceiros.",
   "n_arquivos": 39,
-  "bytes_totais": 519440,
-  "sha256_combinado": "4830e5283aa1e54458f5181827942f790f6df8ff1ad2a6b90426af3d185a333c",
+  "bytes_totais": 520383,
+  "sha256_combinado": "cdfb0c26d3fcae05ab5f67af0a70d7418e1e5c578fe68ab512ef96d75a0880b1",
   "arquivos": [
     {
       "arquivo": "README.md",
       "bytes": 14352,
       "linhas": 298,
-      "sha256": "bee96b137f1d63185e696fcfa36b5df0fcd7128d798b42d881ac312e359b95b8"
+      "sha256": "02f0ed85c881eedb8ebf124588c79e078993eb4c2555e2718d1d4ffb2c2c36d0"
     },
     {
       "arquivo": "SECURITY.md",
@@ -64,9 +64,9 @@
     },
     {
       "arquivo": "etl/extrair_cnes.py",
-      "bytes": 42159,
-      "linhas": 881,
-      "sha256": "201be02d251adf26a111fb9c19cc41f8f0a1a0b66eeee77a32dc2920e481095a"
+      "bytes": 42872,
+      "linhas": 896,
+      "sha256": "b95d8e20e105fc475115520a02fdd78d375988c41c489114c294b99b63204b0c"
     },
     {
       "arquivo": "etl/extrair_cpc.py",
@@ -250,9 +250,9 @@
     },
     {
       "arquivo": "tests/test_validacao.py",
-      "bytes": 25215,
-      "linhas": 574,
-      "sha256": "ce753eb96594b750858cb2b1f23c30287244fbeb4ec494ab54b3ec1a09f8171f"
+      "bytes": 25445,
+      "linhas": 578,
+      "sha256": "d1f7d04465e58bb28a310b413a98e3dec40bee3c4ed530239f20e2feb3877217"
     },
     {
       "arquivo": ".github/workflows/ci.yml",

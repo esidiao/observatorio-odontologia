@@ -5,7 +5,7 @@ lendo a base mensal do DATASUS por FTP sem baixar os 700 MB do ZIP.
 
 Uso:
     python etl/extrair_cnes.py                      # competência mais recente
-    python etl/extrair_cnes.py --competencia 202607
+    python etl/extrair_cnes.py --competencia 202609
     python etl/extrair_cnes.py --listar             # competências disponíveis
     python etl/extrair_cnes.py --rebaixar           # ignora o cache e rebaixa
 
@@ -300,6 +300,20 @@ def _ler_dominio(z, competencia, anterior=None):
     return dominio
 
 
+def _falhas_no_dominio(caminho):
+    """Domínio existente mas incompleto. Um arquivo presente não é um arquivo
+    pronto: a retentativa do que faltou só acontece se a saída antecipada por
+    cache não disparar antes dela — e, com todas as fatias no lugar, era
+    exatamente aí que ela disparava. A tabela que caiu ficava faltando para
+    sempre, no caso que a retentativa existe para cobrir."""
+    if not caminho.exists():
+        return False
+    try:
+        return bool(json.loads(caminho.read_text(encoding="utf-8")).get("falhas"))
+    except (OSError, ValueError):
+        return True          # ilegível é incompleto, não pronto
+
+
 def baixar_fatias(competencia, cache, rebaixar=False):
     """Grava as fatias filtradas em `cache`. Só baixa o que faltar."""
     alvos = {
@@ -309,7 +323,8 @@ def baixar_fatias(competencia, cache, rebaixar=False):
         "equipes": cache / "equipes.csv",
         "dominio": cache / "dominio.json",
     }
-    if not rebaixar and all(p.exists() for p in alvos.values()):
+    if (not rebaixar and all(p.exists() for p in alvos.values())
+            and not _falhas_no_dominio(alvos["dominio"])):
         print(f"[CNES] usando fatias já filtradas em {cache}")
         return alvos
 

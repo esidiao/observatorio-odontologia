@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-12",
+  "gerado_em": "2026-10-23",
   "fontes": {
     "censo": {
       "presente": true,
@@ -31,9 +31,9 @@
     "cnes": {
       "presente": true,
       "fonte": "Cadastro Nacional de Estabelecimentos de Saúde (CNES/DATASUS)",
-      "arquivo": "BASE_DE_DADOS_CNES_202607.ZIP",
-      "url": "ftp://ftp.datasus.gov.br/cnes/BASE_DE_DADOS_CNES_202607.ZIP",
-      "competencia": "202607",
+      "arquivo": "BASE_DE_DADOS_CNES_202609.ZIP",
+      "url": "ftp://ftp.datasus.gov.br/cnes/BASE_DE_DADOS_CNES_202609.ZIP",
+      "competencia": "202609",
       "cbo_familia": "2232",
       "cbo_ocupacoes": {
         "223204": "CIRURGIAO DENTISTA  AUDITOR",
@@ -61,7 +61,10 @@
         "223293": "CIRURGIAODENTISTA DA ESTRATEGIA DE SAUDE DA FAMILIA"
       },
       "cbo_criterio": "prefixo exato da família 2232 (cirurgião-dentista). Casar por texto capturaria docência e pesquisa em Odontologia, e também auxiliar e técnico em saúde bucal — ocupações próprias, de outra família, que este indicador não mede.",
-      "servicos": {},
+      "servicos": {
+        "114": "ATENCAO ESPECIALIZADA A SAUDE BUCAL",
+        "157": "SERVICO DE LABORATORIO DE PROTESE DENTARIA"
+      },
       "classificacoes": {
         "157/001": "LABORATORIO REGIONAL DE PROTESE DENTARIA",
         "114/001": "DENTISTICA",
@@ -101,48 +104,46 @@
       "equipes_criterio": "tipos e subtipos de equipe cujo nome no domínio contém 'saúde bucal' ou 'eSB', descobertos na competência lida e casados cada um contra a sua coluna. Entram tanto as equipes de saúde bucal propriamente ditas quanto as equipes de atenção básica que incluem saúde bucal — a pergunta é se há equipe COM saúde bucal na atenção primária do município. Os rótulos acima permitem refazer a conta com outro recorte.",
       "habilitacao_ceo_nao_publicada": "A habilitação de Centro de Especialidades Odontológicas não é relacionada a estabelecimento em nenhuma tabela-fato desta base: os códigos existem em tbSubGruposHabilitacao e não há tabela que os ligue a uma unidade. Por isso o indicador mede SERVIÇO DECLARADO (114) e se chama rede especializada — chamá-lo CEO afirmaria uma habilitação não lida.",
       "lrpd_nao_entra_em_indice": "O serviço 157 (laboratório de prótese dentária) é extraído e publicado como contagem própria. Não entra na rede especializada: é outra política, com outra unidade de conta.",
-      "dominio_nao_lido": [
-        "tbServicoEspecializado: RuntimeError"
-      ],
-      "extraido_em": "2026-09-12",
+      "dominio_nao_lido": null,
+      "extraido_em": "2026-10-23",
       "diagnostico": {
-        "vinculos_odontologia": 260572,
+        "vinculos_odontologia": 263997,
         "vinculos_por_cbo": {
           "223204": 223,
-          "223208": 137020,
-          "223212": 12933,
-          "223216": 22,
-          "223220": 890,
-          "223224": 3688,
-          "223228": 152,
-          "223232": 938,
-          "223236": 4823,
-          "223240": 9998,
+          "223208": 138627,
+          "223212": 13104,
+          "223216": 23,
+          "223220": 902,
+          "223224": 3780,
+          "223228": 159,
+          "223232": 950,
+          "223236": 4855,
+          "223240": 10111,
           "223244": 375,
-          "223248": 6722,
-          "223252": 714,
-          "223256": 6314,
-          "223260": 3646,
-          "223264": 987,
-          "223268": 12912,
-          "223272": 589,
-          "223276": 252,
-          "223280": 6348,
-          "223284": 272,
-          "223288": 3292,
-          "223293": 47462
+          "223248": 6795,
+          "223252": 719,
+          "223256": 6482,
+          "223260": 3687,
+          "223264": 996,
+          "223268": 13041,
+          "223272": 593,
+          "223276": 249,
+          "223280": 6460,
+          "223284": 278,
+          "223288": 3288,
+          "223293": 48300
         },
-        "vinculos_em_estabelecimento_desabilitado": 411,
+        "vinculos_em_estabelecimento_desabilitado": 282,
         "vinculos_sem_cadastro": 0,
-        "servicos_bucais": 88733,
+        "servicos_bucais": 89976,
         "servicos_com_situacao_preenchida": 0,
         "st_ativo_sn_vazio_no_export": true,
-        "servicos_em_estabelecimento_desabilitado": 21314,
+        "servicos_em_estabelecimento_desabilitado": 21376,
         "servicos_sem_cadastro": 0,
         "equipes_catalogo_incompativel": true,
-        "equipes_lidas": 125202,
+        "equipes_lidas": 125841,
         "equipes_alcancadas_pelo_dominio": 846,
-        "equipes_fracao_alcancada": 0.006757
+        "equipes_fracao_alcancada": 0.006723
       }
     },
     "ibge_municipios": {
@@ -165,7 +166,7 @@
     "A rede especializada é medida pelo SERVIÇO 114 declarado no CNES (atenção especializada à saúde bucal), não pela habilitação de Centro de Especialidades Odontológicas: os códigos de habilitação existem na tabela de domínio, e nenhuma tabela-fato desta base os relaciona a estabelecimento. Por isso o indicador não se chama CEO — chamá-lo assim afirmaria uma habilitação que não foi lida.",
     "As vinte classificações do serviço 114 são especialidades do mesmo serviço (endodontia, periodontia, cirurgia, atendimento a pessoa com deficiência e outras), e não foram agrupadas em subgrupos: o estabelecimento é contado uma vez, e as classificações que ele declara aparecem no detalhe de cada município.",
     "O laboratório de prótese dentária (serviço 157) é publicado como contagem própria e NÃO entra em índice nem se soma à rede especializada: é outra política, com outra unidade de conta.",
-    "As equipes de saúde bucal NÃO são mensuráveis nesta base, e o ICSB está nulo — não zerado. A coluna TP_EQUIPE de tbEquipe usa os códigos 70, 71, 72…, e nenhuma tabela de domínio do export os nomeia: tbTipoEquipe, tbGrupoEquipe e tbTipoEqSubTipo numeram de 01 a 30. Casar um catálogo contra o outro devolveria 846 de 125202 equipes por coincidência de numeração, número plausível e sem sentido. Preferimos a lacuna declarada.",
+    "As equipes de saúde bucal NÃO são mensuráveis nesta base, e o ICSB está nulo — não zerado. A coluna TP_EQUIPE de tbEquipe usa os códigos 70, 71, 72…, e nenhuma tabela de domínio do export os nomeia: tbTipoEquipe, tbGrupoEquipe e tbTipoEqSubTipo numeram de 01 a 30. Casar um catálogo contra o outro devolveria 846 de 125841 equipes por coincidência de numeração, número plausível e sem sentido. Preferimos a lacuna declarada.",
     "A rede especializada conta apenas os estabelecimentos que ofertam o serviço AO SUS. O total declarado — que inclui o consultório privado que registra o serviço 114 no cadastro — é publicado ao lado, nos campos terminados em `_total`: a distância entre os dois diz quanto da rede especializada de saúde bucal do município é pública.",
     "A coluna ST_ATIVO_SN de rlEstabServClass vem vazia em todas as linhas deste export do CNES, então não há como excluir serviço marcado como inativo. O filtro existe no código dos observatórios irmãos e, medido aqui, nunca excluiu nada — fica registrado como limitação em vez de passar por filtro que funciona."
   ]

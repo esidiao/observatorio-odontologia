@@ -25,10 +25,10 @@ dependências.
 | Concluintes | **26.883** | 49.065 |
 | IES distintas | **576** | 1.032 |
 | Cursos avaliados | **452** (CPC 2023) | 746 (CPC 2022) |
-| Municípios com cirurgião-dentista no SUS | **5.567** de 5.571 | 5.523 |
-| Cirurgiões-dentistas no SUS | **95.952** | 71.542 |
-| Municípios com serviço especializado ao SUS | **2.470** | — |
-| Municípios com laboratório de prótese ao SUS | **4.345** | — |
+| Municípios com cirurgião-dentista no SUS | **5.565** de 5.571 | 5.528 |
+| Cirurgiões-dentistas no SUS | **96.748** | 72.751 |
+| Municípios com serviço especializado ao SUS | **2.495** | — |
+| Municípios com laboratório de prótese ao SUS | **4.356** | — |
 
 ### A manchete é uma ausência
 
@@ -98,9 +98,9 @@ municípios com psicólogo no SUS. Nenhum transfere. Para Odontologia a pergunta
 nenhuma fonte única as dá:
 
 * **ICAB** — municípios com ao menos um cirurgião-dentista vinculado ao SUS
-  (família CBO 2232, por prefixo exato). Medido: **5.567 dos 5.571**;
+  (família CBO 2232, por prefixo exato). Medido: **5.565 dos 5.571**;
 * **ICRE** — municípios com estabelecimento que oferta **ao SUS** atenção
-  especializada à saúde bucal (serviço 114). Medido: **2.470**;
+  especializada à saúde bucal (serviço 114). Medido: **2.495**;
 * **ICSB** — municípios com equipe de saúde bucal na atenção primária.
   **Não é mensurável nesta base** — ver abaixo — e sai nulo, nunca zero.
 
@@ -119,8 +119,8 @@ separa de verdade: de 0,211 a 1,000.
 
 `rlEstabServClass` traz `CO_AMBULATORIAL_SUS` e `CO_HOSPITALAR_SUS`, e sem
 olhá-las o indicador conta consultório privado como rede pública. Medida a
-diferença: o serviço 114 é **declarado** em 3.105 municípios por 28.819
-estabelecimentos, e **ofertado ao SUS** em 2.470 municípios por 6.014. A
+diferença: o serviço 114 é **declarado** em 3.130 municípios por 29.188
+estabelecimentos, e **ofertado ao SUS** em 2.495 municípios por 6.075. A
 cobertura pública é publicada como índice; o total declarado sai ao lado, nos
 campos terminados em `_total`, porque a distância entre os dois diz quanto da
 rede especializada de saúde bucal do município é acessível pelo SUS.
@@ -163,7 +163,7 @@ dezenas de milhares de equipes de saúde bucal.
 Por isso `_compativel` **mede** a cobertura do catálogo antes de usá-lo: se os
 códigos descobertos não alcançam ao menos 5% das equipes, o catálogo é
 declarado incompatível e o indicador sai nulo, com o motivo na proveniência.
-Na 202607 a interseção cobre 0,68%. A fatia de equipes continua sendo baixada e
+Na 202609 a interseção cobre 0,67%. A fatia de equipes continua sendo baixada e
 guardada: se uma competência futura exportar o catálogo correspondente, a
 medição volta sozinha, sem nova leitura de uma hora.
 

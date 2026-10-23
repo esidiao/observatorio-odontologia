@@ -2,7 +2,7 @@
 tests/test_validacao.py
 Integridade do conjunto publicado, contra âncoras conhecidas.
 
-As âncoras foram apuradas no Censo 2024, no CPC 2023 e no CNES 202607, lendo
+As âncoras foram apuradas no Censo 2024, no CPC 2023 e no CNES 202609, lendo
 os arquivos originais. Servem como teste de REGRESSÃO: se o pipeline passar a
 produzir outra coisa, o mais provável é defeito no pipeline, não notícia nos
 dados. Uma edição nova das fontes muda os números de propósito — e aí estas
@@ -19,7 +19,7 @@ DATA = REPO / "data"
 
 CENSO = 2024
 CICLO_CPC = "2023"
-COMPETENCIA_CNES = "202607"
+COMPETENCIA_CNES = "202609"
 
 # ------------------------------------------------------- âncoras: Censo 2024
 REGISTROS_CENSO = 650
@@ -46,17 +46,20 @@ CURSOS_COM_CPC = 448
 CURSOS_COM_IDD = 445
 CONCLUINTES_PARTICIPANTES = 23278
 
-# --------------------------------------------------------- âncoras: CNES 202607
-MUNICIPIOS_COM_DENTISTA = 5567
-DENTISTAS_SUS = 95952
+# --------------------------------------------------------- âncoras: CNES 202609
+# Trocar de competência MUDA estes números, e é por isso que a troca falha
+# o teste em vez de passar calada: cada valor foi reconferido contra a
+# competência declarada acima, não ajustado até o teste passar.
+MUNICIPIOS_COM_DENTISTA = 5565
+DENTISTAS_SUS = 96748
 # Rede especializada: só o que é ofertado AO SUS entra no índice. O total
 # declarado — que inclui clínica e consultório privados — fica ao lado, e a
 # diferença entre os dois é grande o bastante para merecer âncora própria.
-MUNICIPIOS_COM_ESP_BUCAL = 2470
-ESTABELECIMENTOS_ESP_BUCAL = 6014
-MUNICIPIOS_COM_ESP_BUCAL_TOTAL = 3105
-ESTABELECIMENTOS_ESP_BUCAL_TOTAL = 28819
-MUNICIPIOS_COM_LRPD = 4345
+MUNICIPIOS_COM_ESP_BUCAL = 2495
+ESTABELECIMENTOS_ESP_BUCAL = 6075
+MUNICIPIOS_COM_ESP_BUCAL_TOTAL = 3130
+ESTABELECIMENTOS_ESP_BUCAL_TOTAL = 29188
+MUNICIPIOS_COM_LRPD = 4356
 
 MUNICIPIOS_BRASIL = 5571          # IBGE, desde a instalação de Boa Esperança
 MUNICIPIOS_MT = 142               # do Norte (MT) em 01/01/2025
@@ -315,7 +318,7 @@ def test_tres_coberturas_existem_e_sao_separadas():
 
 
 def test_ancoras_da_cobertura_do_cnes():
-    """Totais conhecidos do CNES 202607, como teste de regressão."""
+    """Totais conhecidos do CNES 202609, como teste de regressão."""
     ufs = _ler("nacional.json")["ufs"]
     for campo, esperado in [
         ("municipios_com_dentista", MUNICIPIOS_COM_DENTISTA),
@@ -336,8 +339,9 @@ def test_rede_especializada_publica_e_menor_que_a_declarada():
     O filtro de SUS precisa continuar existindo.
 
     Sem ele, consultório privado que declara o serviço 114 entra como rede
-    pública: medido, isso levaria a cobertura de 2.470 para 3.105 municípios e
-    de 6.014 para 28.819 estabelecimentos. Se os dois números empatarem, o
+    pública: medido na 202609, isso levaria a cobertura de 2.495 para 3.130
+    municípios e de 6.075 para 29.188 estabelecimentos. Se os dois números
+    empatarem, o
     filtro caiu — e o site passaria a chamar de pública uma rede que não é.
     """
     ufs = _ler("nacional.json")["ufs"]
@@ -414,7 +418,7 @@ def test_icab_esta_saturado_e_a_densidade_e_que_separa():
     """
     Registra a saturação do ICAB, que muda como ele deve ser lido.
 
-    5.567 dos 5.571 municípios têm cirurgião-dentista vinculado ao SUS — uma
+    5.565 dos 5.571 municípios têm cirurgião-dentista vinculado ao SUS — uma
     saturação ainda maior que a do observatório de Psicologia. O índice continua
     legítimo, mas separa pouquíssimo: quem o ler como retrato da rede vai
     concluir que o país inteiro está igualmente atendido. A medida que separa é
