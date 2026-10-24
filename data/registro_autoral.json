@@ -8,8 +8,8 @@
     "obra": "Observatório Nacional da Formação em Odontologia",
     "descricao": "Sítio estático data-driven com indicadores de acesso territorial, qualidade e cobertura assistencial dos cursos de Odontologia no Brasil: formulação e cálculo dos índices ICT, E, IAF, ICAB, ICRE e ICSB, catálogo de indicadores, textos e desenho editorial."
   },
-  "registrado_em": "2026-10-23T23:12:05+00:00",
-  "git_commit_ancora": "566879ff4d1225647b6bce9199af071fcdebde5e",
+  "registrado_em": "2026-10-24T03:22:23+00:00",
+  "git_commit_ancora": "c48d4f49d6eed5d8de01c2832dd35adabe9f3583",
   "algoritmo": "SHA-256 sobre o conteúdo com fim de linha normalizado em LF",
   "fundamento": "Lei 9.610/1998 (direitos autorais) e Lei 9.609/1998 (programa de computador). O resumo combinado é impressão digital única do conjunto; o commit Git ancora a data no histórico versionado.",
   "como_verificar": [
@@ -23,8 +23,8 @@
   "natureza": "Declaração datada de conteúdo, com anterioridade ancorada no histórico do repositório. Permite comparar uma cópia com o original arquivo a arquivo. Não é registro em cartório nem depósito no INPI, e não substitui nenhum dos dois.",
   "escopo": "Apenas material autoral: código, textos, templates e o desenho dos índices. Não inclui os dados públicos (INEP, DATASUS, IBGE), que pertencem às respectivas fontes, nem bibliotecas de terceiros.",
   "n_arquivos": 39,
-  "bytes_totais": 520383,
-  "sha256_combinado": "cdfb0c26d3fcae05ab5f67af0a70d7418e1e5c578fe68ab512ef96d75a0880b1",
+  "bytes_totais": 520384,
+  "sha256_combinado": "f2e34c14f6729654689839d9e461573e5f10717a322ebb70de8d462153c3fc37",
   "arquivos": [
     {
       "arquivo": "README.md",
@@ -94,9 +94,9 @@
     },
     {
       "arquivo": "etl/rede.py",
-      "bytes": 19893,
+      "bytes": 19894,
       "linhas": 506,
-      "sha256": "2bc07a5d0a48df591c0a1fbb3807c421d47f73bf2ab0d152e01228e3a5637c12"
+      "sha256": "edf5b61d4d2c7f32ed2921537619375a86447aa3a4a2781b0e838b4a859c4506"
     },
     {
       "arquivo": "etl/registro_autoral.py",

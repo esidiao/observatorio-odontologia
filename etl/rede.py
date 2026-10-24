@@ -47,7 +47,7 @@ from pathlib import Path
 TENTATIVAS_HTTP = 4
 TENTATIVAS_FTP = 12          # ~2 de 3 conexões REST caem; 12 dá margem folgada
 ESPERA_BASE = 4
-UA = "observatorio-psicologia/1.0 (+https://github.com/esidiao)"
+UA = "observatorio-odontologia/1.0 (+https://github.com/esidiao)"
 
 _CTX = None
 
