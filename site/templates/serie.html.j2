@@ -8,16 +8,21 @@
   <h1>Série histórica</h1>
   {% if serie and serie.anos %}
   <p class="secao-lede">
-    Comparação entre as edições {{ serie.anos[:-1] | join(', ') }} e {{ serie.anos[-1] }} do Censo da
-    Educação Superior, restrita aos campos que são de fato comparáveis entre
-    edições. O INEP reclassificou os cursos na CINE e republicou as edições
-    anteriores, então o rótulo <em>Odontologia</em> significa a mesma coisa em
-    todos os anos — o que não vale para todo campo do cadastro.
+    Comparação entre as edições
+    {%- if serie.anos | length > 2 %} {{ serie.anos[:-1] | join(', ') }} e
+    {{ serie.anos[-1] }}{% else %} {{ serie.anos | join(' e ') }}{% endif %}
+    do Censo da Educação Superior, restrita aos campos que são de fato
+    comparáveis entre edições. O INEP reclassificou os cursos na CINE e
+    republicou as edições anteriores, então o rótulo <em>Odontologia</em>
+    significa a mesma coisa nas {{ serie.anos | length }} edições — o que não
+    vale para todo campo do cadastro.
   </p>
   {% else %}
   <p class="secao-lede">
-    A série ainda não foi gerada. Rode <code>python etl/serie.py</code> para
-    extrair as edições anteriores do Censo e preencher esta página.
+    <span class="sem-dados">sem dados</span> — esta edição do observatório não
+    publica série histórica. Quando as edições anteriores do Censo entram no
+    recorte, a comparação aparece aqui; até lá a página não estima nada nem
+    repete o ano corrente como se fosse série.
   </p>
   {% endif %}
 </section>

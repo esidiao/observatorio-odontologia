@@ -636,7 +636,7 @@ def escrever_pwa(saida, panorama, versao_estatica):
         caminho = saida / relativo
         if caminho.exists():
             resumo.update(caminho.read_bytes())
-    versao = f"psi-{panorama.get('ano_censo')}-{resumo.hexdigest()[:12]}"
+    versao = f"odonto-{panorama.get('ano_censo')}-{resumo.hexdigest()[:12]}"
     # As URLs que o SW guarda têm de ser as MESMAS que a página pede. Um
     # estático versionado é pedido como `app.js?v=abc`; pré-carregá-lo sem
     # a query encheria o cache com uma entrada que nunca casa, e toda
@@ -652,6 +652,13 @@ def escrever_pwa(saida, panorama, versao_estatica):
    chave velha faz o leitor recorrente ver o conteúdo anterior indefinidamente,
    e o site parece atualizado sem estar. */
 const CACHE = '{versao}';
+/* O prefixo delimita o que este service worker pode apagar.
+   Os observatórios irmãos moram na MESMA origem (sao project pages do mesmo
+   usuario no GitHub Pages) e o Cache Storage e por ORIGEM, nao por caminho.
+   Um `activate` que apagasse "toda chave que nao e a minha" apagaria o cache
+   offline dos irmaos a cada visita — foi o que acontecia, e foi medido: abrir
+   a Fonoaudiologia fazia a chave da Psicologia desaparecer da origem. */
+const PREFIXO = 'odonto-';
 const ESSENCIAIS = {essenciais_js};
 
 self.addEventListener('install', e => {{
@@ -674,7 +681,7 @@ self.addEventListener('install', e => {{
 
 self.addEventListener('activate', e => {{
   e.waitUntil(caches.keys().then(chaves =>
-    Promise.all(chaves.filter(k => k !== CACHE).map(k => caches.delete(k)))
+    Promise.all(chaves.filter(k => k.startsWith(PREFIXO) && k !== CACHE).map(k => caches.delete(k)))
   ).then(() => self.clients.claim()));
 }});
 
