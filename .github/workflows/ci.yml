@@ -90,6 +90,11 @@ jobs:
       - name: "Testes do verificador de fontes"
         run: python tests/test_check_fontes.py
 
+      # Dados sintéticos, sem os 800 MB do INEP: trava a tradução do Censo 2025
+      # (milhar na célula, supressão, semipresencial ≠ EaD, rótulo exato).
+      - name: "Testes do adaptador do Censo 2025"
+        run: python tests/test_censo2025_adaptador.py
+
       - name: "Guarda de riqueza"
         run: python etl/pipeline.py --so-riqueza
 

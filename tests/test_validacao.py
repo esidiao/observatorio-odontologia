@@ -2,8 +2,9 @@
 tests/test_validacao.py
 Integridade do conjunto publicado, contra âncoras conhecidas.
 
-As âncoras foram apuradas no Censo 2024, no CPC 2023 e no CNES 202609, lendo
-os arquivos originais. Servem como teste de REGRESSÃO: se o pipeline passar a
+As âncoras foram apuradas no Censo 2025, no CPC 2023 e no CNES 202609, lendo
+os arquivos originais. As do Censo foram reconferidas contra as tabelas do
+INEP (tabela_curso e tabela_aluno) sem passar pelo adaptador nem pelo ETL. Servem como teste de REGRESSÃO: se o pipeline passar a
 produzir outra coisa, o mais provável é defeito no pipeline, não notícia nos
 dados. Uma edição nova das fontes muda os números de propósito — e aí estas
 constantes mudam junto, num commit que diz isso.
@@ -17,22 +18,30 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 DATA = REPO / "data"
 
-CENSO = 2024
+CENSO = 2025
 CICLO_CPC = "2023"
 COMPETENCIA_CNES = "202609"
 
-# ------------------------------------------------------- âncoras: Censo 2024
-REGISTROS_CENSO = 650
+# ------------------------------------------------------- âncoras: Censo 2025
+# (Censo 2024, para referência: 650 registros, 303 municípios, 118.747 vagas,
+#  162.750 matrículas, 26.883 concluintes, 576 IES.)
+REGISTROS_CENSO = 676
 UFS_COM_PRESENCIAL = 27
-MUNICIPIOS_COM_OFERTA = 303
-CURSOS_PRESENCIAIS = 650
-VAGAS_PRESENCIAL = 118747
+MUNICIPIOS_COM_OFERTA = 308
+CURSOS_PRESENCIAIS = 676
+VAGAS_PRESENCIAL = 131764
 VAGAS_EAD = 0
+VAGAS_SEMIPRESENCIAL = 0
 POLOS_REGISTROS = 0
 POLOS_MUNICIPIOS = 0
-MATRICULAS = 162750
-CONCLUINTES = 26883
-IES_DISTINTAS = 576
+MATRICULAS = 164680
+CONCLUINTES = 26681
+IES_DISTINTAS = 595
+
+# Série histórica: edições cobertas e o ano em que a semipresencial passa a
+# existir como categoria (Decreto 12.456/2025).
+SERIE_ANOS = [str(a) for a in range(2015, 2026)]
+ANO_PRIMEIRO_SEMIPRESENCIAL = 2025
 
 # A ausência de EaD como fato estrutural: não há uma linha sequer de ensino a
 # distância no recorte — nem sede, nem polo. As 27 UFs valem zero.
@@ -145,6 +154,86 @@ def test_vagas_presenciais_e_ead():
 def test_cursos_e_ies():
     ufs = _ler("nacional.json")["ufs"]
     assert _soma(ufs, "n_cursos_presencial") == CURSOS_PRESENCIAIS
+    # O total do país é DISTINTO, e vem da série (contado na leitura); a soma
+    # das UFs contaria em dobro quem oferta em mais de um estado.
+    serie = _ler("serie.json")
+    assert serie["brasil"][str(CENSO)]["n_ies"] == IES_DISTINTAS
+
+
+def test_semipresencial_e_categoria_propria_e_zero_medido():
+    """
+    Desde o Censo 2025, TP_MODALIDADE_ENSINO = 3 é semipresencial.
+
+    Três coisas precisam valer ao mesmo tempo: o campo existe e é ZERO em toda
+    UF (medido — as 676 ofertas são presenciais), não nulo; ele não foi
+    somado à EaD; e o total de vagas é a soma das três modalidades. Se um dia
+    aparecer vaga semipresencial em Odontologia, a âncora falha e a notícia
+    chega por aqui, não por um percentual de EaD que mudou sem explicação.
+    """
+    ufs = _ler("nacional.json")["ufs"]
+    nulos = [u for u, d in ufs.items() if d.get("vagas_semipresencial") is None]
+    assert not nulos, f"vagas_semipresencial nulo em {nulos}: era zero medido"
+    assert _soma(ufs, "vagas_semipresencial") == VAGAS_SEMIPRESENCIAL
+    for sigla, d in ufs.items():
+        assert d["vagas_total"] == (d["vagas_presencial"] + d["vagas_ead"]
+                                    + d["vagas_semipresencial"]), (
+            f"{sigla}: vagas_total não é a soma das três modalidades")
+        if d["vagas_total"]:
+            esperado = round(100 * d["vagas_ead"] / d["vagas_total"], 1)
+            assert d["pct_ead"] == esperado, (
+                f"{sigla}: pct_ead {d['pct_ead']} — tem de ser só EaD "
+                f"({esperado}), sem a semipresencial no numerador")
+
+
+def test_serie_reconcilia_com_o_publicado():
+    """
+    O último ponto da série é o número que o resto do site publica.
+
+    A série é lida por outro caminho (etl/serie.py, edição a edição), então
+    uma definição que divergisse entre os dois apareceria aqui como dois
+    números diferentes para a mesma UF no mesmo ano.
+    """
+    serie = _ler("serie.json")
+    ufs = _ler("nacional.json")["ufs"]
+    assert serie["anos"] == SERIE_ANOS, f"edições da série: {serie['anos']}"
+    ultimo = serie["anos"][-1]
+    assert ultimo == str(CENSO), "a série não termina no Censo publicado"
+    diverge = [f"{u}.{c}: série {serie['ufs'][u][ultimo][c]} x {d[c]}"
+               for u, d in ufs.items() for c in serie["campos"]
+               if serie["ufs"][u][ultimo][c] != d[c]]
+    assert not diverge, "série x nacional.json:\n  " + "\n  ".join(diverge)
+
+
+def test_serie_soma_das_ufs_e_o_brasil():
+    """Cada campo somável da linha Brasil é a soma das UFs, em todo ano."""
+    serie = _ler("serie.json")
+    for ano in serie["anos"]:
+        for campo in serie["campos"]:
+            if campo == "n_ies":
+                continue  # total distinto, não soma (ver etl/serie.py)
+            vals = [(serie["ufs"][u].get(ano) or {}).get(campo)
+                    for u in serie["ufs"]]
+            soma = (None if all(v is None for v in vals)
+                    else sum(v or 0 for v in vals))
+            assert serie["brasil"][ano][campo] == soma, (
+                f"{ano}.{campo}: Brasil {serie['brasil'][ano][campo]} x "
+                f"soma das UFs {soma}")
+
+
+def test_semipresencial_nao_existe_antes_de_2025_na_serie():
+    """
+    Antes de 2025 a categoria não existia: nulo, não zero.
+
+    Zero afirmaria que o Censo 2015–2024 mediu a semipresencial e não achou
+    nenhuma, quando ele nem tinha o código. Em 2025 em diante é medida.
+    """
+    serie = _ler("serie.json")
+    for ano in serie["anos"]:
+        v = serie["brasil"][ano]["vagas_semipresencial"]
+        if int(ano) < ANO_PRIMEIRO_SEMIPRESENCIAL:
+            assert v is None, f"{ano}: semipresencial {v!r}, esperado nulo"
+        else:
+            assert v is not None, f"{ano}: semipresencial nula num ano medido"
 
 
 def test_polos_ead():
@@ -205,9 +294,10 @@ def test_nao_existe_camada_de_ead_no_recorte():
             dimensoes.add((linha.get("TP_DIMENSAO") or "").strip())
     assert dimensoes == {"1"}, (
         f"o recorte tem as camadas {sorted(dimensoes)}. Se apareceu 2 (polo) "
-        "ou 3 (sede EaD), passou a existir oferta a distância em Odontologia: "
-        "é notícia, e todas as âncoras de EaD mudam junto — inclusive as "
-        "seções do site que hoje declaram a ausência.")
+        "ou 3 (sede EaD/semipresencial), passou a existir oferta não "
+        "presencial em Odontologia: é notícia, e todas as âncoras de EaD e "
+        "semipresencial mudam junto — inclusive as seções do site que hoje "
+        "declaram a ausência.")
 
 
 def test_zero_de_ead_e_medida_nao_ausencia():
@@ -527,8 +617,9 @@ def test_proveniencia_vem_do_arquivo():
     assert str(CENSO) in prov.get("membro_cursos", ""), (
         "o membro lido não confere com o ano declarado")
     assert prov.get("rotulo_cine") == "Odontologia", (
-        f"rótulo CINE {prov.get('rotulo_cine')!r} — o match é EXATO. No Censo "
-        "2024 'Odontologia' é o único rótulo que contém 'odont', e é "
+        f"rótulo CINE {prov.get('rotulo_cine')!r} — o match é EXATO. Nos "
+        "Censos 2024 e 2025 'Odontologia' é o único rótulo que contém "
+        "'odont', e é "
         "justamente por isso que o critério exato precisa continuar: o dia em "
         "que surgir um vizinho, a substring o somaria sem avisar")
     assert prov.get("linhas_curso") == REGISTROS_CENSO
@@ -555,6 +646,8 @@ def test_limitacoes_declaradas():
         ("ceo", "por que o indicador não se chama CEO"),
         ("157", "o laboratório de prótese, publicado fora de índice"),
         ("correlação", "por que pct_ead fica fora da matriz"),
+        ("semipresencial", "a modalidade nova do Censo 2025 e a não "
+                           "comparabilidade com 2024"),
     ]:
         assert termo in texto, f"{motivo} não está declarada nas limitações"
 

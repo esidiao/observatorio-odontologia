@@ -6,6 +6,11 @@ Uso:
     python etl/pipeline.py --check-only        # só verifica frescor das fontes
     python etl/pipeline.py --ano 2024          # pipeline completo
     python etl/pipeline.py --ano 2024 --pular-cnes
+    python etl/pipeline.py --ano 2025 --origem-local <saída do adaptador> --pular-cnes
+
+O Censo 2025 veio em sete tabelas normalizadas: traduza antes com
+`etl/censo2025_adaptador.py --rotulo Odontologia` (que aborta se a tradução não
+fechar) e passe a pasta de saída em `--origem-local`.
 
 A ORDEM NÃO É NEGOCIÁVEL
 ------------------------
@@ -332,16 +337,18 @@ def conferir_riqueza(tolerancia=0):
 
 # --------------------------------------------------------------------------- #
 
-def executar(ano, pular_cnes=False, competencia=None):
-    _rodar("extrair_censo.py", "--ano", ano)
+def executar(ano, pular_cnes=False, competencia=None, origem_local=None):
+    origem = ["--origem-local", origem_local] if origem_local else []
+    _rodar("extrair_censo.py", "--ano", ano, *origem)
     _rodar("ingestao.py", "--ano", ano)
     _rodar("extrair_cpc.py", "--ano-censo", ano)
     if not pular_cnes:
         args = ["--competencia", competencia] if competencia else []
         _rodar("extrair_cnes.py", *args)
     else:
-        print("\n[PIPELINE] CNES pulado por pedido; a cobertura de saúde ficará nula "
-              "e a proveniência dirá isso.")
+        print("\n[PIPELINE] CNES pulado por pedido: o consolidador usa o "
+              "data/cobertura_cnes.json já existente; sem ele, a cobertura "
+              "fica nula e a proveniência diz isso.")
     _rodar("consolidar.py")
     _rodar("registro_autoral.py")
 
@@ -372,6 +379,9 @@ def main():
     p.add_argument("--competencia", help="competência do CNES (AAAAMM)")
     p.add_argument("--pular-cnes", action="store_true",
                    help="não reextrai o CNES (demorado); a cobertura fica nula")
+    p.add_argument("--origem-local", metavar="DIR",
+                   help="lê o Censo de uma pasta local (em 2025, a saída de "
+                        "etl/censo2025_adaptador.py) em vez do ZIP remoto")
     p.add_argument("--so-riqueza", action="store_true",
                    help="roda apenas a conferência de riqueza")
     args = p.parse_args()
@@ -382,7 +392,7 @@ def main():
     if args.so_riqueza:
         conferir_riqueza()
         return
-    executar(args.ano, args.pular_cnes, args.competencia)
+    executar(args.ano, args.pular_cnes, args.competencia, args.origem_local)
 
 
 if __name__ == "__main__":

@@ -7,6 +7,17 @@ Uso:
     python etl/extrair_censo.py --ano 2024
     python etl/extrair_censo.py --ano 2024 --rotulo "Odontologia"
     python etl/extrair_censo.py --ano 2024 --listar-rotulos odont
+    python etl/extrair_censo.py --ano 2025 --origem-local <dir>
+
+EDIÇÃO LOCAL, E O CENSO 2025
+----------------------------
+`--origem-local` lê o par MICRODADOS_CADASTRO_CURSOS_<ano>.CSV +
+MICRODADOS_ED_SUP_IES_<ano>.CSV de uma pasta em vez do ZIP remoto. Serve para
+duas coisas: reler uma edição já baixada (2015–2024 têm esse layout) e ler o
+Censo 2025, que o INEP publicou em sete tabelas normalizadas e que só entra
+aqui depois de traduzido por `etl/censo2025_adaptador.py` — o tradutor confere
+matrículas, concluintes, vagas e cursos contra a fonte e ABORTA se a tradução
+não fechar. O recorte e a proveniência seguem as mesmas regras do ZIP remoto.
 
 Saída (em etl/dados/, fora do versionamento):
     curso_<slug>_<ano>.csv   linhas do cadastro de cursos com o rótulo exato
@@ -162,7 +173,9 @@ def abrir_censo(ano):
             "NO_CINE_ROTULO, então o recorte funcionaria e o resto do pipeline "
             "produziria um país VAZIO em silêncio — SG_UF e TP_DIMENSAO não "
             "existem mais, e toda linha cairia em 'sem localização'.\n"
-            "O leitor do esquema novo está em observatorio-fisioterapia.")
+            "Baixe e extraia o ZIP, traduza com etl/censo2025_adaptador.py "
+            "(que confere a tradução e aborta se ela não fechar) e rode de "
+            f"novo com --origem-local <saída do adaptador>.")
     alvo_curso = z.localizar("cadastro_cursos", ".csv") or z.localizar("curso", ".csv")
     alvo_ies = z.localizar("_ies_", ".csv") or z.localizar("ies", ".csv")
     if not alvo_curso:
@@ -210,29 +223,119 @@ def listar_rotulos(z, alvo_curso, filtro):
     return contagem
 
 
-def extrair(ano, rotulo):
-    z, url, alvo_curso, alvo_ies = abrir_censo(ano)
-    ano_do_membro(alvo_curso, ano)
+def codificacao_do_arquivo(caminho):
+    """Mesma regra de `codificacao_do_membro`, para arquivo em disco."""
+    with open(caminho, "rb") as f:
+        return "utf-8-sig" if f.read(3) == b"\xef\xbb\xbf" else "latin-1"
+
+
+class ZipLocal:
+    """
+    Uma pasta com o par cursos + IES, lida com a mesma interface do ZIP remoto.
+
+    Existe para que o recorte, o relatório de vizinhos e a proveniência sejam
+    o MESMO código nas duas origens: uma segunda implementação do recorte
+    para a edição local seria o lugar exato onde os dois caminhos começariam
+    a divergir em silêncio.
+    """
+
+    def __init__(self, pasta, ano):
+        self.pasta = Path(pasta)
+        self.ano = ano
+        if not self.pasta.is_dir():
+            raise SystemExit(f"[ERRO] --origem-local {self.pasta} não é uma pasta.")
+
+    def membro(self, prefixo):
+        caminho = self.pasta / f"{prefixo}_{self.ano}.CSV"
+        if not caminho.exists():
+            raise SystemExit(
+                f"[ERRO] {caminho} ausente. Para o Censo 2025, gere-o com "
+                "etl/censo2025_adaptador.py; para 2015–2024, extraia o CSV do "
+                "ZIP do INEP com o nome original.")
+        return caminho
+
+    def abrir(self, caminho):
+        return open(caminho, encoding=codificacao_do_arquivo(caminho), newline="")
+
+    def md5(self):
+        textos = [p.read_text(encoding="utf-8", errors="replace").strip()
+                  for p in sorted(self.pasta.glob("md5*.txt"))]
+        return "\n".join(textos) or None
+
+    def resumo_adaptador(self):
+        caminho = self.pasta / f"_adaptador_{self.ano}.json"
+        if caminho.exists():
+            return json.loads(caminho.read_text(encoding="utf-8"))
+        return None
+
+
+def _origem(ano, origem_local):
+    """
+    Devolve (abrir_cursos, abrir_ies, descricao) para a origem pedida.
+
+    `abrir_*` são funções sem argumento que devolvem um arquivo de texto
+    aberto; `descricao` traz o que vai para a proveniência. O recorte abaixo
+    é um só para as duas origens.
+    """
+    if not origem_local:
+        z, url, alvo_curso, alvo_ies = abrir_censo(ano)
+        ano_do_membro(alvo_curso, ano)
+        md5_alvo = z.localizar("md5", ".txt")
+        return (
+            lambda: z.membro_arquivo(
+                alvo_curso, encoding=codificacao_do_membro(z, alvo_curso)),
+            lambda: z.membro_arquivo(alvo_ies),
+            {"url": url, "membro_cursos": alvo_curso, "membro_ies": alvo_ies,
+             # md5 publicado pelo próprio INEP: âncora de proveniência que não
+             # depende de data nem de cabeçalho HTTP.
+             "md5_publicado": (z.membro_texto(md5_alvo).strip()
+                               if md5_alvo else None)})
+
+    local = ZipLocal(origem_local, ano)
+    cursos = local.membro("MICRODADOS_CADASTRO_CURSOS")
+    ies = local.membro("MICRODADOS_ED_SUP_IES")
+    ano_do_membro(cursos.name, ano)
+    # A URL é a da publicação, sondada agora — não a pasta desta máquina, que
+    # não diz nada a quem lê a proveniência. Se a rede falhar, fica nula.
+    url, _situacao = url_do_censo(ano)
+    desc = {"url": url, "membro_cursos": cursos.name, "membro_ies": ies.name,
+            "md5_publicado": local.md5()}
+    adaptador = local.resumo_adaptador()
+    if adaptador:
+        desc["traducao"] = {
+            "script": "etl/censo2025_adaptador.py",
+            "tabelas_lidas": adaptador.get("tabelas_lidas"),
+            "linhas_por_dimensao": adaptador.get("linhas_por_dimensao"),
+            "vagas_por_modalidade": adaptador.get("vagas_por_modalidade"),
+            "conferencia": ("matrículas, concluintes, vagas, cursos e "
+                            "FEM+MASC=ING conferidos contra a fonte; a "
+                            "tradução aborta se não fecharem"),
+        }
+    return (lambda: local.abrir(cursos), lambda: local.abrir(ies), desc)
+
+
+def extrair(ano, rotulo, origem_local=None):
+    abrir_cursos, abrir_ies, desc = _origem(ano, origem_local)
     DADOS.mkdir(parents=True, exist_ok=True)
 
     alvo_norm = normalizar(rotulo)
     destino = DADOS / f"curso_{slug(rotulo)}_{ano}.csv"
 
-    print(f"[CENSO] {url}")
-    print(f"[CENSO] membro: {alvo_curso}")
+    print(f"[CENSO] {desc['url']}" + (f"  (lido de {origem_local})"
+                                      if origem_local else ""))
+    print(f"[CENSO] membro: {desc['membro_cursos']}")
     print(f"[CENSO] rótulo exato: {rotulo!r}  (normalizado: {alvo_norm!r})")
 
     lidas = escritas = 0
     vizinhos = {}          # rótulos que substring capturaria — para o relatório
-    # 4 letras: o fragmento de "Odontologia" vira "ODON". No Censo 2024 ele não
-    # casa com nenhum outro rótulo — medido — e por isso o relatório abaixo sai
-    # vazio nesta edição. Ele fica de pé mesmo assim: é exatamente o aviso que
-    # precisa disparar na primeira edição em que o INEP criar um rótulo vizinho.
+    # 4 letras: o fragmento de "Odontologia" vira "ODON". Nos Censos 2024 e
+    # 2025 ele não casa com nenhum outro rótulo — medido — e por isso o
+    # relatório abaixo sai vazio. Ele fica de pé mesmo assim: é exatamente o
+    # aviso que precisa disparar na primeira edição em que o INEP criar um
+    # rótulo vizinho.
     fragmento = alvo_norm.split()[0][:4]
 
-    with z.membro_arquivo(
-            alvo_curso,
-            encoding=codificacao_do_membro(z, alvo_curso)) as f:
+    with abrir_cursos() as f:
         leitor = csv.DictReader(f, delimiter=";")
         campos = leitor.fieldnames or []
         if "NO_CINE_ROTULO" not in campos:
@@ -261,7 +364,7 @@ def extrair(ano, rotulo):
     # cadastro de IES: pequeno, e indispensável para atribuir as vagas EaD à
     # UF-sede da mantenedora (CO_IES -> SG_UF_IES).
     destino_ies = DADOS / f"ies_{ano}.csv"
-    with z.membro_arquivo(alvo_ies) as f, \
+    with abrir_ies() as f, \
             open(destino_ies, "w", encoding="utf-8", newline="") as saida:
         leitor = csv.DictReader(f, delimiter=";")
         escritor = csv.DictWriter(saida, fieldnames=leitor.fieldnames, delimiter=";")
@@ -272,24 +375,25 @@ def extrair(ano, rotulo):
             n_ies += 1
     print(f"[CENSO] {n_ies} IES -> {destino_ies.name}")
 
-    # md5 publicado pelo próprio INEP: âncora de proveniência que não depende
-    # de data nem de cabeçalho HTTP.
-    md5_alvo = z.localizar("md5", ".txt")
-    md5_texto = z.membro_texto(md5_alvo).strip() if md5_alvo else None
-
     prov = {
         "fonte": "Censo da Educação Superior (INEP)",
-        "url": url,
+        "url": desc["url"],
         "ano_censo": ano,                    # do MEMBRO, não do calendário
-        "membro_cursos": alvo_curso,
-        "membro_ies": alvo_ies,
+        "membro_cursos": desc["membro_cursos"],
+        "membro_ies": desc["membro_ies"],
         "rotulo_cine": rotulo,
-        "md5_publicado": md5_texto,
+        "md5_publicado": desc["md5_publicado"],
         "linhas_cadastro": lidas,
         "linhas_curso": escritas,
         "ies_cadastradas": n_ies,
         "extraido_em": date.today().isoformat(),
     }
+    if "traducao" in desc:
+        # Em 2025 o "cadastro" é a tradução: `linhas_cadastro` conta as linhas
+        # do recorte traduzido, não as sete tabelas do INEP, e
+        # `ies_cadastradas` só as IES do recorte. Dito aqui para que ninguém
+        # compare esses dois números com os de 2024.
+        prov["traducao_censo2025"] = desc["traducao"]
     (DADOS / f"_censo_{ano}.json").write_text(
         json.dumps(prov, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[CENSO] proveniência -> _censo_{ano}.json")
@@ -304,14 +408,21 @@ def main():
                    help="rótulo CINE EXATO (default: Odontologia)")
     p.add_argument("--listar-rotulos", metavar="TRECHO",
                    help="diagnóstico: lista rótulos CINE contendo TRECHO e sai")
+    p.add_argument("--origem-local", metavar="DIR",
+                   help="pasta com MICRODADOS_CADASTRO_CURSOS_<ano>.CSV e "
+                        "MICRODADOS_ED_SUP_IES_<ano>.CSV (em 2025, a saída de "
+                        "etl/censo2025_adaptador.py) em vez do ZIP remoto")
     args = p.parse_args()
 
     if args.listar_rotulos:
+        if args.origem_local:
+            raise SystemExit("[ERRO] --listar-rotulos lê o ZIP remoto; para "
+                             "2025 o adaptador já imprime os rótulos vizinhos.")
         z, _url, alvo_curso, _ies = abrir_censo(args.ano)
         listar_rotulos(z, alvo_curso, args.listar_rotulos)
         return
 
-    extrair(args.ano, args.rotulo)
+    extrair(args.ano, args.rotulo, args.origem_local)
 
 
 if __name__ == "__main__":

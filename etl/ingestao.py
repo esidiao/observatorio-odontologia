@@ -34,6 +34,26 @@ As vagas de sede são atribuídas à UF-SEDE DA MANTENEDORA, via
 `CO_IES` -> `SG_UF_IES` no cadastro de IES. Sem isso não há a quem atribuí-las:
 a linha de sede vem com `SG_UF` em branco.
 
+SEMIPRESENCIAL NÃO É EaD (CENSO 2025 EM DIANTE)
+-----------------------------------------------
+Até 2024 `TP_MODALIDADE_ENSINO` só tinha 1 (presencial) e 2 (a distância). Em
+2025 ele passou a ser o formato de oferta do Decreto 12.456/2025, com a
+categoria nova 3 = semipresencial. A camada de sede (dimensão 3, na tradução de
+`censo2025_adaptador.py`) junta EaD e semipresencial; aqui elas se separam pela
+modalidade: `vagas_semipresencial` e `n_cursos_semipresencial` são campos
+próprios, `vagas_total` soma as três e `pct_ead` continua sendo só EaD.
+Modalidade fora de {1, 2, 3}, ou incoerente com a camada, ABORTA — cair calada
+num dos ramos reclassificaria vagas sem ninguém ver. Em Odontologia 2025 as
+676 ofertas são presenciais: a semipresencial vale zero medido, como a EaD.
+
+PERFIL SÓ ONDE O RECORTE FOI DIVULGADO
+--------------------------------------
+No Censo 2025 o INEP suprime ("-") recortes com 3 ou menos alunos por local de
+oferta. Suprimido não é zero: cada percentual de perfil usa como denominador
+apenas as matrículas das linhas em que aquele recorte veio preenchido. Em
+Odontologia 2025 nenhuma linha de curso tem recorte suprimido (medido), então o
+denominador é o total — mas a regra não depende disso.
+
 POR QUE A CONCENTRAÇÃO PRECISA INCLUIR A EaD
 ---------------------------------------------
 `HHI_mantenedora`, `HHI`, `CR2` e `CR10` são calculados sobre a capacidade
@@ -76,9 +96,43 @@ REGIOES = {
 csv.field_size_limit(1 << 24)
 
 
+MOD_PRESENCIAL, MOD_EAD, MOD_SEMIPRESENCIAL = "1", "2", "3"
+MODALIDADES_POR_DIMENSAO = {
+    DIM_PRESENCIAL: {MOD_PRESENCIAL},
+    DIM_POLO: {MOD_EAD, MOD_SEMIPRESENCIAL},
+    DIM_SEDE: {MOD_EAD, MOD_SEMIPRESENCIAL},
+}
+
+# Recortes de perfil: campo interno -> coluna do Censo.
+RECORTES_PERFIL = (
+    ("_mat_fem", "QT_MAT_FEM"), ("_mat_noturno", "QT_MAT_NOTURNO"),
+    ("_mat_preta", "QT_MAT_PRETA"), ("_mat_parda", "QT_MAT_PARDA"),
+    ("_mat_indigena", "QT_MAT_INDIGENA"), ("_mat_cornd", "QT_MAT_CORND"),
+    ("_mat_financ", "QT_MAT_FINANC"), ("_mat_apoio", "QT_MAT_APOIO_SOCIAL"),
+    ("_mat_reserva", "QT_MAT_RESERVA_VAGA"),
+)
+
+
 def inteiro(valor):
+    """
+    Contagem do Censo como inteiro; vazio vale 0.
+
+    Qualquer outra coisa ABORTA. A versão anterior devolvia 0 para tudo que
+    não fosse dígito, e foi assim que "1234.0" (float escrito por pandas) ou
+    "9.731" (milhar dentro da célula, Censo 2025) virariam zero sem erro.
+    """
     texto = (valor or "").strip()
-    return int(texto) if texto.lstrip("-").isdigit() else 0
+    if not texto:
+        return 0
+    if texto.lstrip("-").isdigit():
+        return int(texto)
+    raise SystemExit(f"[INGESTAO] contagem em formato inesperado: {valor!r}. "
+                     "Corrija a origem (adaptador?) em vez de ler como zero.")
+
+
+def divulgado(valor):
+    """O recorte veio preenchido? Vazio ou "-" é supressão, não zero."""
+    return (valor or "").strip() not in ("", "-")
 
 
 def pct(parte, todo, casas=1):
@@ -194,6 +248,15 @@ def agregar(linhas, ies, mun_por_uf, nomes_municipio, populacao):
 
     for linha in linhas:
         dimensao = (linha.get("TP_DIMENSAO") or "").strip()
+        modalidade = (linha.get("TP_MODALIDADE_ENSINO") or "").strip()
+        esperadas = MODALIDADES_POR_DIMENSAO.get(dimensao)
+        if esperadas is not None and modalidade not in esperadas:
+            raise SystemExit(
+                f"[INGESTAO] TP_MODALIDADE_ENSINO={modalidade!r} numa linha de "
+                f"TP_DIMENSAO={dimensao} (CO_CURSO {linha.get('CO_CURSO')}). "
+                f"Esperado {sorted(esperadas)}. Modalidade nova ou incoerente "
+                "não pode cair calada num ramo: confira o dicionário do INEP.")
+        semi = modalidade == MOD_SEMIPRESENCIAL
         uf_linha = (linha.get("SG_UF") or "").strip().upper() or None
         cod_ies = (linha.get("CO_IES") or "").strip()
         dados_ies = ies.get(cod_ies, {})
@@ -231,10 +294,23 @@ def agregar(linhas, ies, mun_por_uf, nomes_municipio, populacao):
             m["concluintes"] += concluintes
             m["ies"].add(cod_ies)
 
+        elif dimensao == DIM_SEDE and semi:
+            d["vagas_semipresencial"] += vagas
+            d["n_cursos_semipresencial"] += 1
+            d["_ies_semi"].add(cod_ies)
+
         elif dimensao == DIM_SEDE:
             d["vagas_ead"] += vagas
             d["n_cursos_ead"] += 1
             d["_ies_ead"].add(cod_ies)
+
+        elif dimensao == DIM_POLO and semi:
+            # Local de oferta de curso semipresencial: tem alunos (que somam
+            # no fluxo da UF, abaixo), mas NÃO é polo de EaD.
+            d["matriculas_semipresencial"] += matriculas
+            m = municipios[uf][cod_mun]
+            m["matriculas"] += matriculas
+            m["concluintes"] += concluintes
 
         elif dimensao == DIM_POLO:
             d["ead_polos_registros"] += 1
@@ -252,18 +328,17 @@ def agregar(linhas, ies, mun_por_uf, nomes_municipio, populacao):
         d["ingressos"] += ingressos
         if dimensao == DIM_PRESENCIAL:
             d["matriculas_presencial"] += matriculas
-        elif dimensao == DIM_POLO:
+        elif dimensao == DIM_POLO and not semi:
             d["matriculas_ead"] += matriculas
 
-        for destino, coluna in (
-                ("_mat_fem", "QT_MAT_FEM"), ("_mat_noturno", "QT_MAT_NOTURNO"),
-                ("_mat_preta", "QT_MAT_PRETA"), ("_mat_parda", "QT_MAT_PARDA"),
-                ("_mat_indigena", "QT_MAT_INDIGENA"),
-                ("_mat_cornd", "QT_MAT_CORND"),
-                ("_mat_financ", "QT_MAT_FINANC"),
-                ("_mat_apoio", "QT_MAT_APOIO_SOCIAL"),
-                ("_mat_reserva", "QT_MAT_RESERVA_VAGA")):
-            d[destino] += inteiro(linha.get(coluna))
+        # Cada recorte soma numerador E denominador só nas linhas em que veio
+        # divulgado. Linha suprimida fica fora dos dois, em vez de entrar no
+        # denominador com numerador zero e puxar o percentual para baixo.
+        for destino, coluna in RECORTES_PERFIL:
+            valor = linha.get(coluna)
+            if divulgado(valor):
+                d[destino] += inteiro(valor)
+                d["_base" + destino] += matriculas
         if (linha.get("TP_REDE") or "").strip() == "1":
             d["_mat_publica"] += matriculas
 
@@ -287,15 +362,18 @@ def _uf_vazia(uf, mun_total, populacao):
         "municipios_total": mun_total,
         "populacao": populacao,
         "vagas_presencial": 0, "vagas_ead": 0, "vagas_capital": 0,
+        "vagas_semipresencial": 0,
         "n_cursos_presencial": 0, "n_cursos_ead": 0,
+        "n_cursos_semipresencial": 0,
         "ead_polos_registros": 0,
         "matriculas": 0, "matriculas_presencial": 0, "matriculas_ead": 0,
+        "matriculas_semipresencial": 0,
         "concluintes": 0, "ingressos": 0,
-        "_ies_presencial": set(), "_ies_ead": set(),
+        "_ies_presencial": set(), "_ies_ead": set(), "_ies_semi": set(),
         "_municipios_oferta": set(), "_municipios_polo": set(),
-        "_mat_fem": 0, "_mat_noturno": 0, "_mat_preta": 0, "_mat_parda": 0,
-        "_mat_indigena": 0, "_mat_cornd": 0, "_mat_financ": 0,
-        "_mat_apoio": 0, "_mat_reserva": 0, "_mat_publica": 0,
+        "_mat_publica": 0,
+        **{destino: 0 for destino, _ in RECORTES_PERFIL},
+        **{"_base" + destino: 0 for destino, _ in RECORTES_PERFIL},
     }
 
 
@@ -307,6 +385,7 @@ def _fechar(ufs, vagas_ies, vagas_mantenedora):
         polos = d.pop("_municipios_polo")
         ies_pres = d.pop("_ies_presencial")
         ies_ead = d.pop("_ies_ead")
+        ies_semi = d.pop("_ies_semi")
 
         d["municipios_oferta"] = len(oferta)
         d["municipios_deserto"] = d["municipios_total"] - len(oferta)
@@ -318,10 +397,13 @@ def _fechar(ufs, vagas_ies, vagas_mantenedora):
 
         d["n_ies_presencial"] = len(ies_pres)
         d["n_ies_ead"] = len(ies_ead)
-        d["n_ies"] = len(ies_pres | ies_ead)
+        d["n_ies"] = len(ies_pres | ies_ead | ies_semi)
         d["n_mantenedoras"] = len(vagas_mantenedora.get(uf, {})) or None
 
-        d["vagas_total"] = d["vagas_presencial"] + d["vagas_ead"]
+        # As três modalidades somam o total; a participação da EaD continua
+        # sendo só EaD — a semipresencial não entra no numerador.
+        d["vagas_total"] = (d["vagas_presencial"] + d["vagas_ead"]
+                            + d["vagas_semipresencial"])
         d["pct_ead"] = pct(d["vagas_ead"], d["vagas_total"])
         d["vagas_por_100k"] = (
             round(100_000 * d["vagas_total"] / d["populacao"], 1)
@@ -333,14 +415,23 @@ def _fechar(ufs, vagas_ies, vagas_mantenedora):
         d["CR10"] = cr(vagas_ies.get(uf, {}), 10)
 
         base = d["matriculas"]
-        d["pct_mulheres"] = pct(d.pop("_mat_fem"), base)
-        d["pct_noturno"] = pct(d.pop("_mat_noturno"), base)
-        d["pct_ppi"] = pct(d.pop("_mat_preta") + d.pop("_mat_parda")
-                           + d.pop("_mat_indigena"), base)
-        d["pct_cor_nao_declarada"] = pct(d.pop("_mat_cornd"), base)
-        d["pct_financiamento"] = pct(d.pop("_mat_financ"), base)
-        d["pct_apoio_social"] = pct(d.pop("_mat_apoio"), base)
-        d["pct_reserva_vaga"] = pct(d.pop("_mat_reserva"), base)
+        bases = {destino: d.pop("_base" + destino)
+                 for destino, _ in RECORTES_PERFIL}
+        d["pct_mulheres"] = pct(d.pop("_mat_fem"), bases["_mat_fem"])
+        d["pct_noturno"] = pct(d.pop("_mat_noturno"), bases["_mat_noturno"])
+        # PPI soma três recortes, e só tem denominador único se os três foram
+        # divulgados nas mesmas linhas. Se as bases diferirem, houve supressão
+        # parcial, e o percentual sai nulo em vez de misturar denominadores.
+        base_ppi = {bases["_mat_preta"], bases["_mat_parda"],
+                    bases["_mat_indigena"]}
+        soma_ppi = (d.pop("_mat_preta") + d.pop("_mat_parda")
+                    + d.pop("_mat_indigena"))
+        d["pct_ppi"] = (pct(soma_ppi, base_ppi.pop())
+                        if len(base_ppi) == 1 else None)
+        d["pct_cor_nao_declarada"] = pct(d.pop("_mat_cornd"), bases["_mat_cornd"])
+        d["pct_financiamento"] = pct(d.pop("_mat_financ"), bases["_mat_financ"])
+        d["pct_apoio_social"] = pct(d.pop("_mat_apoio"), bases["_mat_apoio"])
+        d["pct_reserva_vaga"] = pct(d.pop("_mat_reserva"), bases["_mat_reserva"])
         d["pct_rede_publica"] = pct(d.pop("_mat_publica"), base)
         d["taxa_conclusao"] = pct(d["concluintes"], base)
 
@@ -407,6 +498,8 @@ def main():
           f"{sum(d['vagas_presencial'] for d in ufs.values())}")
     print(f"[INGESTAO] vagas EaD (sede): "
           f"{sum(d['vagas_ead'] for d in ufs.values())}")
+    print(f"[INGESTAO] vagas semipresenciais (sede): "
+          f"{sum(d['vagas_semipresencial'] for d in ufs.values())}")
     print(f"[INGESTAO] municípios com oferta presencial: "
           f"{sum(d['municipios_oferta'] for d in ufs.values())}")
     print(f"[INGESTAO] polos: {sum(d['ead_polos_registros'] for d in ufs.values())} "

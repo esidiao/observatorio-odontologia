@@ -5,6 +5,26 @@ Série histórica: compara edições do Censo da Educação Superior.
 Uso:
     python etl/serie.py --anos 2023 2024
     python etl/serie.py --anos 2021 2022 2023 2024
+    python etl/serie.py --anos 2015 ... 2025 --origem-local <dir 2015-2024> <dir 2025>
+
+EDIÇÕES LOCAIS E O CENSO 2025
+-----------------------------
+`--origem-local` aceita uma ou mais pastas com pares
+MICRODADOS_CADASTRO_CURSOS_<ano>.CSV + MICRODADOS_ED_SUP_IES_<ano>.CSV. De 2015
+a 2024 são os CSV originais do INEP (mesmo layout, com TP_DIMENSAO); 2025 só
+existe traduzido por `etl/censo2025_adaptador.py`. Se o mesmo ano aparecer em
+mais de uma pasta o script ABORTA: um par de outro curso com o mesmo nome (a
+pasta compartilhada da família tem um 2025 filtrado para Farmácia) seria lido
+como "Odontologia sem nenhuma linha" e o ano sumiria da série em silêncio.
+
+A definição de cada campo é a mesma de `ingestao.py`, e o ponto mais recente
+da série tem de coincidir com `data/nacional.json` — tests/test_validacao.py
+confere isso UF a UF. A semipresencial (TP_MODALIDADE_ENSINO = 3) só existe a
+partir de 2025: antes disso `vagas_semipresencial` é NULO (categoria
+inexistente), não zero. E como a definição de modalidade mudou em 2025, a
+fronteira 2024→2025 não é estritamente comparável na partição entre
+modalidades — em Odontologia, porém, as camadas não presenciais valem zero dos
+dois lados.
 
 Saída: data/serie.json  (Brasil e por UF, só com campos comparáveis)
 
@@ -58,19 +78,25 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from extrair_censo import (normalizar, url_do_censo,  # noqa: E402
+from extrair_censo import (ZipLocal, normalizar, url_do_censo,  # noqa: E402
                            urls_do_censo)
+from ingestao import (DIM_PRESENCIAL, DIM_POLO, DIM_SEDE,  # noqa: E402
+                      MOD_SEMIPRESENCIAL, MODALIDADES_POR_DIMENSAO, inteiro)
 from rede import ZipRemotoHTTP, sondar  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 DADOS = REPO / "etl" / "dados"
 DATA = REPO / "data"
 
-DIM_PRESENCIAL, DIM_POLO, DIM_SEDE = "1", "2", "3"
+# Primeiro Censo com a modalidade semipresencial (Decreto 12.456/2025).
+ANO_PRIMEIRO_SEMIPRESENCIAL = 2025
+# Versão do agregado em cache: caches de uma versão anterior não têm os campos
+# novos e são recalculados em vez de lidos.
+VERSAO_CACHE = 2
 
 # Campos que significam a mesma coisa em todas as edições.
 CAMPOS = [
-    "vagas_presencial", "vagas_ead", "vagas_total",
+    "vagas_presencial", "vagas_ead", "vagas_semipresencial", "vagas_total",
     "n_cursos_presencial", "n_ies",
     "municipios_oferta", "ead_polos_registros", "ead_polos_municipios",
     "matriculas", "concluintes",
@@ -79,25 +105,27 @@ CAMPOS = [
 csv.field_size_limit(1 << 24)
 
 
-def inteiro(valor):
-    texto = (valor or "").strip()
-    return int(texto) if texto.lstrip("-").isdigit() else 0
+def _pasta_do_ano(ano, pastas):
+    """A única pasta que tem o par daquele ano, ou None. Duas é erro."""
+    achadas = [p for p in pastas
+               if (Path(p) / f"MICRODADOS_CADASTRO_CURSOS_{ano}.CSV").exists()]
+    if len(achadas) > 1:
+        raise SystemExit(
+            f"[SERIE] {ano} aparece em mais de uma pasta: {achadas}. Escolha "
+            "uma — um par de outro curso com o mesmo nome esvaziaria o ano "
+            "em silêncio.")
+    return achadas[0] if achadas else None
 
 
-def agregar_ano(ano, rotulo="Odontologia"):
-    """Lê a edição `ano` remotamente e devolve o agregado por UF."""
-    cache = DADOS / f"serie_{ano}.json"
-    if cache.exists():
-        print(f"[SERIE] {ano}: usando agregado em cache")
-        guardado = json.loads(cache.read_text(encoding="utf-8"))
-        # Formato antigo: o cache era o mapa de UFs direto, sem bloco nacional.
-        # Aceitá-lo é preciso — apagar caches bons custaria uma releitura de
-        # 400 MB por ano — mas ele não tem como informar o total distinto, e
-        # nesse caso o total sai nulo em vez de sair errado.
-        if "ufs" not in guardado:
-            return {"ufs": guardado, "brasil": None}
-        return guardado
+def _abrir_local(ano, pasta):
+    local = ZipLocal(pasta, ano)
+    cursos = local.membro("MICRODADOS_CADASTRO_CURSOS")
+    ies = local.membro("MICRODADOS_ED_SUP_IES")
+    print(f"[SERIE] {ano}: lendo {cursos} ...")
+    return lambda: local.abrir(cursos), lambda: local.abrir(ies)
 
+
+def _abrir_remoto(ano):
     url, situacao = url_do_censo(ano)
     if url is None:
         tentados = ", ".join(urls_do_censo(ano))
@@ -122,9 +150,28 @@ def agregar_ano(ano, rotulo="Odontologia"):
         return None
 
     print(f"[SERIE] {ano}: lendo {alvo.rsplit('/', 1)[-1]} ...")
+    return lambda: z.membro_arquivo(alvo), lambda: z.membro_arquivo(alvo_ies)
+
+
+def agregar_ano(ano, rotulo="Odontologia", pastas=()):
+    """Lê a edição `ano` (local ou remota) e devolve o agregado por UF."""
+    cache = DADOS / f"serie_{ano}.json"
+    if cache.exists():
+        guardado = json.loads(cache.read_text(encoding="utf-8"))
+        if (guardado.get("versao") == VERSAO_CACHE
+                and guardado.get("rotulo") == rotulo):
+            print(f"[SERIE] {ano}: usando agregado em cache")
+            return guardado
+        print(f"[SERIE] {ano}: cache de versão anterior — recalculando")
+
+    pasta = _pasta_do_ano(ano, pastas)
+    abertos = _abrir_local(ano, pasta) if pasta else _abrir_remoto(ano)
+    if abertos is None:
+        return None
+    abrir_cursos, abrir_ies = abertos
 
     uf_sede = {}
-    with z.membro_arquivo(alvo_ies) as f:
+    with abrir_ies() as f:
         for linha in csv.DictReader(f, delimiter=";"):
             codigo = (linha.get("CO_IES") or "").strip()
             sigla = (linha.get("SG_UF_IES") or "").strip().upper()
@@ -134,19 +181,30 @@ def agregar_ano(ano, rotulo="Odontologia"):
     alvo_norm = normalizar(rotulo)
     ies_do_pais = set()
     ufs = defaultdict(lambda: {
-        "vagas_presencial": 0, "vagas_ead": 0, "n_cursos_presencial": 0,
+        "vagas_presencial": 0, "vagas_ead": 0, "vagas_semipresencial": 0,
+        "n_cursos_presencial": 0,
         "ead_polos_registros": 0, "matriculas": 0, "concluintes": 0,
         "_ies": set(), "_mun_oferta": set(), "_mun_polo": set(),
     })
     lidas = casadas = 0
 
-    with z.membro_arquivo(alvo) as f:
+    modalidades_vistas = set()
+    with abrir_cursos() as f:
         for linha in csv.DictReader(f, delimiter=";"):
             lidas += 1
             if normalizar(linha.get("NO_CINE_ROTULO")) != alvo_norm:
                 continue
             casadas += 1
             dimensao = (linha.get("TP_DIMENSAO") or "").strip()
+            modalidade = (linha.get("TP_MODALIDADE_ENSINO") or "").strip()
+            esperadas = MODALIDADES_POR_DIMENSAO.get(dimensao)
+            if esperadas is not None and modalidade not in esperadas:
+                raise SystemExit(
+                    f"[SERIE] {ano}: TP_MODALIDADE_ENSINO={modalidade!r} em "
+                    f"TP_DIMENSAO={dimensao}. Modalidade nova ou incoerente "
+                    "não pode cair calada num ramo.")
+            modalidades_vistas.add(modalidade)
+            semi = modalidade == MOD_SEMIPRESENCIAL
             cod_ies = (linha.get("CO_IES") or "").strip()
             sigla = (linha.get("SG_UF") or "").strip().upper() or None
             vagas = inteiro(linha.get("QT_VG_TOTAL"))
@@ -166,18 +224,31 @@ def agregar_ano(ano, rotulo="Odontologia"):
                 d["vagas_presencial"] += vagas
                 d["n_cursos_presencial"] += 1
                 d["_mun_oferta"].add(cod_mun)
+            elif dimensao == DIM_SEDE and semi:
+                d["vagas_semipresencial"] += vagas
             elif dimensao == DIM_SEDE:
                 d["vagas_ead"] += vagas
-            elif dimensao == DIM_POLO:
+            elif dimensao == DIM_POLO and not semi:
                 d["ead_polos_registros"] += 1
                 d["_mun_polo"].add(cod_mun)
+
+    if (ano < ANO_PRIMEIRO_SEMIPRESENCIAL
+            and MOD_SEMIPRESENCIAL in modalidades_vistas):
+        raise SystemExit(
+            f"[SERIE] {ano}: modalidade 3 antes de {ANO_PRIMEIRO_SEMIPRESENCIAL}. "
+            "Em 2015–2024 só existiram os códigos 1 e 2 — confira a fonte.")
+    tem_semi = ano >= ANO_PRIMEIRO_SEMIPRESENCIAL
 
     saida = {}
     for sigla, d in ufs.items():
         saida[sigla] = {
             "vagas_presencial": d["vagas_presencial"],
             "vagas_ead": d["vagas_ead"],
-            "vagas_total": d["vagas_presencial"] + d["vagas_ead"],
+            # Antes de 2025 a categoria não existia: nulo, não zero.
+            "vagas_semipresencial": (d["vagas_semipresencial"]
+                                     if tem_semi else None),
+            "vagas_total": (d["vagas_presencial"] + d["vagas_ead"]
+                            + d["vagas_semipresencial"]),
             "n_cursos_presencial": d["n_cursos_presencial"],
             "n_ies": len(d["_ies"]),
             "municipios_oferta": len(d["_mun_oferta"]),
@@ -187,7 +258,8 @@ def agregar_ano(ano, rotulo="Odontologia"):
             "concluintes": d["concluintes"],
         }
 
-    agregado = {"ufs": saida, "brasil": {"n_ies": len(ies_do_pais)}}
+    agregado = {"versao": VERSAO_CACHE, "rotulo": rotulo, "ufs": saida,
+                "brasil": {"n_ies": len(ies_do_pais)}}
     print(f"[SERIE] {ano}: {lidas} linhas, {casadas} do rótulo exato, "
           f"{len(saida)} UFs, {len(ies_do_pais)} IES distintas no país")
     DADOS.mkdir(parents=True, exist_ok=True)
@@ -201,12 +273,16 @@ def main():
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--anos", nargs="+", type=int, default=[2023, 2024])
     p.add_argument("--rotulo", default="Odontologia")
+    p.add_argument("--origem-local", nargs="+", default=[], metavar="DIR",
+                   help="pastas com pares MICRODADOS_CADASTRO_CURSOS_<ano>.CSV "
+                        "+ MICRODADOS_ED_SUP_IES_<ano>.CSV; anos ausentes "
+                        "nelas são lidos do ZIP remoto")
     p.add_argument("--saida", default=str(DATA / "serie.json"))
     args = p.parse_args()
 
     por_ano, nacional_por_ano = {}, {}
     for ano in sorted(args.anos):
-        agregado = agregar_ano(ano, args.rotulo)
+        agregado = agregar_ano(ano, args.rotulo, args.origem_local)
         if agregado and agregado["ufs"]:
             por_ano[str(ano)] = agregado["ufs"]
             nacional_por_ano[str(ano)] = agregado["brasil"]
@@ -227,9 +303,13 @@ def main():
     brasil = {}
     sem_total_distinto = []
     for ano in anos:
-        brasil[ano] = {campo: sum((por_ano[ano].get(s) or {}).get(campo) or 0
-                                  for s in siglas)
-                       for campo in CAMPOS}
+        brasil[ano] = {}
+        for campo in CAMPOS:
+            valores = [(por_ano[ano].get(s) or {}).get(campo) for s in siglas]
+            # Campo nulo em todas as UFs (a semipresencial antes de 2025) é
+            # categoria inexistente no ano: o total do país também é nulo.
+            brasil[ano][campo] = (None if all(v is None for v in valores)
+                                  else sum(v or 0 for v in valores))
         # `n_ies` é o único campo em que a soma das UFs não é o total do país:
         # uma instituição que oferta em três estados entra em três contagens.
         # Vem do conjunto nacional, ou fica nulo — nunca a soma.
@@ -259,6 +339,15 @@ def main():
                 "nacional de códigos — não a soma das contagens estaduais, que "
                 "conta em dobro quem oferta em mais de um estado."
             ),
+            # UF sem nenhuma linha do rótulo numa edição que FOI lida. Fica
+            # nula, não zero: o caso medido (RR em 2020) é o curso 96461, de
+            # Boa Vista, presente em 2019 e 2021 com o mesmo código e ausente
+            # do arquivo de 2020 — lacuna de registro na fonte, não um ano sem
+            # curso. Zero afirmaria o fechamento de um curso que continuou.
+            "ufs_sem_linha_no_ano": {
+                ano: sorted(s for s in siglas if por_ano[ano].get(s) is None)
+                for ano in anos
+                if any(por_ano[ano].get(s) is None for s in siglas)},
             "gerado_em": date.today().isoformat(),
         },
         "anos": anos,

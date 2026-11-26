@@ -214,7 +214,7 @@ def juntar_cobertura(ufs, municipios_por_uf, cobertura):
     return ufs, municipios_por_uf
 
 
-def limitacoes(ufs, qualidade, cobertura):
+def limitacoes(ufs, qualidade, cobertura, ano_censo=None):
     """
     O que não foi medido, escrito por extenso.
 
@@ -227,16 +227,38 @@ def limitacoes(ufs, qualidade, cobertura):
     sem_polo = sorted(s for s, d in ufs.items()
                       if not d.get("ead_polos_registros"))
     vagas_ead = sum(d.get("vagas_ead") or 0 for d in ufs.values())
+    vagas_semi = sum(d.get("vagas_semipresencial") or 0 for d in ufs.values())
     itens.append(
-        f"Não existe oferta de Odontologia a distância no Censo 2024: as "
-        f"{sum(d.get('n_cursos_presencial') or 0 for d in ufs.values())} "
-        f"ofertas do recorte são presenciais, com {vagas_ead} vaga EaD e nenhum "
-        f"polo em {len(sem_polo)} das {len(ufs)} UFs. Esse zero é MEDIDO — o "
-        "Censo varreu as três camadas de TP_DIMENSAO e não encontrou linha "
-        "alguma de EaD —, não é lacuna de apuração. Os indicadores de EaD "
-        "continuam publicados no conjunto de dados, valendo zero, e o site "
-        "declara a ausência numa seção própria em vez de espalhar colunas "
-        "vazias pelas páginas.")
+        f"Não existe oferta de Odontologia a distância no Censo {ano_censo}: "
+        f"as {sum(d.get('n_cursos_presencial') or 0 for d in ufs.values())} "
+        f"ofertas do recorte são presenciais, com {vagas_ead} vaga EaD, "
+        f"{vagas_semi} vaga semipresencial e nenhum polo em {len(sem_polo)} "
+        f"das {len(ufs)} UFs. Esse zero é MEDIDO — todas as camadas do Censo "
+        "foram lidas e nenhuma linha é a distância ou semipresencial —, não é "
+        "lacuna de apuração. Os indicadores dessas modalidades continuam "
+        "publicados no conjunto de dados, valendo zero, e o site declara a "
+        "ausência numa seção própria em vez de espalhar colunas vazias pelas "
+        "páginas.")
+    if ano_censo and int(ano_censo) >= 2025:
+        itens.append(
+            "Desde o Censo 2025 TP_MODALIDADE_ENSINO é o formato de oferta do "
+            "Decreto 12.456/2025, com a categoria nova 3 = semipresencial. Ela "
+            "é publicada em campos próprios (vagas_semipresencial, "
+            "n_cursos_semipresencial, matriculas_semipresencial), NÃO soma na "
+            "EaD nem em pct_ead, e entra no total de vagas. A participação por "
+            "modalidade não é estritamente comparável à de 2024; em "
+            "Odontologia as duas modalidades não presenciais valem zero nos "
+            "dois anos.")
+        itens.append(
+            "O Censo 2025 foi publicado em sete tabelas normalizadas. O "
+            "recorte é traduzido para o layout das edições anteriores por "
+            "etl/censo2025_adaptador.py, que confere matrículas, concluintes, "
+            "vagas, cursos e FEM+MASC=ING contra a fonte e aborta se a "
+            "tradução não fechar. Recortes suprimidos pelo INEP (célula com 3 "
+            "ou menos alunos por local de oferta) ficam fora do numerador E do "
+            "denominador dos percentuais de perfil, nunca como zero; no "
+            "recorte de Odontologia, medido, nenhuma linha de curso tem "
+            "recorte suprimido.")
 
     itens.append(
         "Como pct_ead é constante em zero, ele fica FORA da matriz de "
@@ -363,7 +385,8 @@ def proveniencia(bruto, qualidade, cobertura, ufs):
     return {
         "gerado_em": date.today().isoformat(),
         "fontes": fontes,
-        "limitacoes_conhecidas": limitacoes(ufs, qualidade, cobertura),
+        "limitacoes_conhecidas": limitacoes(
+            ufs, qualidade, cobertura, bruto["metadados"].get("ano_censo")),
     }
 
 
