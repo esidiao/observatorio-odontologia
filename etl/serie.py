@@ -58,7 +58,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from extrair_censo import URL_CENSO, normalizar  # noqa: E402
+from extrair_censo import (normalizar, url_do_censo,  # noqa: E402
+                           urls_do_censo)
 from rede import ZipRemotoHTTP, sondar  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
@@ -97,7 +98,13 @@ def agregar_ano(ano, rotulo="Odontologia"):
             return {"ufs": guardado, "brasil": None}
         return guardado
 
-    url = URL_CENSO.format(ano=ano)
+    url, situacao = url_do_censo(ano)
+    if url is None:
+        tentados = ", ".join(urls_do_censo(ano))
+        raise SystemExit(
+            f"[ERRO] edição {ano} do Censo não encontrada"
+            + (" (falha de rede, não ausência)" if situacao is None else "")
+            + f". Tentei: {tentados}")
     existe, detalhe = sondar(url)
     if existe is False:
         print(f"[SERIE] {ano}: confirmadamente não publicado — ano pulado.")

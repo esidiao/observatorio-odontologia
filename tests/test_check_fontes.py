@@ -121,7 +121,7 @@ def test_serie_anual_separa_novidade_de_indeterminado():
     pipeline.sondar = lambda url, **kw: respostas[int(url.split("=")[-1])]
     try:
         novidades, indeterminados = pipeline._serie_anual(
-            "Teste", "https://exemplo/x?ano={ano}", 2024, 2026)
+            "Teste", ("https://exemplo/x?ano={ano}",), 2024, 2026)
     finally:
         pipeline.sondar = original
     assert novidades == ["Teste 2025"], novidades
@@ -138,7 +138,7 @@ def test_serie_anual_sem_ano_atual_nao_afirma_nada():
     numa roupagem diferente.
     """
     novidades, indeterminados = pipeline._serie_anual(
-        "Teste", "https://exemplo/x?ano={ano}", None, 2026)
+        "Teste", ("https://exemplo/x?ano={ano}",), None, 2026)
     assert novidades == []
     assert indeterminados, (
         "ano corrente desconhecido tem de virar indeterminado, não silêncio")

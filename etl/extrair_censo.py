@@ -47,12 +47,79 @@ import unicodedata
 from datetime import date
 from pathlib import Path
 
-from rede import ZipRemotoHTTP
+from rede import ZipRemotoHTTP, sondar
 
 REPO = Path(__file__).parent.parent
 DADOS = REPO / "etl" / "dados"
-URL_CENSO = ("https://download.inep.gov.br/microdados/"
-             "microdados_censo_da_educacao_superior_{ano}.zip")
+BASE_CENSO = "https://download.inep.gov.br/microdados/"
+
+# O NOME DO ARQUIVO MUDA ENTRE EDIÇÕES, E ISSO JÁ CUSTOU UM ALERTA MUDO.
+#
+# Até 2024 o arquivo se chamava `microdados_censo_da_educacao_superior_AAAA`.
+# Em 2025 o INEP tirou o "da": `microdados_censo_educacao_superior_2025.zip`.
+# Enquanto houve um molde único com `{ano}`, o verificador semanal sondava um
+# endereço que nunca existiu, recebia 404 e relatava "confirmadamente não
+# publicado" — afirmação confiante e falsa sobre uma edição no ar.
+#
+# A lição não é "corrigir o molde", é que 404 em UM nome não prova ausência.
+# Por isso aqui há uma LISTA, do mais novo para o mais antigo, e quem procura
+# uma edição tenta todos antes de dizer que não existe.
+PADROES_CENSO = (
+    "microdados_censo_educacao_superior_{ano}.zip",      # 2025 em diante
+    "microdados_censo_da_educacao_superior_{ano}.zip",   # até 2024
+)
+
+
+def urls_do_censo(ano):
+    """Os endereços candidatos daquela edição, na ordem de tentativa."""
+    return tuple(BASE_CENSO + p.format(ano=ano) for p in PADROES_CENSO)
+
+
+def url_do_censo(ano):
+    """
+    Devolve (url, situacao): `True` se algum candidato respondeu, `False` se
+    TODOS deram 404, `None` se houve falha de rede — porque não saber é
+    diferente de não existir.
+    """
+    indeterminado = False
+    for url in urls_do_censo(ano):
+        existe, _ = sondar(url)
+        if existe:
+            return url, True
+        if existe is None:
+            indeterminado = True
+    return None, (None if indeterminado else False)
+
+
+def esquema_do_zip(z):
+    """
+    Diz se a edição usa o cadastro único ou as tabelas normalizadas.
+
+    De 1995 a 2024 o Censo veio num cadastro só, com uma linha por curso E POR
+    CAMADA (`TP_DIMENSAO`). Em 2025 o INEP normalizou: curso, local de oferta,
+    aluno, docente, biblioteca e laboratório viraram tabelas separadas, e a
+    camada deixou de existir como coluna.
+
+    A detecção é pela PRESENÇA da tabela de local de oferta, não pelo ano: ano
+    é calendário, estrutura é fato do arquivo.
+    """
+    return "normalizado" if z.localizar("tabela_local_oferta", ".csv") else "unico"
+
+
+def codificacao_do_membro(z, alvo):
+    """
+    Descobre a codificação pelo BOM, em vez de supor.
+
+    Até 2024 os CSV do Censo vinham em latin-1; o de 2025 veio em UTF-8 com
+    BOM. Ler UTF-8 como latin-1 não levanta erro: devolve texto estragado, e
+    `Administração` vira `AdministraÃ§Ã£o`. Como o recorte deste projeto é por
+    IGUALDADE EXATA de rótulo, o efeito seria ZERO linha casada — um recorte
+    vazio, que o resto do pipeline trataria como "curso que não existe nesta
+    edição" em vez de erro de leitura.
+    """
+    for pedaco in z.membro_blocos(alvo, bloco=4096):
+        return "utf-8-sig" if pedaco.startswith(b"\xef\xbb\xbf") else "latin-1"
+    return "latin-1"
 
 # csv do INEP tem campos longos (ementas, listas); o padrão de 128 KB estoura.
 csv.field_size_limit(1 << 24)
@@ -71,8 +138,31 @@ def slug(texto):
 
 
 def abrir_censo(ano):
-    url = URL_CENSO.format(ano=ano)
+    url, situacao = url_do_censo(ano)
+    if url is None:
+        tentados = "\n  ".join(urls_do_censo(ano))
+        if situacao is None:
+            raise SystemExit(
+                f"[ERRO] não consegui verificar a edição {ano} do Censo (falha "
+                f"de rede). Tentei:\n  {tentados}\n"
+                "Falha de rede não é ausência: tente de novo em vez de "
+                "concluir que a edição não existe.")
+        raise SystemExit(
+            f"[ERRO] edição {ano} do Censo não encontrada. Tentei:\n  {tentados}\n"
+            "Se o INEP renomeou o arquivo outra vez, acrescente o padrão novo "
+            "em PADROES_CENSO — não troque o que já está lá, porque os anos "
+            "anteriores continuam com o nome antigo.")
     z = ZipRemotoHTTP(url)
+    if esquema_do_zip(z) == "normalizado":
+        raise SystemExit(
+            f"[ERRO] a edição {ano} do Censo vem no esquema NORMALIZADO (tabelas "
+            "separadas, sem TP_DIMENSAO), e este repositório ainda só sabe ler o "
+            "cadastro único.\n"
+            "Parar aqui é deliberado: a tabela de cursos nova tem "
+            "NO_CINE_ROTULO, então o recorte funcionaria e o resto do pipeline "
+            "produziria um país VAZIO em silêncio — SG_UF e TP_DIMENSAO não "
+            "existem mais, e toda linha cairia em 'sem localização'.\n"
+            "O leitor do esquema novo está em observatorio-fisioterapia.")
     alvo_curso = z.localizar("cadastro_cursos", ".csv") or z.localizar("curso", ".csv")
     alvo_ies = z.localizar("_ies_", ".csv") or z.localizar("ies", ".csv")
     if not alvo_curso:
@@ -101,7 +191,9 @@ def listar_rotulos(z, alvo_curso, filtro):
     """Diagnóstico: mostra rótulos CINE que contêm o filtro, com contagem."""
     alvo = normalizar(filtro)
     contagem = {}
-    with z.membro_arquivo(alvo_curso) as f:
+    with z.membro_arquivo(
+            alvo_curso,
+            encoding=codificacao_do_membro(z, alvo_curso)) as f:
         leitor = csv.DictReader(f, delimiter=";")
         if "NO_CINE_ROTULO" not in (leitor.fieldnames or []):
             raise SystemExit("[ERRO] coluna NO_CINE_ROTULO ausente no cadastro")
@@ -138,7 +230,9 @@ def extrair(ano, rotulo):
     # precisa disparar na primeira edição em que o INEP criar um rótulo vizinho.
     fragmento = alvo_norm.split()[0][:4]
 
-    with z.membro_arquivo(alvo_curso) as f:
+    with z.membro_arquivo(
+            alvo_curso,
+            encoding=codificacao_do_membro(z, alvo_curso)) as f:
         leitor = csv.DictReader(f, delimiter=";")
         campos = leitor.fieldnames or []
         if "NO_CINE_ROTULO" not in campos:

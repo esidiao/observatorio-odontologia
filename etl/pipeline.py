@@ -44,20 +44,24 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from rede import sondar  # noqa: E402
+from rede import sondar
+from extrair_censo import BASE_CENSO, PADROES_CENSO  # noqa: E402  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 ETL = REPO / "etl"
 DATA = REPO / "data"
 
-URL_CENSO = ("https://download.inep.gov.br/microdados/"
-             "microdados_censo_da_educacao_superior_{ano}.zip")
+# Os padrões do Censo vêm de `extrair_censo`, não são copiados para cá.
+# Este arquivo tinha a própria cópia do molde, e foi assim que o verificador
+# continuou sondando o nome antigo depois que o INEP o mudou: duas cópias da
+# mesma verdade, e a que o alerta usava era a desatualizada.
+URLS_CENSO = tuple(BASE_CENSO + p for p in PADROES_CENSO)
 # Duas grafias, porque o INEP não é consistente entre ciclos: 2023 publica
 # `CPC_2023.xlsx` e 2022 publica `cpc_2022.xlsx`. Sondar só uma delas devolve
 # 404 e faz o verificador concluir que o ciclo não existe.
 URLS_CPC = [
     ("https://download.inep.gov.br/educacao_superior/indicadores/"
-     "resultados/{ano}/CPC_{ano}.xlsx"),
+     "resultados/{ano}/CPC_{ano}.xlsx",),
     ("https://download.inep.gov.br/educacao_superior/indicadores/"
      "resultados/{ano}/cpc_{ano}.xlsx"),
 ]
@@ -93,21 +97,43 @@ def _rodar(script, *args):
 # Verificação de frescor
 # --------------------------------------------------------------------------- #
 
-def _serie_anual(rotulo, url_padrao, ano_atual, ano_limite):
-    """Procura edição mais recente que `ano_atual`. Devolve (novidades, indeterminados)."""
+def _serie_anual(rotulo, padroes, ano_atual, ano_limite):
+    """
+    Procura edição mais recente que `ano_atual`, tentando TODOS os padrões de
+    nome conhecidos. Devolve (novidades, indeterminados).
+
+    Tentar vários nomes não é zelo excessivo: o INEP renomeou o arquivo do
+    Censo em 2025 (tirou o "da" de `censo_da_educacao`), e enquanto houve um
+    molde só, este verificador respondeu "confirmadamente não publicado" sobre
+    uma edição que estava no ar. Alerta que erra para o lado de "não há
+    novidade" é pior que alerta nenhum, porque o silêncio dele é
+    indistinguível do silêncio legítimo e ninguém vai conferir.
+
+    Só se declara ausência quando TODOS os candidatos responderam 404.
+    """
     novidades, indeterminados = [], []
     if not ano_atual:
         return novidades, ["{}: ano corrente desconhecido".format(rotulo)]
     for ano in range(int(ano_atual) + 1, ano_limite + 1):
-        existe, detalhe = sondar(url_padrao.format(ano=ano))
-        if existe:
+        achou, indefinido, detalhes = False, False, []
+        for padrao in padroes:
+            existe, detalhe = sondar(padrao.format(ano=ano))
+            detalhes.append(detalhe)
+            if existe:
+                achou = True
+                break
+            if existe is None:
+                indefinido = True
+        if achou:
             novidades.append(f"{rotulo} {ano}")
             print(f"[CHECK] NOVIDADE: {rotulo} {ano} publicado (atual: {ano_atual}).")
-        elif existe is None:
-            indeterminados.append(f"{rotulo} {ano} ({detalhe})")
-            print(f"[CHECK] INDETERMINADO: {rotulo} {ano} não verificável ({detalhe}).")
+        elif indefinido:
+            indeterminados.append(f"{rotulo} {ano} ({', '.join(detalhes)})")
+            print(f"[CHECK] INDETERMINADO: {rotulo} {ano} não verificável "
+                  f"({', '.join(detalhes)}).")
         else:
-            print(f"[CHECK] {rotulo} {ano}: confirmadamente não publicado (404).")
+            print(f"[CHECK] {rotulo} {ano}: confirmadamente não publicado "
+                  f"(404 em {len(padroes)} nome(s) conhecido(s)).")
     return novidades, indeterminados
 
 
@@ -191,7 +217,7 @@ def verificar_fontes():
     novidades, indeterminados = [], []
 
     ano_censo = (prov.get("censo") or {}).get("ano_censo")
-    n, i = _serie_anual("Censo da Educação Superior", URL_CENSO, ano_censo, ano_limite)
+    n, i = _serie_anual("Censo da Educação Superior", URLS_CENSO, ano_censo, ano_limite)
     novidades += n
     indeterminados += i
 
