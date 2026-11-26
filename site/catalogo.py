@@ -19,8 +19,10 @@ precisa estar aqui.
 
 A CATEGORIA TAMBÉM É ESTRUTURA, NÃO ENFEITE
 --------------------------------------------
-`Ensino a distância` é uma categoria como as outras, e é ela que o site usa
-para recolher os indicadores de EaD numa seção própria. A alternativa seria uma
+`EaD e semipresencial` é uma categoria como as outras, e é ela que o site usa
+para recolher os indicadores de oferta não presencial numa seção própria. A
+semipresencial (Censo 2025 em diante) mora na mesma SEÇÃO que a EaD, mas em
+campos próprios: ela não soma em `vagas_ead` nem em `pct_ead`. A alternativa seria uma
 lista de chaves repetida no template, que envelheceria calada assim que alguém
 acrescentasse um indicador de EaD e esquecesse de atualizá-la. Aqui a seção sai
 do mesmo registro que a formatação e o verbete.
@@ -128,9 +130,11 @@ INDICADORES = [
     # ------------------------------------------------------------ capacidade
     _i("vagas_total", "Vagas totais", "Capacidade total de vagas anuais",
        "Capacidade",
-       "Todas as vagas anuais de Odontologia. Como não há oferta a distância "
-       "no país, este número é inteiramente a capacidade presencial — o campo "
-       "de EaD existe, e vale zero.",
+       "Todas as vagas anuais de Odontologia: presenciais, a distância e "
+       "semipresenciais (esta última, categoria do Censo 2025 em diante). "
+       "Como não há oferta a distância nem semipresencial no país, este "
+       "número é inteiramente a capacidade presencial — os outros dois campos "
+       "existem, e valem zero.",
        "vagas/ano", "contextual", "Censo INEP", dec=0,
        aliases=["vagas totais", "capacidade"]),
 
@@ -165,7 +169,7 @@ INDICADORES = [
 
     _i("n_ies", "IES", "Instituições de ensino superior", "Capacidade",
        "Instituições distintas que ofertam o curso no estado, somando "
-       "presencial e EaD.",
+       "presencial, EaD e semipresencial.",
        "instituições", "contextual", "Censo INEP", dec=0,
        aliases=["instituições"]),
 
@@ -174,23 +178,27 @@ INDICADORES = [
        "instituições.",
        "mantenedoras", "contextual", "Censo INEP", dec=0),
 
-    # ------------------------------------------------------ ensino a distância
-    # Recolhidos numa seção própria porque quase todos valem zero. Zero aqui é
-    # MEDIDA — 25 das 27 UFs não têm nenhuma vaga a distância —, e a seção
-    # existe para dizer isso de uma vez, em vez de espalhar vinte e cinco
-    # zeros pelas tabelas principais como se fossem lacunas.
-    _i("vagas_ead", "Vagas EaD", "Vagas a distância", "Ensino a distância",
+    # ------------------------------------------- EaD e semipresencial
+    # Recolhidos numa seção própria porque todos valem zero. Zero aqui é
+    # MEDIDA — nenhuma das 27 UFs tem vaga a distância ou semipresencial —, e
+    # a seção existe para dizer isso de uma vez, em vez de espalhar zeros pelas
+    # tabelas principais como se fossem lacunas.
+    _i("vagas_ead", "Vagas EaD", "Vagas a distância", "EaD e semipresencial",
        "Vagas anuais em cursos a distância, registradas na sede da "
-       "mantenedora. Em Odontologia são ZERO no país inteiro, contra 118.747 "
-       "presenciais. Zero aqui significa que o estado foi medido e não tem "
+       "mantenedora. Em Odontologia são ZERO no país inteiro, contra 131.764 "
+       "presenciais no Censo 2025. Zero aqui significa que o estado foi "
+       "medido e não tem "
        "nenhuma vaga EaD — é medida, não lacuna. O campo continua publicado "
        "justamente para que a ausência seja verificável.",
        "vagas/ano", "contextual", "Censo INEP", dec=0, aliases=["vagas ead"]),
 
     _i("pct_ead", "% EaD", "Participação da EaD na capacidade",
-       "Ensino a distância",
-       "Percentual das vagas que são a distância. Em Odontologia é 0% em "
-       "todas as UFs. Para comparar: em Administração passa de 67%, em "
+       "EaD e semipresencial",
+       "Percentual das vagas que são a distância, sobre o total das três "
+       "modalidades; a semipresencial não entra no numerador. Em Odontologia "
+       "é 0% em todas as UFs. Desde o Censo 2025 a modalidade segue a "
+       "definição do Decreto 12.456/2025, então a participação não é "
+       "estritamente comparável à de 2024. Para comparar: em Administração passa de 67%, em "
        "Fonoaudiologia fica em 43% e em Psicologia, 0,2%. Por ser constante, "
        "este indicador fica fora da matriz de correlação e dos mapas: sem "
        "variância não há associação a medir.",
@@ -198,33 +206,57 @@ INDICADORES = [
        aliases=["% ead", "participação da ead"]),
 
     _i("n_cursos_ead", "Cursos EaD", "Cursos a distância (sede)",
-       "Ensino a distância",
+       "EaD e semipresencial",
        "Número de cursos EaD com sede no estado.",
        "cursos", "contextual", "Censo INEP", dec=0),
 
     _i("ead_polos_registros", "Polos EaD", "Polos EaD (registros)",
-       "Ensino a distância",
-       "Registros de polo de apoio presencial de cursos EaD no estado. São 114 "
-       "no país. Quatro estados — Acre, Amapá, Rondônia e Roraima — não têm "
-       "nenhum.",
+       "EaD e semipresencial",
+       "Registros de polo de apoio presencial de cursos EaD no estado. Em "
+       "Odontologia não há nenhum, em nenhuma UF.",
        "registros", "contextual", "Censo INEP", dec=0, aliases=["polos"]),
 
     _i("ead_polos_municipios", "Municípios com polo",
-       "Municípios com polo EaD", "Ensino a distância",
-       "Municípios distintos que abrigam ao menos um polo EaD: 105 no país.",
+       "Municípios com polo EaD", "EaD e semipresencial",
+       "Municípios distintos que abrigam ao menos um polo EaD: nenhum, em "
+       "Odontologia.",
        "municípios", "contextual", "Censo INEP", dec=0),
 
     _i("municipios_so_ead", "Municípios só EaD",
-       "Municípios atendidos apenas por EaD", "Ensino a distância",
+       "Municípios atendidos apenas por EaD", "EaD e semipresencial",
        "Municípios que têm polo EaD e nenhum curso presencial. Mede até onde a "
        "EaD chega em território que a oferta presencial não alcança — que, "
        "neste curso, é quase lugar nenhum.",
        "municípios", "contextual", "Censo INEP", dec=0),
 
     _i("matriculas_ead", "Matrículas EaD", "Matrículas em polos EaD",
-       "Ensino a distância",
+       "EaD e semipresencial",
        "Alunos matriculados registrados em polos EaD do estado. As linhas de "
        "polo carregam as matrículas; as vagas ficam na linha de sede.",
+       "alunos", "contextual", "Censo INEP", dec=0),
+
+    _i("vagas_semipresencial", "Vagas semipresenciais",
+       "Vagas semipresenciais", "EaD e semipresencial",
+       "Vagas anuais em cursos semipresenciais, categoria que o Censo passou a "
+       "registrar em 2025 (TP_MODALIDADE_ENSINO = 3, Decreto 12.456/2025). "
+       "NÃO é EaD: fica fora de vagas_ead e de pct_ead, e entra só no total "
+       "de vagas. Em Odontologia é ZERO medido em todas as UFs no Censo 2025. "
+       "Antes de 2025 a categoria não existia, e a série histórica a mostra "
+       "em branco nesses anos, não como zero.",
+       "vagas/ano", "contextual", "Censo INEP", dec=0,
+       aliases=["semipresencial", "vagas semipresenciais"]),
+
+    _i("n_cursos_semipresencial", "Cursos semipresenciais",
+       "Cursos semipresenciais (sede)", "EaD e semipresencial",
+       "Número de cursos semipresenciais com sede no estado (Censo 2025 em "
+       "diante). Zero em Odontologia.",
+       "cursos", "contextual", "Censo INEP", dec=0),
+
+    _i("matriculas_semipresencial", "Matrículas semipresenciais",
+       "Matrículas em locais de oferta semipresenciais", "EaD e semipresencial",
+       "Alunos de cursos semipresenciais registrados nos locais de oferta do "
+       "estado (Censo 2025 em diante). Somam nas matrículas totais da UF, mas "
+       "não nas de EaD. Zero em Odontologia.",
        "alunos", "contextual", "Censo INEP", dec=0),
 
     # --------------------------------------------------------- concentração
@@ -261,8 +293,8 @@ INDICADORES = [
 
     _i("municipios_oferta", "Municípios com curso",
        "Municípios com oferta presencial", "Território",
-       "Municípios onde existe ao menos um curso presencial: 303 no país, de "
-       "5.571.",
+       "Municípios onde existe ao menos um curso presencial: 308 no país, de "
+       "5.571, no Censo 2025.",
        "municípios", "maior", "Censo INEP", dec=0,
        aliases=["municípios com oferta"]),
 
@@ -538,7 +570,7 @@ INDICADORES = [
        "cursos", "contextual", "Censo INEP", dec=0),
 
     _i("polos_ead", "Polos EaD", "Polos de EaD no município",
-       "Ensino a distância",
+       "EaD e semipresencial",
        "Polos de apoio presencial de cursos a distância registrados no "
        "município.",
        "registros", "contextual", "Censo INEP", dec=0),
@@ -555,14 +587,14 @@ INDICADORES = [
 
 POR_CHAVE = {i["key"]: i for i in INDICADORES}
 
-CATEGORIAS = ["Território", "Capacidade", "Ensino a distância", "Concentração",
+CATEGORIAS = ["Território", "Capacidade", "EaD e semipresencial", "Concentração",
               "Cobertura — saúde",
               "Qualidade", "Fluxo", "Perfil"]
 
 # A seção recolhida na página de UF e na home. Sai daqui, e não de uma lista de
 # chaves no template, para que um indicador de EaD acrescentado depois entre na
 # seção sozinho.
-CATEGORIA_EAD = "Ensino a distância"
+CATEGORIA_EAD = "EaD e semipresencial"
 
 
 def da_categoria(categoria):

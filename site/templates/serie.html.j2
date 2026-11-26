@@ -17,6 +17,19 @@
     significa a mesma coisa nas {{ serie.anos | length }} edições — o que não
     vale para todo campo do cadastro.
   </p>
+  {% if serie.anos[-1] | int >= 2025 %}
+  <p class="nota">
+    <strong>2025 tem outro formato, e uma modalidade nova.</strong> O Censo
+    2025 veio em sete tabelas, que este observatório traduz para o layout das
+    edições anteriores e confere contra a fonte (vagas, matrículas,
+    concluintes e cursos fecham). Ele também passou a registrar a modalidade
+    <em>semipresencial</em> (Decreto 12.456/2025), que não existia até 2024:
+    nos anos anteriores ela aparece em branco no conjunto de dados, não como
+    zero, e a partição entre modalidades não é estritamente comparável entre
+    2024 e 2025. Em Odontologia as modalidades não presenciais valem zero dos
+    dois lados, e os campos desta página mantêm o significado.
+  </p>
+  {% endif %}
   {% else %}
   <p class="secao-lede">
     <span class="sem-dados">sem dados</span> — esta edição do observatório não
@@ -75,6 +88,19 @@
     indicador em algum dos anos aparecem com a variação em branco — a diferença
     entre um número e uma ausência não é um número.
   </p>
+  {% set lacunas = (serie.metadados or {}).get('ufs_sem_linha_no_ano') or {} %}
+  {% if lacunas %}
+  <p class="nota">
+    Edições sem nenhuma linha de Odontologia para um estado:
+    {% for ano, siglas in lacunas | dictsort %}{% for s in siglas %}{{ nomes_uf.get(s, s) }}{{ ', ' if not loop.last }}{% endfor %} em {{ ano }}{{ '; ' if not loop.last else '.' }}{% endfor %}
+    {% if lacunas == {'2020': ['RR']} %}
+    O curso de Boa Vista aparece com o mesmo código em 2019 e em 2021, então
+    a ausência é do registro na fonte, não um fechamento.
+    {% endif %}
+    A célula fica em branco, e não zero, e o total do Brasil daquele ano é o
+    que o Censo publicou, sem estimar a parte que falta.
+  </p>
+  {% endif %}
 </section>
 
 {% endif %}

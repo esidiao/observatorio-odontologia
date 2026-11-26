@@ -138,15 +138,15 @@
   EaD acrescentado depois entra sozinho.
 #}
 <section class="secao secao-ead">
-  <h2 class="secao-titulo">Ensino a distância</h2>
+  <h2 class="secao-titulo">Ensino a distância e semipresencial</h2>
   <p class="secao-lede">
-    {% if d.vagas_ead %}
-      {{ nome_uf }} tem {{ d.vagas_ead | numero }} vagas a distância, de
-      {{ d.vagas_total | numero }} no total — e isso contraria o que o Censo
-      {{ panorama.ano_censo }} registrou para o país, onde não havia nenhuma.
-    {% elif d.vagas_ead == 0 %}
-      Não há oferta de Odontologia a distância em {{ nome_uf }} — nem vaga, nem
-      polo. O mesmo vale para as outras {{ panorama.n_ufs - 1 }} unidades da
+    {% if d.vagas_ead or d.vagas_semipresencial %}
+      {{ nome_uf }} tem {{ d.vagas_ead | numero }} vagas a distância e
+      {{ (d.vagas_semipresencial or 0) | numero }} semipresenciais, de
+      {{ d.vagas_total | numero }} no total.
+    {% elif d.vagas_ead == 0 and not d.vagas_semipresencial %}
+      Não há oferta de Odontologia a distância nem semipresencial em
+      {{ nome_uf }} — nem vaga, nem polo. O mesmo vale para as outras {{ panorama.n_ufs - 1 }} unidades da
       federação: no Censo {{ panorama.ano_censo }} o curso é integralmente
       presencial no país inteiro. <strong>Esse zero é medida, não lacuna</strong>:
       as {{ panorama.n_cursos_presencial | numero }} ofertas do recorte foram
@@ -160,6 +160,20 @@
     inteiras mostrando zero. Os campos continuam publicados no conjunto de
     dados, valendo zero, para quem for conferir ou reusar.
   </p>
+  {% if panorama.ano_censo and panorama.ano_censo >= 2025 %}
+  <p class="nota">
+    <strong>2025 não é estritamente comparável a 2024 na modalidade.</strong>
+    A partir do Censo 2025 o INEP passou a registrar o formato de oferta do
+    Decreto 12.456/2025, com uma categoria nova — <em>semipresencial</em> —
+    que até 2024 não existia. Ela é publicada aqui em campos próprios e
+    <strong>não</strong> é somada à EaD; o total de vagas soma as três
+    modalidades. Em Odontologia a mudança não move nenhum número: as
+    {{ panorama.n_cursos_presencial | numero }} ofertas de
+    {{ panorama.ano_censo }} são todas presenciais, como as de 2024 —, mas a
+    comparação entre edições de qualquer indicador de modalidade deve levar a
+    troca de definição em conta.
+  </p>
+  {% endif %}
 </section>
 
 <section class="secao">
@@ -269,6 +283,65 @@
       </tbody>
     </table>
   </div>
+</section>
+{% endif %}
+
+{#
+  Evolução da UF ao longo das edições do Censo. Sai de data/serie.json, com a
+  mesma definição de indicador que o resto da página: o último ano da tabela
+  é o número publicado nos cartões acima (tests/test_validacao.py confere).
+  Renderizada no servidor, sem gráfico: é uma tabela que se lê sem JavaScript.
+#}
+{% if serie_anos and serie_uf %}
+<section class="secao">
+  <h2 class="secao-titulo">Evolução</h2>
+  <p class="secao-lede">
+    {{ nome_uf }} nas edições {{ serie_anos[0] }} a {{ serie_anos[-1] }} do
+    Censo da Educação Superior, só com os campos comparáveis entre edições.
+    Para comparar com outros estados, veja a
+    <a href="{{ depth }}serie.html">série histórica</a>.
+  </p>
+  <div class="tabela-rolagem">
+    <table class="tabela-simples">
+      <caption class="so-leitor">Evolução de {{ nome_uf }} por edição do Censo da Educação Superior</caption>
+      <thead>
+        <tr>
+          <th scope="col">Indicador</th>
+          {% for ano in serie_anos %}<th scope="col">{{ ano }}</th>{% endfor %}
+          <th scope="col">Variação {{ serie_anos[0] }}–{{ serie_anos[-1] }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for campo in serie_campos %}
+        {% set ind = (catalogo | selectattr('key', 'equalto', campo) | first) %}
+        {% set primeiro = (serie_uf.get(serie_anos[0]) or {}).get(campo) %}
+        {% set ultimo = (serie_uf.get(serie_anos[-1]) or {}).get(campo) %}
+        <tr>
+          <th scope="row"{% if ind %} title="{{ ind.nome }}"{% endif %}>{{ ind.sigla if ind else campo }}</th>
+          {% for ano in serie_anos %}
+          {% set v = (serie_uf.get(ano) or {}).get(campo) %}
+          <td class="num{% if v is none %} sem-dados{% endif %}">{{ v | numero }}</td>
+          {% endfor %}
+          {% if primeiro and ultimo is not none %}
+          {% set var = 100 * (ultimo - primeiro) / primeiro %}
+          <td class="num">{{ '+' if var > 0 else '' }}{{ var | numero(1) }}%</td>
+          {% else %}
+          <td class="num sem-dados">sem dados</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <p class="tabela-dica">Role a tabela para o lado para ver as demais colunas.</p>
+  {% if serie_anos[-1] | int >= 2025 %}
+  <p class="nota">
+    Em 2025 o Censo mudou de formato (sete tabelas) e passou a registrar a
+    modalidade semipresencial. Os campos desta tabela foram conferidos contra a
+    fonte nos dois formatos e mantêm o significado; a partição entre
+    modalidades, não — veja a seção de ensino a distância e semipresencial.
+  </p>
+  {% endif %}
 </section>
 {% endif %}
 

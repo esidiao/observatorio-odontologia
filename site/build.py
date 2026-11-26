@@ -485,13 +485,22 @@ def construir(caminho_dados, saida, templates):
            ufs=ufs, ufs_ordenadas=ordenadas, ufs_json=_json(ufs),
            serie_json=_json(serie))
 
+    # Evolução por UF: os mesmos campos da página de série, menos os de EaD e
+    # semipresencial — que valem zero (ou nulo, antes de 2025) em todos os
+    # anos, e uma linha de zeros não diz nada que a seção própria não diga.
+    serie_anos = serie.get("anos") or []
+    serie_campos = [c for c in (serie.get("campos") or [])
+                    if (catalogo.POR_CHAVE.get(c) or {}).get("cat")
+                    != catalogo.CATEGORIA_EAD]
     for sigla, d in sorted(ufs.items()):
         lista = municipios.get(sigla, [])
         render("uf.html.j2", f"uf/{sigla}.html", depth="../",
                sigla=sigla, nome_uf=NOMES_UF.get(sigla, sigla), d=d,
                uf_json=_json(d), codigo_ibge=CODIGO_IBGE.get(sigla, ""),
                municipios=lista, municipios_json=_json(lista),
-               ufs_json=_json(ufs))
+               ufs_json=_json(ufs),
+               serie_anos=serie_anos, serie_campos=serie_campos,
+               serie_uf=(serie.get("ufs") or {}).get(sigla) or {})
     print(f"[BUILD] {len(ufs)} páginas de UF")
 
     n_mun = 0

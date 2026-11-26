@@ -13,17 +13,18 @@ dependências.
 
 ## O que este observatório mede
 
-| | Odontologia (Censo 2024) | Psicologia, para escala |
-|---|---:|---:|
-| Registros no Censo, rótulo CINE exato | **650** | 1.372 |
-| UFs com oferta presencial | **27** de 27 | 27 |
-| Municípios com oferta presencial | **303** | 498 |
-| Vagas presenciais | **118.747** | 276.250 |
-| Vagas EaD | **0** | 549 |
-| Polos de EaD | **0** | 114 |
-| Matrículas | **162.750** | 375.574 |
-| Concluintes | **26.883** | 49.065 |
-| IES distintas | **576** | 1.032 |
+| | Odontologia (Censo 2025) | Odontologia (Censo 2024) | Psicologia (Censo 2024), para escala |
+|---|---:|---:|---:|
+| Cursos no Censo, rótulo CINE exato | **676** | 650 | 1.372 |
+| UFs com oferta presencial | **27** de 27 | 27 | 27 |
+| Municípios com oferta presencial | **308** | 303 | 498 |
+| Vagas presenciais | **131.764** | 118.747 | 276.250 |
+| Vagas EaD | **0** | 0 | 549 |
+| Vagas semipresenciais (categoria nova em 2025) | **0** | — | — |
+| Polos de EaD | **0** | 0 | 114 |
+| Matrículas | **164.680** | 162.750 | 375.574 |
+| Concluintes | **26.681** | 26.883 | 49.065 |
+| IES distintas | **595** | 576 | 1.032 |
 | Cursos avaliados | **452** (CPC 2023) | 746 (CPC 2022) |
 | Municípios com cirurgião-dentista no SUS | **5.565** de 5.571 | 5.528 |
 | Cirurgiões-dentistas no SUS | **96.748** | 72.751 |
@@ -32,14 +33,16 @@ dependências.
 
 ### A manchete é uma ausência
 
-**Não existe Odontologia a distância no Brasil.** As 650 ofertas registradas no
-Censo 2024 são presenciais — nenhuma vaga de EaD, nenhum polo, em nenhuma
-unidade da federação —, e os 452 cursos avaliados no CPC 2023 também são todos
-presenciais.
+**Não existe Odontologia a distância no Brasil.** As 676 ofertas registradas no
+Censo 2025 são presenciais — nenhuma vaga de EaD, nenhuma semipresencial,
+nenhum polo, em nenhuma unidade da federação —, como já eram as 650 de 2024, e
+os 452 cursos avaliados no CPC 2023 também são todos presenciais.
 
-Esse zero é **medido, não presumido**. O cadastro do Censo separa a oferta em
-três camadas (`TP_DIMENSAO`: presencial, polo de EaD, sede de EaD) e as três
-foram lidas: só a primeira tem linha. Nos observatórios irmãos a modalidade vai
+Esse zero é **medido, não presumido**. Até 2024 o cadastro do Censo separa a
+oferta em três camadas (`TP_DIMENSAO`: presencial, polo de EaD, sede de EaD) e
+as três foram lidas: só a primeira tem linha. Em 2025 a mesma conferência é
+feita nas tabelas novas (ver abaixo): todas as 676 linhas de curso têm
+`TP_MODALIDADE_ENSINO = 1`. Nos observatórios irmãos a modalidade vai
 de 0,2% da capacidade em Psicologia a 66,9% em Administração — aqui ela é
 exatamente nada.
 
@@ -52,7 +55,8 @@ informa alguma coisa.
 
 ### O rótulo CINE não tem vizinho, e o critério exato continua
 
-Medido no Censo 2024: `Odontologia` é o **único** rótulo que contém "odont".
+Medido nos Censos 2024 e 2025: `Odontologia` é o **único** rótulo que contém
+"odont".
 Diferente de `Psicologia`, que convive com `Psicopedagogia` (6.083 registros),
 ou de `Administração`, ao lado de `Administração pública` (3.530).
 
@@ -64,6 +68,33 @@ O diagnóstico refaz a verificação em qualquer edição:
 ```bash
 python etl/extrair_censo.py --ano 2024 --listar-rotulos odont
 ```
+
+### O Censo 2025 mudou de formato
+
+O INEP publicou o Censo da Educação Superior 2025 em sete tabelas normalizadas
+(`microdados_censo_educacao_superior_2025.zip`, sem o "da" no nome), sem
+`TP_DIMENSAO`, com colunas renomeadas, separador de milhar dentro da célula
+(`"9.731"`) e supressão (`-`) de recortes com 3 ou menos alunos por local de
+oferta. E `TP_MODALIDADE_ENSINO` mudou de sentido: passou a ser o formato de
+oferta do Decreto 12.456/2025, com a categoria nova **3 = semipresencial**.
+
+Em vez de reescrever o ETL, `etl/censo2025_adaptador.py` traduz o recorte para
+o layout das edições anteriores e **aborta** se matrículas, concluintes, vagas,
+cursos ou FEM+MASC=ING não fecharem contra a fonte. O rótulo casa por
+igualdade, como no resto do projeto, e modalidade desconhecida aborta.
+
+```bash
+python etl/censo2025_adaptador.py --origem <pasta dados do ZIP 2025> \
+    --saida <pasta> --rotulo Odontologia
+python etl/pipeline.py --ano 2025 --origem-local <pasta> --pular-cnes
+```
+
+A semipresencial é publicada em campos próprios (`vagas_semipresencial`,
+`n_cursos_semipresencial`, `matriculas_semipresencial`): não soma na EaD nem em
+`pct_ead`, entra no total de vagas, e na série histórica fica **nula** antes de
+2025 (a categoria não existia), não zero. A participação por modalidade não é
+estritamente comparável entre 2024 e 2025, e o site diz isso; em Odontologia,
+de todo modo, as duas modalidades não presenciais valem zero nos dois anos.
 
 ## Estrutura
 
@@ -82,7 +113,7 @@ python etl/extrair_censo.py --ano 2024 --listar-rotulos odont
 
 | Indicador | Fonte | Acesso |
 |---|---|---|
-| Oferta, vagas, matrículas | Censo da Educação Superior 2024 (INEP) | HTTPS, ZIP lido por `Range` |
+| Oferta, vagas, matrículas | Censo da Educação Superior 2025 (INEP); série 2015–2025 | HTTPS, ZIP lido por `Range` (até 2024); 2025 traduzido localmente pelo adaptador |
 | CPC, IDD, ENADE, perfil docente | **CPC 2023** (INEP), área ODONTOLOGIA | HTTPS |
 | Cirurgiões-dentistas no SUS | CNES — vínculos com CBO `2232xx` | FTP DATASUS |
 | Rede especializada | CNES — serviço **114**, atenção especializada à saúde bucal | FTP DATASUS |
@@ -179,7 +210,7 @@ pip install -r requirements.txt
 python site/build.py
 ```
 
-O site sai em `site/dist/`: 27 páginas de estado e 303 de município, uma para
+O site sai em `site/dist/`: 27 páginas de estado e 308 de município, uma para
 cada município com curso presencial.
 
 ### Portões de qualidade (GO)
@@ -200,6 +231,7 @@ resultado conhecido; e a coerência interna do catálogo de indicadores.
 python tests/test_catalogo.py
 python tests/test_validacao.py
 python tests/test_check_fontes.py
+python tests/test_censo2025_adaptador.py
 python tests/test_acessibilidade.py   # depois de `python site/build.py`
 ```
 
@@ -218,8 +250,17 @@ prova.
 python etl/pipeline.py --check-only     # só verifica se as fontes mudaram
 python etl/pipeline.py --ano 2024       # extrai, calcula, valida, publica
 python etl/pipeline.py --so-riqueza     # só a guarda de riqueza
-python etl/serie.py --anos 2021 2022 2023 2024
+python etl/serie.py --anos 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 \
+    --origem-local <pasta com os CSV 2015-2024> <saída do adaptador 2025>
 ```
+
+A série histórica (`data/serie.json`, página "Série" e seção "Evolução" de cada
+estado) cobre 2015–2025 com a mesma definição de indicador do resto do ETL: o
+ponto de 2025 é o número publicado em `nacional.json`, e a soma das UFs é a
+linha do Brasil em todos os anos — `tests/test_validacao.py` confere as duas
+coisas. Uma lacuna da fonte fica em branco, não zero: o Censo 2020 não tem a
+linha do curso de Odontologia de Roraima (o mesmo código aparece em 2019 e em
+2021).
 
 A extração do CNES leva perto de uma hora, porque o FTP do DATASUS derruba a
 maior parte das conexões que usam `REST`. Ela guarda as fatias já filtradas em
