@@ -9,7 +9,7 @@
   "componente_q_do_iaf": "CPC (Faixa), escala 1 a 5",
   "cursos_avaliados": 452,
   "ufs_avaliadas": 27,
-  "extraido_em": "2026-09-11"
+  "extraido_em": "2026-11-26"
  },
  "ufs": {
   "AC": {
@@ -27,7 +27,7 @@
    "dim_didatico_pedagogica": 5.417,
    "dim_infraestrutura": 5.303,
    "dim_oportunidade_formacao": 4.498,
-   "vagas_avaliadas": 1142,
+   "vagas_avaliadas": 1107,
    "cursos_sem_vagas_no_censo": []
   },
   "AL": {
@@ -45,7 +45,7 @@
    "dim_didatico_pedagogica": 5.56,
    "dim_infraestrutura": 5.429,
    "dim_oportunidade_formacao": 5.162,
-   "vagas_avaliadas": 1419,
+   "vagas_avaliadas": 1159,
    "cursos_sem_vagas_no_censo": []
   },
   "AM": {
@@ -63,7 +63,7 @@
    "dim_didatico_pedagogica": 5.719,
    "dim_infraestrutura": 5.502,
    "dim_oportunidade_formacao": 5.266,
-   "vagas_avaliadas": 1449,
+   "vagas_avaliadas": 1694,
    "cursos_sem_vagas_no_censo": [
     "45976"
    ]
@@ -83,7 +83,7 @@
    "dim_didatico_pedagogica": 5.178,
    "dim_infraestrutura": 4.64,
    "dim_oportunidade_formacao": 3.933,
-   "vagas_avaliadas": 269,
+   "vagas_avaliadas": 265,
    "cursos_sem_vagas_no_censo": []
   },
   "BA": {
@@ -101,7 +101,7 @@
    "dim_didatico_pedagogica": 5.549,
    "dim_infraestrutura": 5.307,
    "dim_oportunidade_formacao": 4.78,
-   "vagas_avaliadas": 6044,
+   "vagas_avaliadas": 5409,
    "cursos_sem_vagas_no_censo": []
   },
   "CE": {
@@ -119,7 +119,7 @@
    "dim_didatico_pedagogica": 5.664,
    "dim_infraestrutura": 5.639,
    "dim_oportunidade_formacao": 5.162,
-   "vagas_avaliadas": 3573,
+   "vagas_avaliadas": 2991,
    "cursos_sem_vagas_no_censo": []
   },
   "DF": {
@@ -137,7 +137,7 @@
    "dim_didatico_pedagogica": 5.611,
    "dim_infraestrutura": 5.412,
    "dim_oportunidade_formacao": 5.184,
-   "vagas_avaliadas": 1863,
+   "vagas_avaliadas": 1942,
    "cursos_sem_vagas_no_censo": []
   },
   "ES": {
@@ -155,7 +155,7 @@
    "dim_didatico_pedagogica": 5.58,
    "dim_infraestrutura": 5.419,
    "dim_oportunidade_formacao": 5.164,
-   "vagas_avaliadas": 1847,
+   "vagas_avaliadas": 2023,
    "cursos_sem_vagas_no_censo": []
   },
   "GO": {
@@ -173,7 +173,7 @@
    "dim_didatico_pedagogica": 5.524,
    "dim_infraestrutura": 5.298,
    "dim_oportunidade_formacao": 4.736,
-   "vagas_avaliadas": 3289,
+   "vagas_avaliadas": 3382,
    "cursos_sem_vagas_no_censo": []
   },
   "MA": {
@@ -191,7 +191,7 @@
    "dim_didatico_pedagogica": 5.605,
    "dim_infraestrutura": 5.468,
    "dim_oportunidade_formacao": 4.983,
-   "vagas_avaliadas": 2441,
+   "vagas_avaliadas": 21285,
    "cursos_sem_vagas_no_censo": [
     "1332462"
    ]
@@ -211,7 +211,7 @@
    "dim_didatico_pedagogica": 5.567,
    "dim_infraestrutura": 5.406,
    "dim_oportunidade_formacao": 4.868,
-   "vagas_avaliadas": 12450,
+   "vagas_avaliadas": 11392,
    "cursos_sem_vagas_no_censo": []
   },
   "MS": {
@@ -229,7 +229,7 @@
    "dim_didatico_pedagogica": 5.486,
    "dim_infraestrutura": 5.292,
    "dim_oportunidade_formacao": 4.996,
-   "vagas_avaliadas": 563,
+   "vagas_avaliadas": 503,
    "cursos_sem_vagas_no_censo": []
   },
   "MT": {
@@ -247,7 +247,7 @@
    "dim_didatico_pedagogica": 5.582,
    "dim_infraestrutura": 5.365,
    "dim_oportunidade_formacao": 4.777,
-   "vagas_avaliadas": 1770,
+   "vagas_avaliadas": 1844,
    "cursos_sem_vagas_no_censo": []
   },
   "PA": {
@@ -265,7 +265,7 @@
    "dim_didatico_pedagogica": 5.631,
    "dim_infraestrutura": 5.384,
    "dim_oportunidade_formacao": 4.956,
-   "vagas_avaliadas": 2847,
+   "vagas_avaliadas": 2749,
    "cursos_sem_vagas_no_censo": []
   },
   "PB": {
@@ -283,7 +283,7 @@
    "dim_didatico_pedagogica": 5.419,
    "dim_infraestrutura": 5.206,
    "dim_oportunidade_formacao": 4.465,
-   "vagas_avaliadas": 2596,
+   "vagas_avaliadas": 2451,
    "cursos_sem_vagas_no_censo": []
   },
   "PE": {
@@ -301,7 +301,7 @@
    "dim_didatico_pedagogica": 5.628,
    "dim_infraestrutura": 5.466,
    "dim_oportunidade_formacao": 5.02,
-   "vagas_avaliadas": 4699,
+   "vagas_avaliadas": 4603,
    "cursos_sem_vagas_no_censo": []
   },
   "PI": {
@@ -319,7 +319,7 @@
    "dim_didatico_pedagogica": 5.757,
    "dim_infraestrutura": 5.682,
    "dim_oportunidade_formacao": 5.338,
-   "vagas_avaliadas": 1582,
+   "vagas_avaliadas": 1439,
    "cursos_sem_vagas_no_censo": []
   },
   "PR": {
@@ -337,7 +337,7 @@
    "dim_didatico_pedagogica": 5.494,
    "dim_infraestrutura": 5.301,
    "dim_oportunidade_formacao": 4.774,
-   "vagas_avaliadas": 3702,
+   "vagas_avaliadas": 3431,
    "cursos_sem_vagas_no_censo": []
   },
   "RJ": {
@@ -355,7 +355,7 @@
    "dim_didatico_pedagogica": 5.615,
    "dim_infraestrutura": 5.403,
    "dim_oportunidade_formacao": 5.132,
-   "vagas_avaliadas": 5239,
+   "vagas_avaliadas": 4811,
    "cursos_sem_vagas_no_censo": []
   },
   "RN": {
@@ -373,7 +373,7 @@
    "dim_didatico_pedagogica": 5.479,
    "dim_infraestrutura": 5.228,
    "dim_oportunidade_formacao": 4.662,
-   "vagas_avaliadas": 1435,
+   "vagas_avaliadas": 1288,
    "cursos_sem_vagas_no_censo": []
   },
   "RO": {
@@ -391,7 +391,7 @@
    "dim_didatico_pedagogica": 5.66,
    "dim_infraestrutura": 5.58,
    "dim_oportunidade_formacao": 5.236,
-   "vagas_avaliadas": 2037,
+   "vagas_avaliadas": 1646,
    "cursos_sem_vagas_no_censo": []
   },
   "RR": {
@@ -409,7 +409,7 @@
    "dim_didatico_pedagogica": 5.883,
    "dim_infraestrutura": 5.818,
    "dim_oportunidade_formacao": 5.685,
-   "vagas_avaliadas": 123,
+   "vagas_avaliadas": 110,
    "cursos_sem_vagas_no_censo": []
   },
   "RS": {
@@ -427,7 +427,7 @@
    "dim_didatico_pedagogica": 5.483,
    "dim_infraestrutura": 5.37,
    "dim_oportunidade_formacao": 4.648,
-   "vagas_avaliadas": 2751,
+   "vagas_avaliadas": 2928,
    "cursos_sem_vagas_no_censo": []
   },
   "SC": {
@@ -445,7 +445,7 @@
    "dim_didatico_pedagogica": 5.431,
    "dim_infraestrutura": 5.215,
    "dim_oportunidade_formacao": 4.806,
-   "vagas_avaliadas": 2464,
+   "vagas_avaliadas": 2429,
    "cursos_sem_vagas_no_censo": []
   },
   "SE": {
@@ -463,7 +463,7 @@
    "dim_didatico_pedagogica": 5.356,
    "dim_infraestrutura": 5.045,
    "dim_oportunidade_formacao": 4.823,
-   "vagas_avaliadas": 605,
+   "vagas_avaliadas": 634,
    "cursos_sem_vagas_no_censo": []
   },
   "SP": {
@@ -481,7 +481,7 @@
    "dim_didatico_pedagogica": 5.423,
    "dim_infraestrutura": 5.227,
    "dim_oportunidade_formacao": 4.76,
-   "vagas_avaliadas": 18258,
+   "vagas_avaliadas": 15203,
    "cursos_sem_vagas_no_censo": []
   },
   "TO": {
@@ -499,7 +499,7 @@
    "dim_didatico_pedagogica": 5.67,
    "dim_infraestrutura": 5.683,
    "dim_oportunidade_formacao": 5.318,
-   "vagas_avaliadas": 747,
+   "vagas_avaliadas": 928,
    "cursos_sem_vagas_no_censo": []
   }
  },
@@ -519,7 +519,7 @@
    "CPC_cont": 3.526,
    "ENADE_cont": 3.885,
    "IDD": 2.65,
-   "vagas": 74
+   "vagas": 95
   },
   {
    "cod_curso": "304",
@@ -536,7 +536,7 @@
    "CPC_cont": 3.016,
    "ENADE_cont": 3.712,
    "IDD": 2.454,
-   "vagas": 46
+   "vagas": 42
   },
   {
    "cod_curso": "391",
@@ -553,7 +553,7 @@
    "CPC_cont": 3.75,
    "ENADE_cont": 4.094,
    "IDD": 3.565,
-   "vagas": 42
+   "vagas": 49
   },
   {
    "cod_curso": "485",
@@ -570,7 +570,7 @@
    "CPC_cont": 4.296,
    "ENADE_cont": 4.937,
    "IDD": 4.725,
-   "vagas": 75
+   "vagas": 72
   },
   {
    "cod_curso": "760",
@@ -587,7 +587,7 @@
    "CPC_cont": 3.602,
    "ENADE_cont": 3.547,
    "IDD": 2.982,
-   "vagas": 60
+   "vagas": 62
   },
   {
    "cod_curso": "869",
@@ -604,7 +604,7 @@
    "CPC_cont": 3.895,
    "ENADE_cont": 3.237,
    "IDD": 3.378,
-   "vagas": 61
+   "vagas": 93
   },
   {
    "cod_curso": "1441",
@@ -621,7 +621,7 @@
    "CPC_cont": 3.554,
    "ENADE_cont": 3.6,
    "IDD": 2.844,
-   "vagas": 108
+   "vagas": 84
   },
   {
    "cod_curso": "1631",
@@ -638,7 +638,7 @@
    "CPC_cont": 2.989,
    "ENADE_cont": 2.235,
    "IDD": 2.109,
-   "vagas": 107
+   "vagas": 116
   },
   {
    "cod_curso": "1726",
@@ -655,7 +655,7 @@
    "CPC_cont": 3.181,
    "ENADE_cont": 2.529,
    "IDD": 2.552,
-   "vagas": 59
+   "vagas": 68
   },
   {
    "cod_curso": "1883",
@@ -672,7 +672,7 @@
    "CPC_cont": 3.635,
    "ENADE_cont": 3.547,
    "IDD": 3.595,
-   "vagas": 104
+   "vagas": 160
   },
   {
    "cod_curso": "2147",
@@ -689,7 +689,7 @@
    "CPC_cont": 2.77,
    "ENADE_cont": 1.901,
    "IDD": 2.14,
-   "vagas": 70
+   "vagas": 50
   },
   {
    "cod_curso": "2297",
@@ -706,7 +706,7 @@
    "CPC_cont": 3.218,
    "ENADE_cont": 2.076,
    "IDD": 2.023,
-   "vagas": 176
+   "vagas": 163
   },
   {
    "cod_curso": "2694",
@@ -723,7 +723,7 @@
    "CPC_cont": 3.914,
    "ENADE_cont": 4.095,
    "IDD": 2.961,
-   "vagas": 79
+   "vagas": 81
   },
   {
    "cod_curso": "3127",
@@ -791,7 +791,7 @@
    "CPC_cont": 3.702,
    "ENADE_cont": 3.864,
    "IDD": 3.334,
-   "vagas": 42
+   "vagas": 46
   },
   {
    "cod_curso": "3527",
@@ -808,7 +808,7 @@
    "CPC_cont": 2.391,
    "ENADE_cont": 1.642,
    "IDD": 1.9,
-   "vagas": 92
+   "vagas": 98
   },
   {
    "cod_curso": "3932",
@@ -825,7 +825,7 @@
    "CPC_cont": 3.661,
    "ENADE_cont": 3.436,
    "IDD": 4.066,
-   "vagas": 275
+   "vagas": 219
   },
   {
    "cod_curso": "4415",
@@ -842,7 +842,7 @@
    "CPC_cont": 3.472,
    "ENADE_cont": 2.266,
    "IDD": 2.502,
-   "vagas": 80
+   "vagas": 65
   },
   {
    "cod_curso": "4585",
@@ -859,7 +859,7 @@
    "CPC_cont": 3.555,
    "ENADE_cont": 2.875,
    "IDD": 3.553,
-   "vagas": 259
+   "vagas": 233
   },
   {
    "cod_curso": "5117",
@@ -893,7 +893,7 @@
    "CPC_cont": 3.002,
    "ENADE_cont": 2.876,
    "IDD": 3.008,
-   "vagas": 219
+   "vagas": 259
   },
   {
    "cod_curso": "5283",
@@ -910,7 +910,7 @@
    "CPC_cont": 3.653,
    "ENADE_cont": 3.57,
    "IDD": 3.693,
-   "vagas": 121
+   "vagas": 77
   },
   {
    "cod_curso": "5623",
@@ -927,7 +927,7 @@
    "CPC_cont": 3.653,
    "ENADE_cont": 2.67,
    "IDD": 2.749,
-   "vagas": 95
+   "vagas": 120
   },
   {
    "cod_curso": "6483",
@@ -944,7 +944,7 @@
    "CPC_cont": 4.65,
    "ENADE_cont": 4.666,
    "IDD": 5.0,
-   "vagas": 163
+   "vagas": 162
   },
   {
    "cod_curso": "6583",
@@ -961,7 +961,7 @@
    "CPC_cont": 3.095,
    "ENADE_cont": 2.687,
    "IDD": 2.723,
-   "vagas": 64
+   "vagas": 119
   },
   {
    "cod_curso": "7195",
@@ -978,7 +978,7 @@
    "CPC_cont": 1.515,
    "ENADE_cont": 1.036,
    "IDD": 0.836,
-   "vagas": 1498
+   "vagas": 354
   },
   {
    "cod_curso": "7269",
@@ -995,7 +995,7 @@
    "CPC_cont": 3.927,
    "ENADE_cont": 4.197,
    "IDD": 4.714,
-   "vagas": 130
+   "vagas": 125
   },
   {
    "cod_curso": "7399",
@@ -1012,7 +1012,7 @@
    "CPC_cont": 2.555,
    "ENADE_cont": 2.309,
    "IDD": 2.026,
-   "vagas": 132
+   "vagas": 123
   },
   {
    "cod_curso": "7415",
@@ -1029,7 +1029,7 @@
    "CPC_cont": 2.809,
    "ENADE_cont": 2.144,
    "IDD": 2.645,
-   "vagas": 285
+   "vagas": 353
   },
   {
    "cod_curso": "7492",
@@ -1046,7 +1046,7 @@
    "CPC_cont": 3.358,
    "ENADE_cont": 3.1,
    "IDD": 2.628,
-   "vagas": 247
+   "vagas": 313
   },
   {
    "cod_curso": "7716",
@@ -1063,7 +1063,7 @@
    "CPC_cont": 3.154,
    "ENADE_cont": 2.808,
    "IDD": 3.474,
-   "vagas": 130
+   "vagas": 129
   },
   {
    "cod_curso": "8100",
@@ -1097,7 +1097,7 @@
    "CPC_cont": 3.397,
    "ENADE_cont": 4.058,
    "IDD": 3.015,
-   "vagas": 200
+   "vagas": 107
   },
   {
    "cod_curso": "8579",
@@ -1114,7 +1114,7 @@
    "CPC_cont": 2.336,
    "ENADE_cont": 1.801,
    "IDD": 1.917,
-   "vagas": 530
+   "vagas": 568
   },
   {
    "cod_curso": "8666",
@@ -1131,7 +1131,7 @@
    "CPC_cont": 3.963,
    "ENADE_cont": 3.637,
    "IDD": 4.512,
-   "vagas": 107
+   "vagas": 105
   },
   {
    "cod_curso": "9035",
@@ -1148,7 +1148,7 @@
    "CPC_cont": 3.606,
    "ENADE_cont": 2.271,
    "IDD": 3.036,
-   "vagas": 180
+   "vagas": 170
   },
   {
    "cod_curso": "9290",
@@ -1165,7 +1165,7 @@
    "CPC_cont": 3.488,
    "ENADE_cont": 3.526,
    "IDD": 3.324,
-   "vagas": 310
+   "vagas": 357
   },
   {
    "cod_curso": "9709",
@@ -1182,7 +1182,7 @@
    "CPC_cont": 3.361,
    "ENADE_cont": 3.677,
    "IDD": 2.85,
-   "vagas": 94
+   "vagas": 97
   },
   {
    "cod_curso": "9722",
@@ -1199,7 +1199,7 @@
    "CPC_cont": 2.996,
    "ENADE_cont": 2.328,
    "IDD": 2.173,
-   "vagas": 212
+   "vagas": 222
   },
   {
    "cod_curso": "9836",
@@ -1216,7 +1216,7 @@
    "CPC_cont": 2.934,
    "ENADE_cont": 2.136,
    "IDD": 2.452,
-   "vagas": 1234
+   "vagas": 797
   },
   {
    "cod_curso": "9984",
@@ -1233,7 +1233,7 @@
    "CPC_cont": 3.153,
    "ENADE_cont": 2.174,
    "IDD": 2.063,
-   "vagas": 181
+   "vagas": 176
   },
   {
    "cod_curso": "10004",
@@ -1250,7 +1250,7 @@
    "CPC_cont": 4.009,
    "ENADE_cont": 3.229,
    "IDD": 4.3,
-   "vagas": 114
+   "vagas": 112
   },
   {
    "cod_curso": "10268",
@@ -1267,7 +1267,7 @@
    "CPC_cont": 2.065,
    "ENADE_cont": 2.173,
    "IDD": 2.075,
-   "vagas": 115
+   "vagas": 77
   },
   {
    "cod_curso": "10350",
@@ -1284,7 +1284,7 @@
    "CPC_cont": 3.157,
    "ENADE_cont": 3.339,
    "IDD": 3.979,
-   "vagas": 220
+   "vagas": 130
   },
   {
    "cod_curso": "10592",
@@ -1301,7 +1301,7 @@
    "CPC_cont": 3.186,
    "ENADE_cont": 2.773,
    "IDD": 3.057,
-   "vagas": 389
+   "vagas": 392
   },
   {
    "cod_curso": "10752",
@@ -1318,7 +1318,7 @@
    "CPC_cont": 3.01,
    "ENADE_cont": 2.279,
    "IDD": 2.759,
-   "vagas": 361
+   "vagas": 363
   },
   {
    "cod_curso": "11317",
@@ -1352,7 +1352,7 @@
    "CPC_cont": 3.906,
    "ENADE_cont": 4.032,
    "IDD": 3.03,
-   "vagas": 90
+   "vagas": 89
   },
   {
    "cod_curso": "11595",
@@ -1369,7 +1369,7 @@
    "CPC_cont": 2.707,
    "ENADE_cont": 3.648,
    "IDD": 2.436,
-   "vagas": 100
+   "vagas": 94
   },
   {
    "cod_curso": "11731",
@@ -1403,7 +1403,7 @@
    "CPC_cont": 3.155,
    "ENADE_cont": 2.681,
    "IDD": 2.791,
-   "vagas": 122
+   "vagas": 100
   },
   {
    "cod_curso": "12330",
@@ -1420,7 +1420,7 @@
    "CPC_cont": 4.075,
    "ENADE_cont": 4.407,
    "IDD": 3.673,
-   "vagas": 94
+   "vagas": 88
   },
   {
    "cod_curso": "12584",
@@ -1454,7 +1454,7 @@
    "CPC_cont": 3.627,
    "ENADE_cont": 3.761,
    "IDD": 2.898,
-   "vagas": 110
+   "vagas": 103
   },
   {
    "cod_curso": "12814",
@@ -1488,7 +1488,7 @@
    "CPC_cont": 3.992,
    "ENADE_cont": 4.507,
    "IDD": 3.497,
-   "vagas": 232
+   "vagas": 162
   },
   {
    "cod_curso": "13104",
@@ -1505,7 +1505,7 @@
    "CPC_cont": 3.68,
    "ENADE_cont": 3.846,
    "IDD": 2.785,
-   "vagas": 105
+   "vagas": 110
   },
   {
    "cod_curso": "13202",
@@ -1522,7 +1522,7 @@
    "CPC_cont": 3.419,
    "ENADE_cont": 3.87,
    "IDD": 3.086,
-   "vagas": 67
+   "vagas": 41
   },
   {
    "cod_curso": "13289",
@@ -1539,7 +1539,7 @@
    "CPC_cont": 3.634,
    "ENADE_cont": 3.882,
    "IDD": 3.322,
-   "vagas": 136
+   "vagas": 120
   },
   {
    "cod_curso": "13426",
@@ -1556,7 +1556,7 @@
    "CPC_cont": 3.648,
    "ENADE_cont": 3.898,
    "IDD": 3.109,
-   "vagas": 88
+   "vagas": 86
   },
   {
    "cod_curso": "13611",
@@ -1573,7 +1573,7 @@
    "CPC_cont": 3.549,
    "ENADE_cont": 3.922,
    "IDD": 3.219,
-   "vagas": 140
+   "vagas": 157
   },
   {
    "cod_curso": "13720",
@@ -1590,7 +1590,7 @@
    "CPC_cont": 4.415,
    "ENADE_cont": 4.606,
    "IDD": 4.673,
-   "vagas": 135
+   "vagas": 136
   },
   {
    "cod_curso": "13867",
@@ -1607,7 +1607,7 @@
    "CPC_cont": 4.261,
    "ENADE_cont": 4.022,
    "IDD": 3.817,
-   "vagas": 78
+   "vagas": 80
   },
   {
    "cod_curso": "13997",
@@ -1624,7 +1624,7 @@
    "CPC_cont": 3.765,
    "ENADE_cont": 4.247,
    "IDD": 2.813,
-   "vagas": 80
+   "vagas": 83
   },
   {
    "cod_curso": "14096",
@@ -1641,7 +1641,7 @@
    "CPC_cont": 3.573,
    "ENADE_cont": 4.043,
    "IDD": 2.55,
-   "vagas": 60
+   "vagas": 73
   },
   {
    "cod_curso": "14236",
@@ -1675,7 +1675,7 @@
    "CPC_cont": 3.667,
    "ENADE_cont": 4.116,
    "IDD": 3.222,
-   "vagas": 101
+   "vagas": 103
   },
   {
    "cod_curso": "14607",
@@ -1692,7 +1692,7 @@
    "CPC_cont": 3.719,
    "ENADE_cont": 3.618,
    "IDD": 2.869,
-   "vagas": 117
+   "vagas": 114
   },
   {
    "cod_curso": "14613",
@@ -1726,7 +1726,7 @@
    "CPC_cont": 2.766,
    "ENADE_cont": 2.552,
    "IDD": 2.566,
-   "vagas": 181
+   "vagas": 189
   },
   {
    "cod_curso": "14973",
@@ -1743,7 +1743,7 @@
    "CPC_cont": 3.644,
    "ENADE_cont": 3.821,
    "IDD": 3.53,
-   "vagas": 45
+   "vagas": 90
   },
   {
    "cod_curso": "15345",
@@ -1760,7 +1760,7 @@
    "CPC_cont": 2.544,
    "ENADE_cont": 1.541,
    "IDD": 1.151,
-   "vagas": 240
+   "vagas": 190
   },
   {
    "cod_curso": "15408",
@@ -1777,7 +1777,7 @@
    "CPC_cont": 3.999,
    "ENADE_cont": 3.719,
    "IDD": 3.603,
-   "vagas": 100
+   "vagas": 101
   },
   {
    "cod_curso": "15476",
@@ -1794,7 +1794,7 @@
    "CPC_cont": 3.253,
    "ENADE_cont": 2.79,
    "IDD": 3.03,
-   "vagas": 277
+   "vagas": 334
   },
   {
    "cod_curso": "15648",
@@ -1811,7 +1811,7 @@
    "CPC_cont": 3.251,
    "ENADE_cont": 1.947,
    "IDD": 2.24,
-   "vagas": 160
+   "vagas": 234
   },
   {
    "cod_curso": "15841",
@@ -1845,7 +1845,7 @@
    "CPC_cont": 3.687,
    "ENADE_cont": 3.616,
    "IDD": 3.071,
-   "vagas": 70
+   "vagas": 64
   },
   {
    "cod_curso": "16827",
@@ -1862,7 +1862,7 @@
    "CPC_cont": 2.55,
    "ENADE_cont": 1.471,
    "IDD": 1.663,
-   "vagas": 192
+   "vagas": 219
   },
   {
    "cod_curso": "17662",
@@ -1879,7 +1879,7 @@
    "CPC_cont": 2.863,
    "ENADE_cont": 2.304,
    "IDD": 2.488,
-   "vagas": 263
+   "vagas": 172
   },
   {
    "cod_curso": "17955",
@@ -1896,7 +1896,7 @@
    "CPC_cont": 3.684,
    "ENADE_cont": 2.874,
    "IDD": 3.281,
-   "vagas": 105
+   "vagas": 100
   },
   {
    "cod_curso": "18166",
@@ -1913,7 +1913,7 @@
    "CPC_cont": 3.472,
    "ENADE_cont": 2.832,
    "IDD": 2.978,
-   "vagas": 155
+   "vagas": 180
   },
   {
    "cod_curso": "18294",
@@ -1930,7 +1930,7 @@
    "CPC_cont": 2.742,
    "ENADE_cont": 2.06,
    "IDD": 2.041,
-   "vagas": 652
+   "vagas": 187
   },
   {
    "cod_curso": "18404",
@@ -1947,7 +1947,7 @@
    "CPC_cont": 4.034,
    "ENADE_cont": 3.809,
    "IDD": 4.025,
-   "vagas": 67
+   "vagas": 63
   },
   {
    "cod_curso": "18442",
@@ -1964,7 +1964,7 @@
    "CPC_cont": 2.835,
    "ENADE_cont": 1.732,
    "IDD": 2.605,
-   "vagas": 477
+   "vagas": 504
   },
   {
    "cod_curso": "18443",
@@ -1981,7 +1981,7 @@
    "CPC_cont": 2.934,
    "ENADE_cont": 1.865,
    "IDD": 1.991,
-   "vagas": 312
+   "vagas": 311
   },
   {
    "cod_curso": "18455",
@@ -1998,7 +1998,7 @@
    "CPC_cont": 1.976,
    "ENADE_cont": 0.931,
    "IDD": 1.301,
-   "vagas": 140
+   "vagas": 71
   },
   {
    "cod_curso": "18502",
@@ -2015,7 +2015,7 @@
    "CPC_cont": 2.13,
    "ENADE_cont": 2.007,
    "IDD": 1.384,
-   "vagas": 296
+   "vagas": 253
   },
   {
    "cod_curso": "18595",
@@ -2032,7 +2032,7 @@
    "CPC_cont": 3.829,
    "ENADE_cont": 3.086,
    "IDD": 3.193,
-   "vagas": 468
+   "vagas": 471
   },
   {
    "cod_curso": "18675",
@@ -2049,7 +2049,7 @@
    "CPC_cont": 2.655,
    "ENADE_cont": 1.97,
    "IDD": 2.174,
-   "vagas": 232
+   "vagas": 200
   },
   {
    "cod_curso": "18681",
@@ -2066,7 +2066,7 @@
    "CPC_cont": 2.348,
    "ENADE_cont": 1.922,
    "IDD": 1.657,
-   "vagas": 92
+   "vagas": 111
   },
   {
    "cod_curso": "18725",
@@ -2100,7 +2100,7 @@
    "CPC_cont": 3.336,
    "ENADE_cont": 3.415,
    "IDD": 3.903,
-   "vagas": 131
+   "vagas": 130
   },
   {
    "cod_curso": "18768",
@@ -2117,7 +2117,7 @@
    "CPC_cont": 3.776,
    "ENADE_cont": 3.991,
    "IDD": 4.538,
-   "vagas": 125
+   "vagas": 120
   },
   {
    "cod_curso": "19004",
@@ -2134,7 +2134,7 @@
    "CPC_cont": 3.135,
    "ENADE_cont": 2.448,
    "IDD": 2.726,
-   "vagas": 190
+   "vagas": 143
   },
   {
    "cod_curso": "19121",
@@ -2151,7 +2151,7 @@
    "CPC_cont": 3.664,
    "ENADE_cont": 3.706,
    "IDD": 3.268,
-   "vagas": 197
+   "vagas": 184
   },
   {
    "cod_curso": "19205",
@@ -2185,7 +2185,7 @@
    "CPC_cont": 1.464,
    "ENADE_cont": 0.956,
    "IDD": 0.348,
-   "vagas": 329
+   "vagas": 324
   },
   {
    "cod_curso": "19344",
@@ -2202,7 +2202,7 @@
    "CPC_cont": 2.712,
    "ENADE_cont": 1.943,
    "IDD": 1.954,
-   "vagas": 200
+   "vagas": 175
   },
   {
    "cod_curso": "19350",
@@ -2219,7 +2219,7 @@
    "CPC_cont": 2.525,
    "ENADE_cont": 1.962,
    "IDD": 2.645,
-   "vagas": 183
+   "vagas": 133
   },
   {
    "cod_curso": "19454",
@@ -2236,7 +2236,7 @@
    "CPC_cont": 2.887,
    "ENADE_cont": 3.078,
    "IDD": 2.905,
-   "vagas": 60
+   "vagas": 115
   },
   {
    "cod_curso": "19584",
@@ -2253,7 +2253,7 @@
    "CPC_cont": 2.967,
    "ENADE_cont": 2.275,
    "IDD": 2.31,
-   "vagas": 110
+   "vagas": 155
   },
   {
    "cod_curso": "19898",
@@ -2270,7 +2270,7 @@
    "CPC_cont": 3.706,
    "ENADE_cont": 3.908,
    "IDD": 4.639,
-   "vagas": 378
+   "vagas": 328
   },
   {
    "cod_curso": "19899",
@@ -2287,7 +2287,7 @@
    "CPC_cont": 3.595,
    "ENADE_cont": 2.709,
    "IDD": 2.877,
-   "vagas": 230
+   "vagas": 235
   },
   {
    "cod_curso": "20011",
@@ -2304,7 +2304,7 @@
    "CPC_cont": 2.178,
    "ENADE_cont": 1.648,
    "IDD": 0.936,
-   "vagas": 288
+   "vagas": 303
   },
   {
    "cod_curso": "20016",
@@ -2321,7 +2321,7 @@
    "CPC_cont": 3.7,
    "ENADE_cont": 2.954,
    "IDD": 3.267,
-   "vagas": 310
+   "vagas": 309
   },
   {
    "cod_curso": "20110",
@@ -2338,7 +2338,7 @@
    "CPC_cont": 1.926,
    "ENADE_cont": 1.235,
    "IDD": 1.279,
-   "vagas": 382
+   "vagas": 344
   },
   {
    "cod_curso": "20250",
@@ -2355,7 +2355,7 @@
    "CPC_cont": 2.691,
    "ENADE_cont": 1.965,
    "IDD": 2.016,
-   "vagas": 43
+   "vagas": 37
   },
   {
    "cod_curso": "20365",
@@ -2372,7 +2372,7 @@
    "CPC_cont": 3.665,
    "ENADE_cont": 2.752,
    "IDD": 2.981,
-   "vagas": 160
+   "vagas": 169
   },
   {
    "cod_curso": "20406",
@@ -2389,7 +2389,7 @@
    "CPC_cont": 2.135,
    "ENADE_cont": 2.373,
    "IDD": null,
-   "vagas": 295
+   "vagas": 345
   },
   {
    "cod_curso": "20481",
@@ -2406,7 +2406,7 @@
    "CPC_cont": 3.583,
    "ENADE_cont": 3.008,
    "IDD": 3.27,
-   "vagas": 108
+   "vagas": 105
   },
   {
    "cod_curso": "20686",
@@ -2440,7 +2440,7 @@
    "CPC_cont": 2.9,
    "ENADE_cont": 1.88,
    "IDD": 2.214,
-   "vagas": 258
+   "vagas": 361
   },
   {
    "cod_curso": "20732",
@@ -2457,7 +2457,7 @@
    "CPC_cont": 3.722,
    "ENADE_cont": 2.683,
    "IDD": 3.125,
-   "vagas": 198
+   "vagas": 225
   },
   {
    "cod_curso": "20815",
@@ -2474,7 +2474,7 @@
    "CPC_cont": 3.936,
    "ENADE_cont": 3.098,
    "IDD": 3.515,
-   "vagas": 132
+   "vagas": 123
   },
   {
    "cod_curso": "21986",
@@ -2491,7 +2491,7 @@
    "CPC_cont": 3.734,
    "ENADE_cont": 3.204,
    "IDD": 3.585,
-   "vagas": 93
+   "vagas": 59
   },
   {
    "cod_curso": "22109",
@@ -2525,7 +2525,7 @@
    "CPC_cont": 2.088,
    "ENADE_cont": 1.489,
    "IDD": 1.257,
-   "vagas": 81
+   "vagas": 84
   },
   {
    "cod_curso": "38313",
@@ -2542,7 +2542,7 @@
    "CPC_cont": 2.905,
    "ENADE_cont": 1.891,
    "IDD": 1.639,
-   "vagas": 245
+   "vagas": 261
   },
   {
    "cod_curso": "38787",
@@ -2576,7 +2576,7 @@
    "CPC_cont": 3.114,
    "ENADE_cont": 2.359,
    "IDD": 2.787,
-   "vagas": 215
+   "vagas": 205
   },
   {
    "cod_curso": "42154",
@@ -2593,7 +2593,7 @@
    "CPC_cont": 3.688,
    "ENADE_cont": 2.971,
    "IDD": 3.228,
-   "vagas": 448
+   "vagas": 407
   },
   {
    "cod_curso": "42668",
@@ -2610,7 +2610,7 @@
    "CPC_cont": 3.948,
    "ENADE_cont": 3.292,
    "IDD": 4.063,
-   "vagas": 180
+   "vagas": 165
   },
   {
    "cod_curso": "42963",
@@ -2627,7 +2627,7 @@
    "CPC_cont": 3.51,
    "ENADE_cont": 3.796,
    "IDD": 2.368,
-   "vagas": 25
+   "vagas": 29
   },
   {
    "cod_curso": "44934",
@@ -2644,7 +2644,7 @@
    "CPC_cont": 2.841,
    "ENADE_cont": 2.009,
    "IDD": 2.956,
-   "vagas": 200
+   "vagas": 199
   },
   {
    "cod_curso": "45976",
@@ -2695,7 +2695,7 @@
    "CPC_cont": 2.149,
    "ENADE_cont": 1.702,
    "IDD": 1.741,
-   "vagas": 247
+   "vagas": 190
   },
   {
    "cod_curso": "47918",
@@ -2712,7 +2712,7 @@
    "CPC_cont": 2.432,
    "ENADE_cont": 2.06,
    "IDD": 2.054,
-   "vagas": 67
+   "vagas": 62
   },
   {
    "cod_curso": "50884",
@@ -2746,7 +2746,7 @@
    "CPC_cont": 2.659,
    "ENADE_cont": 2.12,
    "IDD": 2.829,
-   "vagas": 233
+   "vagas": 142
   },
   {
    "cod_curso": "51701",
@@ -2763,7 +2763,7 @@
    "CPC_cont": 4.226,
    "ENADE_cont": 3.822,
    "IDD": 4.976,
-   "vagas": 270
+   "vagas": 287
   },
   {
    "cod_curso": "53314",
@@ -2780,7 +2780,7 @@
    "CPC_cont": 2.525,
    "ENADE_cont": 2.28,
    "IDD": 1.861,
-   "vagas": 1600
+   "vagas": 1200
   },
   {
    "cod_curso": "54056",
@@ -2797,7 +2797,7 @@
    "CPC_cont": 3.116,
    "ENADE_cont": 2.372,
    "IDD": 2.94,
-   "vagas": 246
+   "vagas": 130
   },
   {
    "cod_curso": "54969",
@@ -2814,7 +2814,7 @@
    "CPC_cont": 3.464,
    "ENADE_cont": 2.602,
    "IDD": 2.652,
-   "vagas": 96
+   "vagas": 97
   },
   {
    "cod_curso": "55362",
@@ -2831,7 +2831,7 @@
    "CPC_cont": 2.979,
    "ENADE_cont": 2.108,
    "IDD": 2.284,
-   "vagas": 104
+   "vagas": 100
   },
   {
    "cod_curso": "56394",
@@ -2848,7 +2848,7 @@
    "CPC_cont": 2.617,
    "ENADE_cont": 2.317,
    "IDD": 2.19,
-   "vagas": 53
+   "vagas": 78
   },
   {
    "cod_curso": "57926",
@@ -2865,7 +2865,7 @@
    "CPC_cont": 3.002,
    "ENADE_cont": 2.034,
    "IDD": 2.733,
-   "vagas": 144
+   "vagas": 153
   },
   {
    "cod_curso": "60016",
@@ -2882,7 +2882,7 @@
    "CPC_cont": 2.353,
    "ENADE_cont": 2.358,
    "IDD": 2.638,
-   "vagas": 117
+   "vagas": 122
   },
   {
    "cod_curso": "60658",
@@ -2899,7 +2899,7 @@
    "CPC_cont": 3.763,
    "ENADE_cont": 3.615,
    "IDD": 3.803,
-   "vagas": 100
+   "vagas": 111
   },
   {
    "cod_curso": "65065",
@@ -2916,7 +2916,7 @@
    "CPC_cont": 1.881,
    "ENADE_cont": 1.039,
    "IDD": 1.869,
-   "vagas": 117
+   "vagas": 115
   },
   {
    "cod_curso": "65240",
@@ -2950,7 +2950,7 @@
    "CPC_cont": 2.77,
    "ENADE_cont": 2.775,
    "IDD": 2.616,
-   "vagas": 132
+   "vagas": 123
   },
   {
    "cod_curso": "67156",
@@ -2967,7 +2967,7 @@
    "CPC_cont": 3.909,
    "ENADE_cont": 3.25,
    "IDD": 3.109,
-   "vagas": 65
+   "vagas": 73
   },
   {
    "cod_curso": "68042",
@@ -2984,7 +2984,7 @@
    "CPC_cont": 1.967,
    "ENADE_cont": 1.517,
    "IDD": 1.443,
-   "vagas": 1437
+   "vagas": 399
   },
   {
    "cod_curso": "72357",
@@ -3001,7 +3001,7 @@
    "CPC_cont": 2.899,
    "ENADE_cont": 2.109,
    "IDD": 2.305,
-   "vagas": 314
+   "vagas": 313
   },
   {
    "cod_curso": "72763",
@@ -3018,7 +3018,7 @@
    "CPC_cont": 2.901,
    "ENADE_cont": 2.215,
    "IDD": 2.662,
-   "vagas": 127
+   "vagas": 126
   },
   {
    "cod_curso": "73038",
@@ -3035,7 +3035,7 @@
    "CPC_cont": 2.027,
    "ENADE_cont": 1.408,
    "IDD": 0.993,
-   "vagas": 204
+   "vagas": 320
   },
   {
    "cod_curso": "75823",
@@ -3052,7 +3052,7 @@
    "CPC_cont": 2.861,
    "ENADE_cont": 2.069,
    "IDD": 1.871,
-   "vagas": 306
+   "vagas": 254
   },
   {
    "cod_curso": "80010",
@@ -3069,7 +3069,7 @@
    "CPC_cont": 3.71,
    "ENADE_cont": 3.538,
    "IDD": 3.367,
-   "vagas": 73
+   "vagas": 49
   },
   {
    "cod_curso": "80272",
@@ -3086,7 +3086,7 @@
    "CPC_cont": 2.94,
    "ENADE_cont": 2.428,
    "IDD": 2.257,
-   "vagas": 107
+   "vagas": 101
   },
   {
    "cod_curso": "81113",
@@ -3103,7 +3103,7 @@
    "CPC_cont": 2.805,
    "ENADE_cont": 1.857,
    "IDD": 2.297,
-   "vagas": 406
+   "vagas": 547
   },
   {
    "cod_curso": "82227",
@@ -3120,7 +3120,7 @@
    "CPC_cont": 2.892,
    "ENADE_cont": 2.054,
    "IDD": 2.806,
-   "vagas": 2433
+   "vagas": 2664
   },
   {
    "cod_curso": "87182",
@@ -3137,7 +3137,7 @@
    "CPC_cont": 4.101,
    "ENADE_cont": 3.493,
    "IDD": 3.83,
-   "vagas": 107
+   "vagas": 90
   },
   {
    "cod_curso": "87760",
@@ -3154,7 +3154,7 @@
    "CPC_cont": 2.48,
    "ENADE_cont": 2.621,
    "IDD": 2.319,
-   "vagas": 147
+   "vagas": 380
   },
   {
    "cod_curso": "88514",
@@ -3171,7 +3171,7 @@
    "CPC_cont": 2.828,
    "ENADE_cont": 1.962,
    "IDD": 2.209,
-   "vagas": 333
+   "vagas": 350
   },
   {
    "cod_curso": "90681",
@@ -3188,7 +3188,7 @@
    "CPC_cont": 3.092,
    "ENADE_cont": 2.566,
    "IDD": 3.176,
-   "vagas": 165
+   "vagas": 174
   },
   {
    "cod_curso": "90683",
@@ -3205,7 +3205,7 @@
    "CPC_cont": 2.327,
    "ENADE_cont": 2.288,
    "IDD": 2.942,
-   "vagas": 110
+   "vagas": 202
   },
   {
    "cod_curso": "95047",
@@ -3222,7 +3222,7 @@
    "CPC_cont": 2.143,
    "ENADE_cont": 1.414,
    "IDD": 1.782,
-   "vagas": 493
+   "vagas": 611
   },
   {
    "cod_curso": "95579",
@@ -3239,7 +3239,7 @@
    "CPC_cont": 3.746,
    "ENADE_cont": 2.973,
    "IDD": 3.488,
-   "vagas": 150
+   "vagas": 147
   },
   {
    "cod_curso": "95581",
@@ -3256,7 +3256,7 @@
    "CPC_cont": 3.385,
    "ENADE_cont": 1.923,
    "IDD": 3.047,
-   "vagas": 110
+   "vagas": 117
   },
   {
    "cod_curso": "96096",
@@ -3273,7 +3273,7 @@
    "CPC_cont": 2.529,
    "ENADE_cont": 2.508,
    "IDD": 2.857,
-   "vagas": 351
+   "vagas": 423
   },
   {
    "cod_curso": "96461",
@@ -3290,7 +3290,7 @@
    "CPC_cont": 2.122,
    "ENADE_cont": 0.954,
    "IDD": 0.885,
-   "vagas": 123
+   "vagas": 110
   },
   {
    "cod_curso": "99228",
@@ -3307,7 +3307,7 @@
    "CPC_cont": 2.05,
    "ENADE_cont": 0.939,
    "IDD": 0.624,
-   "vagas": 175
+   "vagas": 170
   },
   {
    "cod_curso": "99308",
@@ -3324,7 +3324,7 @@
    "CPC_cont": 4.171,
    "ENADE_cont": 4.298,
    "IDD": 3.644,
-   "vagas": 44
+   "vagas": 45
   },
   {
    "cod_curso": "99824",
@@ -3341,7 +3341,7 @@
    "CPC_cont": 1.811,
    "ENADE_cont": 1.582,
    "IDD": 1.883,
-   "vagas": 290
+   "vagas": 285
   },
   {
    "cod_curso": "99857",
@@ -3358,7 +3358,7 @@
    "CPC_cont": 2.73,
    "ENADE_cont": 1.874,
    "IDD": 1.758,
-   "vagas": 170
+   "vagas": 190
   },
   {
    "cod_curso": "100063",
@@ -3375,7 +3375,7 @@
    "CPC_cont": 3.249,
    "ENADE_cont": 3.279,
    "IDD": 2.634,
-   "vagas": 20
+   "vagas": 22
   },
   {
    "cod_curso": "100878",
@@ -3392,7 +3392,7 @@
    "CPC_cont": 2.334,
    "ENADE_cont": 1.769,
    "IDD": 1.999,
-   "vagas": 111
+   "vagas": 129
   },
   {
    "cod_curso": "101749",
@@ -3409,7 +3409,7 @@
    "CPC_cont": 2.857,
    "ENADE_cont": 2.474,
    "IDD": 2.846,
-   "vagas": 54
+   "vagas": 63
   },
   {
    "cod_curso": "101820",
@@ -3426,7 +3426,7 @@
    "CPC_cont": 2.112,
    "ENADE_cont": 1.754,
    "IDD": 1.251,
-   "vagas": 301
+   "vagas": 292
   },
   {
    "cod_curso": "102619",
@@ -3443,7 +3443,7 @@
    "CPC_cont": 2.01,
    "ENADE_cont": 1.575,
    "IDD": 1.683,
-   "vagas": 45
+   "vagas": 33
   },
   {
    "cod_curso": "103512",
@@ -3460,7 +3460,7 @@
    "CPC_cont": 1.707,
    "ENADE_cont": 0.858,
    "IDD": 1.031,
-   "vagas": 132
+   "vagas": 166
   },
   {
    "cod_curso": "104538",
@@ -3477,7 +3477,7 @@
    "CPC_cont": 2.09,
    "ENADE_cont": 1.42,
    "IDD": 1.375,
-   "vagas": 209
+   "vagas": 205
   },
   {
    "cod_curso": "108978",
@@ -3494,7 +3494,7 @@
    "CPC_cont": 1.681,
    "ENADE_cont": 1.1,
    "IDD": 0.703,
-   "vagas": 410
+   "vagas": 374
   },
   {
    "cod_curso": "109055",
@@ -3511,7 +3511,7 @@
    "CPC_cont": 2.442,
    "ENADE_cont": 1.563,
    "IDD": 2.178,
-   "vagas": 323
+   "vagas": 320
   },
   {
    "cod_curso": "109186",
@@ -3528,7 +3528,7 @@
    "CPC_cont": 3.175,
    "ENADE_cont": 2.332,
    "IDD": 3.458,
-   "vagas": 343
+   "vagas": 334
   },
   {
    "cod_curso": "109337",
@@ -3545,7 +3545,7 @@
    "CPC_cont": 1.914,
    "ENADE_cont": 1.877,
    "IDD": 2.066,
-   "vagas": 213
+   "vagas": 230
   },
   {
    "cod_curso": "111202",
@@ -3562,7 +3562,7 @@
    "CPC_cont": 1.656,
    "ENADE_cont": 1.493,
    "IDD": 1.014,
-   "vagas": 888
+   "vagas": 919
   },
   {
    "cod_curso": "116014",
@@ -3613,7 +3613,7 @@
    "CPC_cont": 1.404,
    "ENADE_cont": 0.184,
    "IDD": 0.882,
-   "vagas": 30
+   "vagas": 15
   },
   {
    "cod_curso": "119730",
@@ -3630,7 +3630,7 @@
    "CPC_cont": 2.801,
    "ENADE_cont": 1.404,
    "IDD": 1.801,
-   "vagas": 52
+   "vagas": 86
   },
   {
    "cod_curso": "122676",
@@ -3647,7 +3647,7 @@
    "CPC_cont": 3.269,
    "ENADE_cont": 3.395,
    "IDD": 2.75,
-   "vagas": 132
+   "vagas": 114
   },
   {
    "cod_curso": "122800",
@@ -3664,7 +3664,7 @@
    "CPC_cont": 2.69,
    "ENADE_cont": 2.529,
    "IDD": 2.852,
-   "vagas": 45
+   "vagas": 43
   },
   {
    "cod_curso": "122802",
@@ -3681,7 +3681,7 @@
    "CPC_cont": 3.07,
    "ENADE_cont": 2.327,
    "IDD": 2.561,
-   "vagas": 62
+   "vagas": 70
   },
   {
    "cod_curso": "122809",
@@ -3698,7 +3698,7 @@
    "CPC_cont": 4.519,
    "ENADE_cont": 4.109,
    "IDD": 4.68,
-   "vagas": 110
+   "vagas": 160
   },
   {
    "cod_curso": "1045684",
@@ -3715,7 +3715,7 @@
    "CPC_cont": 4.197,
    "ENADE_cont": 3.459,
    "IDD": 4.509,
-   "vagas": 170
+   "vagas": 130
   },
   {
    "cod_curso": "1059632",
@@ -3732,7 +3732,7 @@
    "CPC_cont": 2.387,
    "ENADE_cont": 1.557,
    "IDD": 1.388,
-   "vagas": 118
+   "vagas": 102
   },
   {
    "cod_curso": "1069320",
@@ -3783,7 +3783,7 @@
    "CPC_cont": 2.776,
    "ENADE_cont": 2.474,
    "IDD": 2.787,
-   "vagas": 155
+   "vagas": 165
   },
   {
    "cod_curso": "1108119",
@@ -3800,7 +3800,7 @@
    "CPC_cont": 2.978,
    "ENADE_cont": 2.276,
    "IDD": 1.942,
-   "vagas": 78
+   "vagas": 45
   },
   {
    "cod_curso": "1108167",
@@ -3817,7 +3817,7 @@
    "CPC_cont": 2.93,
    "ENADE_cont": 3.408,
    "IDD": 1.545,
-   "vagas": 57
+   "vagas": 55
   },
   {
    "cod_curso": "1110563",
@@ -3834,7 +3834,7 @@
    "CPC_cont": 3.416,
    "ENADE_cont": 2.524,
    "IDD": 2.919,
-   "vagas": 65
+   "vagas": 79
   },
   {
    "cod_curso": "1110654",
@@ -3851,7 +3851,7 @@
    "CPC_cont": 1.709,
    "ENADE_cont": 0.624,
    "IDD": 0.715,
-   "vagas": 132
+   "vagas": 202
   },
   {
    "cod_curso": "1113662",
@@ -3868,7 +3868,7 @@
    "CPC_cont": 4.557,
    "ENADE_cont": 4.173,
    "IDD": 4.762,
-   "vagas": 272
+   "vagas": 155
   },
   {
    "cod_curso": "1114906",
@@ -3885,7 +3885,7 @@
    "CPC_cont": 3.465,
    "ENADE_cont": 3.138,
    "IDD": 3.21,
-   "vagas": 115
+   "vagas": 120
   },
   {
    "cod_curso": "1122568",
@@ -3902,7 +3902,7 @@
    "CPC_cont": 2.863,
    "ENADE_cont": 2.852,
    "IDD": 3.035,
-   "vagas": 111
+   "vagas": 115
   },
   {
    "cod_curso": "1143674",
@@ -3919,7 +3919,7 @@
    "CPC_cont": 1.523,
    "ENADE_cont": 1.824,
    "IDD": 1.364,
-   "vagas": 130
+   "vagas": 147
   },
   {
    "cod_curso": "1152083",
@@ -3936,7 +3936,7 @@
    "CPC_cont": 2.895,
    "ENADE_cont": 2.575,
    "IDD": 2.885,
-   "vagas": 142
+   "vagas": 165
   },
   {
    "cod_curso": "1157850",
@@ -3953,7 +3953,7 @@
    "CPC_cont": 2.916,
    "ENADE_cont": 2.458,
    "IDD": 2.624,
-   "vagas": 483
+   "vagas": 463
   },
   {
    "cod_curso": "1158378",
@@ -3970,7 +3970,7 @@
    "CPC_cont": 3.003,
    "ENADE_cont": 1.522,
    "IDD": 1.77,
-   "vagas": 302
+   "vagas": 363
   },
   {
    "cod_curso": "1165467",
@@ -3987,7 +3987,7 @@
    "CPC_cont": 1.63,
    "ENADE_cont": 1.62,
    "IDD": 1.112,
-   "vagas": 125
+   "vagas": 134
   },
   {
    "cod_curso": "1168617",
@@ -4004,7 +4004,7 @@
    "CPC_cont": 2.15,
    "ENADE_cont": 1.95,
    "IDD": 1.752,
-   "vagas": 160
+   "vagas": 119
   },
   {
    "cod_curso": "1170832",
@@ -4021,7 +4021,7 @@
    "CPC_cont": 3.151,
    "ENADE_cont": 2.102,
    "IDD": 2.377,
-   "vagas": 372
+   "vagas": 240
   },
   {
    "cod_curso": "1172595",
@@ -4038,7 +4038,7 @@
    "CPC_cont": 2.293,
    "ENADE_cont": 0.864,
    "IDD": 1.497,
-   "vagas": 150
+   "vagas": 130
   },
   {
    "cod_curso": "1175049",
@@ -4055,7 +4055,7 @@
    "CPC_cont": 2.016,
    "ENADE_cont": 2.049,
    "IDD": 2.05,
-   "vagas": 65
+   "vagas": 60
   },
   {
    "cod_curso": "1178888",
@@ -4072,7 +4072,7 @@
    "CPC_cont": 4.397,
    "ENADE_cont": 4.049,
    "IDD": 5.0,
-   "vagas": 335
+   "vagas": 350
   },
   {
    "cod_curso": "1178921",
@@ -4089,7 +4089,7 @@
    "CPC_cont": 2.7,
    "ENADE_cont": 3.351,
    "IDD": 2.655,
-   "vagas": 182
+   "vagas": 212
   },
   {
    "cod_curso": "1179443",
@@ -4106,7 +4106,7 @@
    "CPC_cont": 3.298,
    "ENADE_cont": 1.815,
    "IDD": 2.599,
-   "vagas": 90
+   "vagas": 192
   },
   {
    "cod_curso": "1180543",
@@ -4123,7 +4123,7 @@
    "CPC_cont": 3.118,
    "ENADE_cont": 2.543,
    "IDD": 2.948,
-   "vagas": 420
+   "vagas": 434
   },
   {
    "cod_curso": "1182802",
@@ -4174,7 +4174,7 @@
    "CPC_cont": 2.245,
    "ENADE_cont": 1.81,
    "IDD": 2.019,
-   "vagas": 150
+   "vagas": 157
   },
   {
    "cod_curso": "1189397",
@@ -4208,7 +4208,7 @@
    "CPC_cont": 3.317,
    "ENADE_cont": 2.687,
    "IDD": 3.569,
-   "vagas": 123
+   "vagas": 138
   },
   {
    "cod_curso": "1192471",
@@ -4225,7 +4225,7 @@
    "CPC_cont": 3.018,
    "ENADE_cont": 2.32,
    "IDD": 1.915,
-   "vagas": 170
+   "vagas": 195
   },
   {
    "cod_curso": "1199543",
@@ -4242,7 +4242,7 @@
    "CPC_cont": 2.694,
    "ENADE_cont": 1.702,
    "IDD": 2.129,
-   "vagas": 70
+   "vagas": 65
   },
   {
    "cod_curso": "1257429",
@@ -4259,7 +4259,7 @@
    "CPC_cont": 2.366,
    "ENADE_cont": 1.548,
    "IDD": 1.619,
-   "vagas": 225
+   "vagas": 235
   },
   {
    "cod_curso": "1258695",
@@ -4276,7 +4276,7 @@
    "CPC_cont": 2.008,
    "ENADE_cont": 1.89,
    "IDD": 2.472,
-   "vagas": 50
+   "vagas": 52
   },
   {
    "cod_curso": "1279299",
@@ -4293,7 +4293,7 @@
    "CPC_cont": 3.478,
    "ENADE_cont": 2.591,
    "IDD": 3.134,
-   "vagas": 169
+   "vagas": 160
   },
   {
    "cod_curso": "1279431",
@@ -4327,7 +4327,7 @@
    "CPC_cont": 3.507,
    "ENADE_cont": 2.589,
    "IDD": 3.236,
-   "vagas": 111
+   "vagas": 138
   },
   {
    "cod_curso": "1279495",
@@ -4344,7 +4344,7 @@
    "CPC_cont": 4.204,
    "ENADE_cont": 3.476,
    "IDD": 3.596,
-   "vagas": 60
+   "vagas": 160
   },
   {
    "cod_curso": "1279509",
@@ -4361,7 +4361,7 @@
    "CPC_cont": 2.812,
    "ENADE_cont": 1.508,
    "IDD": 1.377,
-   "vagas": 230
+   "vagas": 160
   },
   {
    "cod_curso": "1279596",
@@ -4378,7 +4378,7 @@
    "CPC_cont": 3.745,
    "ENADE_cont": 2.918,
    "IDD": 3.179,
-   "vagas": 103
+   "vagas": 112
   },
   {
    "cod_curso": "1279632",
@@ -4395,7 +4395,7 @@
    "CPC_cont": 2.608,
    "ENADE_cont": 2.235,
    "IDD": 2.775,
-   "vagas": 827
+   "vagas": 920
   },
   {
    "cod_curso": "1279674",
@@ -4412,7 +4412,7 @@
    "CPC_cont": 4.164,
    "ENADE_cont": 3.801,
    "IDD": 3.535,
-   "vagas": 171
+   "vagas": 188
   },
   {
    "cod_curso": "1279712",
@@ -4429,7 +4429,7 @@
    "CPC_cont": 2.139,
    "ENADE_cont": 1.067,
    "IDD": 0.743,
-   "vagas": 97
+   "vagas": 100
   },
   {
    "cod_curso": "1279808",
@@ -4446,7 +4446,7 @@
    "CPC_cont": 3.147,
    "ENADE_cont": 2.53,
    "IDD": 3.053,
-   "vagas": 116
+   "vagas": 92
   },
   {
    "cod_curso": "1280013",
@@ -4463,7 +4463,7 @@
    "CPC_cont": 2.668,
    "ENADE_cont": 2.118,
    "IDD": 2.081,
-   "vagas": 174
+   "vagas": 144
   },
   {
    "cod_curso": "1280072",
@@ -4497,7 +4497,7 @@
    "CPC_cont": 3.708,
    "ENADE_cont": 3.118,
    "IDD": 3.219,
-   "vagas": 73
+   "vagas": 76
   },
   {
    "cod_curso": "1280489",
@@ -4514,7 +4514,7 @@
    "CPC_cont": 3.09,
    "ENADE_cont": 2.29,
    "IDD": 2.844,
-   "vagas": 266
+   "vagas": 311
   },
   {
    "cod_curso": "1280549",
@@ -4531,7 +4531,7 @@
    "CPC_cont": 4.317,
    "ENADE_cont": 4.389,
    "IDD": 3.982,
-   "vagas": 130
+   "vagas": 106
   },
   {
    "cod_curso": "1280996",
@@ -4548,7 +4548,7 @@
    "CPC_cont": 2.693,
    "ENADE_cont": 1.727,
    "IDD": 2.366,
-   "vagas": 403
+   "vagas": 288
   },
   {
    "cod_curso": "1281000",
@@ -4565,7 +4565,7 @@
    "CPC_cont": 2.563,
    "ENADE_cont": 1.829,
    "IDD": 2.673,
-   "vagas": 511
+   "vagas": 335
   },
   {
    "cod_curso": "1281012",
@@ -4582,7 +4582,7 @@
    "CPC_cont": 2.276,
    "ENADE_cont": 1.734,
    "IDD": 1.732,
-   "vagas": 410
+   "vagas": 426
   },
   {
    "cod_curso": "1281062",
@@ -4599,7 +4599,7 @@
    "CPC_cont": 3.906,
    "ENADE_cont": 3.258,
    "IDD": 3.927,
-   "vagas": 60
+   "vagas": 63
   },
   {
    "cod_curso": "1281099",
@@ -4633,7 +4633,7 @@
    "CPC_cont": 2.398,
    "ENADE_cont": 1.28,
    "IDD": 1.943,
-   "vagas": 240
+   "vagas": 327
   },
   {
    "cod_curso": "1282908",
@@ -4650,7 +4650,7 @@
    "CPC_cont": 2.622,
    "ENADE_cont": 1.816,
    "IDD": 2.151,
-   "vagas": 307
+   "vagas": 219
   },
   {
    "cod_curso": "1283660",
@@ -4667,7 +4667,7 @@
    "CPC_cont": 2.694,
    "ENADE_cont": 2.111,
    "IDD": 2.422,
-   "vagas": 479
+   "vagas": 389
   },
   {
    "cod_curso": "1283721",
@@ -4684,7 +4684,7 @@
    "CPC_cont": 3.556,
    "ENADE_cont": 2.84,
    "IDD": 3.084,
-   "vagas": 182
+   "vagas": 70
   },
   {
    "cod_curso": "1283827",
@@ -4701,7 +4701,7 @@
    "CPC_cont": 3.613,
    "ENADE_cont": 3.022,
    "IDD": 3.922,
-   "vagas": 113
+   "vagas": 77
   },
   {
    "cod_curso": "1284197",
@@ -4735,7 +4735,7 @@
    "CPC_cont": 2.989,
    "ENADE_cont": 2.422,
    "IDD": 2.95,
-   "vagas": 535
+   "vagas": 499
   },
   {
    "cod_curso": "1284457",
@@ -4752,7 +4752,7 @@
    "CPC_cont": 3.837,
    "ENADE_cont": 3.049,
    "IDD": 3.95,
-   "vagas": 220
+   "vagas": 175
   },
   {
    "cod_curso": "1284506",
@@ -4769,7 +4769,7 @@
    "CPC_cont": 3.52,
    "ENADE_cont": 3.493,
    "IDD": 3.672,
-   "vagas": 147
+   "vagas": 144
   },
   {
    "cod_curso": "1284873",
@@ -4786,7 +4786,7 @@
    "CPC_cont": 1.545,
    "ENADE_cont": 0.984,
    "IDD": 0.934,
-   "vagas": 456
+   "vagas": 280
   },
   {
    "cod_curso": "1284875",
@@ -4803,7 +4803,7 @@
    "CPC_cont": 1.868,
    "ENADE_cont": 1.948,
    "IDD": 1.932,
-   "vagas": 496
+   "vagas": 419
   },
   {
    "cod_curso": "1284880",
@@ -4820,7 +4820,7 @@
    "CPC_cont": 1.601,
    "ENADE_cont": 1.117,
    "IDD": 0.872,
-   "vagas": 482
+   "vagas": 424
   },
   {
    "cod_curso": "1284961",
@@ -4837,7 +4837,7 @@
    "CPC_cont": 1.533,
    "ENADE_cont": 0.937,
    "IDD": 1.302,
-   "vagas": 852
+   "vagas": 822
   },
   {
    "cod_curso": "1284997",
@@ -4854,7 +4854,7 @@
    "CPC_cont": 2.492,
    "ENADE_cont": 1.683,
    "IDD": 2.433,
-   "vagas": 133
+   "vagas": 125
   },
   {
    "cod_curso": "1285037",
@@ -4871,7 +4871,7 @@
    "CPC_cont": 2.936,
    "ENADE_cont": 2.076,
    "IDD": 2.267,
-   "vagas": 220
+   "vagas": 200
   },
   {
    "cod_curso": "1285080",
@@ -4905,7 +4905,7 @@
    "CPC_cont": 2.737,
    "ENADE_cont": 1.674,
    "IDD": 2.265,
-   "vagas": 312
+   "vagas": 292
   },
   {
    "cod_curso": "1286234",
@@ -4922,7 +4922,7 @@
    "CPC_cont": 2.615,
    "ENADE_cont": 2.24,
    "IDD": 2.595,
-   "vagas": 140
+   "vagas": 161
   },
   {
    "cod_curso": "1292466",
@@ -4939,7 +4939,7 @@
    "CPC_cont": 3.005,
    "ENADE_cont": 2.466,
    "IDD": 3.182,
-   "vagas": 33
+   "vagas": 48
   },
   {
    "cod_curso": "1292487",
@@ -4956,7 +4956,7 @@
    "CPC_cont": 3.86,
    "ENADE_cont": 3.09,
    "IDD": 3.84,
-   "vagas": 48
+   "vagas": 65
   },
   {
    "cod_curso": "1299341",
@@ -4973,7 +4973,7 @@
    "CPC_cont": 3.016,
    "ENADE_cont": 2.025,
    "IDD": 1.862,
-   "vagas": 181
+   "vagas": 230
   },
   {
    "cod_curso": "1299342",
@@ -4990,7 +4990,7 @@
    "CPC_cont": 2.445,
    "ENADE_cont": 1.951,
    "IDD": 1.901,
-   "vagas": 83
+   "vagas": 100
   },
   {
    "cod_curso": "1299430",
@@ -5007,7 +5007,7 @@
    "CPC_cont": 1.889,
    "ENADE_cont": 1.069,
    "IDD": 1.063,
-   "vagas": 60
+   "vagas": 15
   },
   {
    "cod_curso": "1299613",
@@ -5041,7 +5041,7 @@
    "CPC_cont": 2.643,
    "ENADE_cont": 1.99,
    "IDD": 1.948,
-   "vagas": 178
+   "vagas": 127
   },
   {
    "cod_curso": "1300195",
@@ -5058,7 +5058,7 @@
    "CPC_cont": 2.493,
    "ENADE_cont": 1.376,
    "IDD": 1.9,
-   "vagas": 179
+   "vagas": 171
   },
   {
    "cod_curso": "1300205",
@@ -5075,7 +5075,7 @@
    "CPC_cont": 1.917,
    "ENADE_cont": 0.961,
    "IDD": 1.0,
-   "vagas": 126
+   "vagas": 154
   },
   {
    "cod_curso": "1300233",
@@ -5092,7 +5092,7 @@
    "CPC_cont": 2.669,
    "ENADE_cont": 1.657,
    "IDD": 1.749,
-   "vagas": 166
+   "vagas": 150
   },
   {
    "cod_curso": "1300237",
@@ -5109,7 +5109,7 @@
    "CPC_cont": 2.869,
    "ENADE_cont": 2.143,
    "IDD": 2.433,
-   "vagas": 250
+   "vagas": 325
   },
   {
    "cod_curso": "1300313",
@@ -5126,7 +5126,7 @@
    "CPC_cont": 1.953,
    "ENADE_cont": 2.041,
    "IDD": 2.834,
-   "vagas": 97
+   "vagas": 90
   },
   {
    "cod_curso": "1300328",
@@ -5143,7 +5143,7 @@
    "CPC_cont": 2.491,
    "ENADE_cont": 2.139,
    "IDD": 2.453,
-   "vagas": 307
+   "vagas": 192
   },
   {
    "cod_curso": "1300492",
@@ -5160,7 +5160,7 @@
    "CPC_cont": 1.959,
    "ENADE_cont": 1.379,
    "IDD": 1.659,
-   "vagas": 81
+   "vagas": 86
   },
   {
    "cod_curso": "1300506",
@@ -5177,7 +5177,7 @@
    "CPC_cont": 1.435,
    "ENADE_cont": 1.135,
    "IDD": 0.578,
-   "vagas": 222
+   "vagas": 152
   },
   {
    "cod_curso": "1300508",
@@ -5194,7 +5194,7 @@
    "CPC_cont": 3.29,
    "ENADE_cont": 1.969,
    "IDD": 2.144,
-   "vagas": 168
+   "vagas": 145
   },
   {
    "cod_curso": "1303390",
@@ -5211,7 +5211,7 @@
    "CPC_cont": 2.84,
    "ENADE_cont": 2.205,
    "IDD": 2.137,
-   "vagas": 272
+   "vagas": 230
   },
   {
    "cod_curso": "1303399",
@@ -5228,7 +5228,7 @@
    "CPC_cont": 2.768,
    "ENADE_cont": 1.856,
    "IDD": 2.118,
-   "vagas": 148
+   "vagas": 141
   },
   {
    "cod_curso": "1303403",
@@ -5245,7 +5245,7 @@
    "CPC_cont": 2.509,
    "ENADE_cont": 2.013,
    "IDD": 2.371,
-   "vagas": 77
+   "vagas": 63
   },
   {
    "cod_curso": "1303508",
@@ -5262,7 +5262,7 @@
    "CPC_cont": 3.393,
    "ENADE_cont": 3.452,
    "IDD": 2.918,
-   "vagas": 58
+   "vagas": 70
   },
   {
    "cod_curso": "1303706",
@@ -5279,7 +5279,7 @@
    "CPC_cont": 2.756,
    "ENADE_cont": 1.94,
    "IDD": 2.757,
-   "vagas": 194
+   "vagas": 221
   },
   {
    "cod_curso": "1303763",
@@ -5296,7 +5296,7 @@
    "CPC_cont": 2.289,
    "ENADE_cont": 1.188,
    "IDD": 1.833,
-   "vagas": 211
+   "vagas": 169
   },
   {
    "cod_curso": "1303797",
@@ -5313,7 +5313,7 @@
    "CPC_cont": 2.28,
    "ENADE_cont": 1.803,
    "IDD": 1.79,
-   "vagas": 117
+   "vagas": 83
   },
   {
    "cod_curso": "1303801",
@@ -5330,7 +5330,7 @@
    "CPC_cont": 3.143,
    "ENADE_cont": 2.439,
    "IDD": 2.541,
-   "vagas": 154
+   "vagas": 150
   },
   {
    "cod_curso": "1303809",
@@ -5347,7 +5347,7 @@
    "CPC_cont": 2.622,
    "ENADE_cont": 1.776,
    "IDD": 2.377,
-   "vagas": 215
+   "vagas": 201
   },
   {
    "cod_curso": "1303900",
@@ -5364,7 +5364,7 @@
    "CPC_cont": 2.444,
    "ENADE_cont": 1.626,
    "IDD": 1.622,
-   "vagas": 189
+   "vagas": 225
   },
   {
    "cod_curso": "1304010",
@@ -5381,7 +5381,7 @@
    "CPC_cont": 2.512,
    "ENADE_cont": 2.065,
    "IDD": 2.108,
-   "vagas": 210
+   "vagas": 205
   },
   {
    "cod_curso": "1304019",
@@ -5398,7 +5398,7 @@
    "CPC_cont": 2.798,
    "ENADE_cont": 1.926,
    "IDD": 1.822,
-   "vagas": 220
+   "vagas": 103
   },
   {
    "cod_curso": "1304522",
@@ -5415,7 +5415,7 @@
    "CPC_cont": 2.8,
    "ENADE_cont": 1.88,
    "IDD": 1.644,
-   "vagas": 166
+   "vagas": 135
   },
   {
    "cod_curso": "1304528",
@@ -5432,7 +5432,7 @@
    "CPC_cont": 1.671,
    "ENADE_cont": 1.403,
    "IDD": 0.617,
-   "vagas": 192
+   "vagas": 185
   },
   {
    "cod_curso": "1304684",
@@ -5449,7 +5449,7 @@
    "CPC_cont": 3.756,
    "ENADE_cont": 3.367,
    "IDD": 3.571,
-   "vagas": 180
+   "vagas": 162
   },
   {
    "cod_curso": "1304835",
@@ -5466,7 +5466,7 @@
    "CPC_cont": 1.982,
    "ENADE_cont": 1.55,
    "IDD": 1.491,
-   "vagas": 280
+   "vagas": 475
   },
   {
    "cod_curso": "1305049",
@@ -5483,7 +5483,7 @@
    "CPC_cont": 2.552,
    "ENADE_cont": 2.13,
    "IDD": 1.881,
-   "vagas": 100
+   "vagas": 64
   },
   {
    "cod_curso": "1308693",
@@ -5500,7 +5500,7 @@
    "CPC_cont": 2.992,
    "ENADE_cont": 2.219,
    "IDD": 2.347,
-   "vagas": 217
+   "vagas": 187
   },
   {
    "cod_curso": "1311582",
@@ -5517,7 +5517,7 @@
    "CPC_cont": 1.822,
    "ENADE_cont": 1.082,
    "IDD": 1.358,
-   "vagas": 194
+   "vagas": 147
   },
   {
    "cod_curso": "1311751",
@@ -5534,7 +5534,7 @@
    "CPC_cont": 2.471,
    "ENADE_cont": 1.596,
    "IDD": 2.056,
-   "vagas": 115
+   "vagas": 19000
   },
   {
    "cod_curso": "1313064",
@@ -5551,7 +5551,7 @@
    "CPC_cont": 2.861,
    "ENADE_cont": 2.453,
    "IDD": 1.943,
-   "vagas": 80
+   "vagas": 20
   },
   {
    "cod_curso": "1313219",
@@ -5585,7 +5585,7 @@
    "CPC_cont": 2.986,
    "ENADE_cont": 3.18,
    "IDD": 2.672,
-   "vagas": 54
+   "vagas": 60
   },
   {
    "cod_curso": "1321431",
@@ -5602,7 +5602,7 @@
    "CPC_cont": 2.042,
    "ENADE_cont": 1.438,
    "IDD": 1.422,
-   "vagas": 103
+   "vagas": 30
   },
   {
    "cod_curso": "1321459",
@@ -5619,7 +5619,7 @@
    "CPC_cont": 2.258,
    "ENADE_cont": 1.647,
    "IDD": 1.032,
-   "vagas": 70
+   "vagas": 90
   },
   {
    "cod_curso": "1321643",
@@ -5636,7 +5636,7 @@
    "CPC_cont": 2.455,
    "ENADE_cont": 1.793,
    "IDD": 1.882,
-   "vagas": 476
+   "vagas": 127
   },
   {
    "cod_curso": "1321944",
@@ -5653,7 +5653,7 @@
    "CPC_cont": 4.06,
    "ENADE_cont": 3.538,
    "IDD": 3.884,
-   "vagas": 199
+   "vagas": 65
   },
   {
    "cod_curso": "1321966",
@@ -5670,7 +5670,7 @@
    "CPC_cont": 3.493,
    "ENADE_cont": 3.251,
    "IDD": 3.857,
-   "vagas": 129
+   "vagas": 121
   },
   {
    "cod_curso": "1321986",
@@ -5687,7 +5687,7 @@
    "CPC_cont": 1.826,
    "ENADE_cont": 0.603,
    "IDD": 0.0,
-   "vagas": 120
+   "vagas": 177
   },
   {
    "cod_curso": "1322079",
@@ -5704,7 +5704,7 @@
    "CPC_cont": 3.0,
    "ENADE_cont": 2.24,
    "IDD": 2.255,
-   "vagas": 105
+   "vagas": 83
   },
   {
    "cod_curso": "1322201",
@@ -5721,7 +5721,7 @@
    "CPC_cont": 3.505,
    "ENADE_cont": 2.838,
    "IDD": 2.779,
-   "vagas": 93
+   "vagas": 91
   },
   {
    "cod_curso": "1322258",
@@ -5738,7 +5738,7 @@
    "CPC_cont": 2.512,
    "ENADE_cont": 1.976,
    "IDD": 1.252,
-   "vagas": 183
+   "vagas": 168
   },
   {
    "cod_curso": "1322403",
@@ -5755,7 +5755,7 @@
    "CPC_cont": 2.478,
    "ENADE_cont": 1.88,
    "IDD": 2.041,
-   "vagas": 156
+   "vagas": 161
   },
   {
    "cod_curso": "1322549",
@@ -5772,7 +5772,7 @@
    "CPC_cont": 2.077,
    "ENADE_cont": 1.768,
    "IDD": 1.92,
-   "vagas": 463
+   "vagas": 301
   },
   {
    "cod_curso": "1322569",
@@ -5806,7 +5806,7 @@
    "CPC_cont": 3.404,
    "ENADE_cont": 2.628,
    "IDD": 3.836,
-   "vagas": 110
+   "vagas": 177
   },
   {
    "cod_curso": "1322666",
@@ -5823,7 +5823,7 @@
    "CPC_cont": 3.282,
    "ENADE_cont": 2.432,
    "IDD": 3.004,
-   "vagas": 320
+   "vagas": 273
   },
   {
    "cod_curso": "1322862",
@@ -5840,7 +5840,7 @@
    "CPC_cont": 2.854,
    "ENADE_cont": 1.936,
    "IDD": 2.507,
-   "vagas": 32
+   "vagas": 68
   },
   {
    "cod_curso": "1323567",
@@ -5857,7 +5857,7 @@
    "CPC_cont": 2.241,
    "ENADE_cont": 1.839,
    "IDD": 2.582,
-   "vagas": 297
+   "vagas": 228
   },
   {
    "cod_curso": "1323580",
@@ -5874,7 +5874,7 @@
    "CPC_cont": 2.518,
    "ENADE_cont": 1.991,
    "IDD": 2.214,
-   "vagas": 480
+   "vagas": 489
   },
   {
    "cod_curso": "1323714",
@@ -5891,7 +5891,7 @@
    "CPC_cont": 2.055,
    "ENADE_cont": 2.018,
    "IDD": 2.015,
-   "vagas": 75
+   "vagas": 55
   },
   {
    "cod_curso": "1323969",
@@ -5908,7 +5908,7 @@
    "CPC_cont": 2.709,
    "ENADE_cont": 2.016,
    "IDD": 1.716,
-   "vagas": 152
+   "vagas": 83
   },
   {
    "cod_curso": "1324603",
@@ -5925,7 +5925,7 @@
    "CPC_cont": 2.878,
    "ENADE_cont": 2.755,
    "IDD": 3.352,
-   "vagas": 130
+   "vagas": 110
   },
   {
    "cod_curso": "1325018",
@@ -5942,7 +5942,7 @@
    "CPC_cont": 3.315,
    "ENADE_cont": 2.341,
    "IDD": 2.401,
-   "vagas": 156
+   "vagas": 95
   },
   {
    "cod_curso": "1330303",
@@ -5959,7 +5959,7 @@
    "CPC_cont": 2.911,
    "ENADE_cont": 1.781,
    "IDD": 1.727,
-   "vagas": 90
+   "vagas": 92
   },
   {
    "cod_curso": "1330673",
@@ -5976,7 +5976,7 @@
    "CPC_cont": 3.556,
    "ENADE_cont": 2.841,
    "IDD": 2.893,
-   "vagas": 205
+   "vagas": 421
   },
   {
    "cod_curso": "1330831",
@@ -5993,7 +5993,7 @@
    "CPC_cont": 2.088,
    "ENADE_cont": 0.268,
    "IDD": 1.42,
-   "vagas": 36
+   "vagas": 55
   },
   {
    "cod_curso": "1330874",
@@ -6010,7 +6010,7 @@
    "CPC_cont": 2.658,
    "ENADE_cont": 2.191,
    "IDD": 1.647,
-   "vagas": 42
+   "vagas": 45
   },
   {
    "cod_curso": "1330930",
@@ -6027,7 +6027,7 @@
    "CPC_cont": 2.333,
    "ENADE_cont": 0.806,
    "IDD": 1.572,
-   "vagas": 325
+   "vagas": 215
   },
   {
    "cod_curso": "1331007",
@@ -6044,7 +6044,7 @@
    "CPC_cont": 2.669,
    "ENADE_cont": 2.089,
    "IDD": 2.206,
-   "vagas": 444
+   "vagas": 309
   },
   {
    "cod_curso": "1331009",
@@ -6061,7 +6061,7 @@
    "CPC_cont": 2.272,
    "ENADE_cont": 1.468,
    "IDD": 1.803,
-   "vagas": 152
+   "vagas": 151
   },
   {
    "cod_curso": "1331388",
@@ -6078,7 +6078,7 @@
    "CPC_cont": 2.58,
    "ENADE_cont": 2.057,
    "IDD": 1.973,
-   "vagas": 392
+   "vagas": 298
   },
   {
    "cod_curso": "1332387",
@@ -6095,7 +6095,7 @@
    "CPC_cont": 2.216,
    "ENADE_cont": 1.598,
    "IDD": 0.882,
-   "vagas": 52
+   "vagas": 37
   },
   {
    "cod_curso": "1332401",
@@ -6112,7 +6112,7 @@
    "CPC_cont": 2.317,
    "ENADE_cont": 1.864,
    "IDD": 1.051,
-   "vagas": 269
+   "vagas": 221
   },
   {
    "cod_curso": "1332462",
@@ -6146,7 +6146,7 @@
    "CPC_cont": 2.612,
    "ENADE_cont": 2.358,
    "IDD": 2.523,
-   "vagas": 367
+   "vagas": 311
   },
   {
    "cod_curso": "1332927",
@@ -6163,7 +6163,7 @@
    "CPC_cont": 3.03,
    "ENADE_cont": 2.641,
    "IDD": 3.36,
-   "vagas": 83
+   "vagas": 85
   },
   {
    "cod_curso": "1349374",
@@ -6180,7 +6180,7 @@
    "CPC_cont": 2.73,
    "ENADE_cont": 1.99,
    "IDD": 1.629,
-   "vagas": 150
+   "vagas": 132
   },
   {
    "cod_curso": "1349420",
@@ -6197,7 +6197,7 @@
    "CPC_cont": 1.508,
    "ENADE_cont": 0.261,
    "IDD": 1.54,
-   "vagas": 20
+   "vagas": 15
   },
   {
    "cod_curso": "1349610",
@@ -6214,7 +6214,7 @@
    "CPC_cont": 2.738,
    "ENADE_cont": 1.986,
    "IDD": 2.133,
-   "vagas": 100
+   "vagas": 150
   },
   {
    "cod_curso": "1349659",
@@ -6248,7 +6248,7 @@
    "CPC_cont": 3.179,
    "ENADE_cont": 2.559,
    "IDD": 2.516,
-   "vagas": 90
+   "vagas": 160
   },
   {
    "cod_curso": "1349761",
@@ -6282,7 +6282,7 @@
    "CPC_cont": 3.069,
    "ENADE_cont": 2.368,
    "IDD": 2.112,
-   "vagas": 90
+   "vagas": 100
   },
   {
    "cod_curso": "1350418",
@@ -6299,7 +6299,7 @@
    "CPC_cont": 3.004,
    "ENADE_cont": 2.363,
    "IDD": 2.163,
-   "vagas": 74
+   "vagas": 100
   },
   {
    "cod_curso": "1350783",
@@ -6316,7 +6316,7 @@
    "CPC_cont": 3.872,
    "ENADE_cont": 3.229,
    "IDD": 3.471,
-   "vagas": 166
+   "vagas": 162
   },
   {
    "cod_curso": "1350882",
@@ -6333,7 +6333,7 @@
    "CPC_cont": 1.441,
    "ENADE_cont": 0.976,
    "IDD": 0.933,
-   "vagas": 249
+   "vagas": 317
   },
   {
    "cod_curso": "1350894",
@@ -6350,7 +6350,7 @@
    "CPC_cont": 2.898,
    "ENADE_cont": 1.781,
    "IDD": 2.283,
-   "vagas": 117
+   "vagas": 55
   },
   {
    "cod_curso": "1351595",
@@ -6367,7 +6367,7 @@
    "CPC_cont": 2.199,
    "ENADE_cont": 2.307,
    "IDD": 2.524,
-   "vagas": 300
+   "vagas": 160
   },
   {
    "cod_curso": "1352273",
@@ -6384,7 +6384,7 @@
    "CPC_cont": 2.464,
    "ENADE_cont": 2.171,
    "IDD": 2.361,
-   "vagas": 420
+   "vagas": 348
   },
   {
    "cod_curso": "1352409",
@@ -6401,7 +6401,7 @@
    "CPC_cont": 2.851,
    "ENADE_cont": 2.559,
    "IDD": 2.788,
-   "vagas": 115
+   "vagas": 125
   },
   {
    "cod_curso": "1353071",
@@ -6469,7 +6469,7 @@
    "CPC_cont": 2.876,
    "ENADE_cont": 2.447,
    "IDD": 2.447,
-   "vagas": 74
+   "vagas": 51
   },
   {
    "cod_curso": "1353924",
@@ -6486,7 +6486,7 @@
    "CPC_cont": 2.094,
    "ENADE_cont": 0.595,
    "IDD": 1.201,
-   "vagas": 130
+   "vagas": 120
   },
   {
    "cod_curso": "1354063",
@@ -6503,7 +6503,7 @@
    "CPC_cont": 1.981,
    "ENADE_cont": 0.988,
    "IDD": 1.928,
-   "vagas": 100
+   "vagas": 80
   },
   {
    "cod_curso": "1354159",
@@ -6520,7 +6520,7 @@
    "CPC_cont": 3.468,
    "ENADE_cont": 2.592,
    "IDD": 3.042,
-   "vagas": 45
+   "vagas": 91
   },
   {
    "cod_curso": "1364218",
@@ -6537,7 +6537,7 @@
    "CPC_cont": 3.038,
    "ENADE_cont": 1.914,
    "IDD": 2.239,
-   "vagas": 190
+   "vagas": 197
   },
   {
    "cod_curso": "1364302",
@@ -6554,7 +6554,7 @@
    "CPC_cont": 2.614,
    "ENADE_cont": 1.786,
    "IDD": 2.319,
-   "vagas": 128
+   "vagas": 118
   },
   {
    "cod_curso": "1364317",
@@ -6571,7 +6571,7 @@
    "CPC_cont": 2.725,
    "ENADE_cont": 2.127,
    "IDD": 1.767,
-   "vagas": 320
+   "vagas": 200
   },
   {
    "cod_curso": "1364362",
@@ -6605,7 +6605,7 @@
    "CPC_cont": 2.558,
    "ENADE_cont": 1.962,
    "IDD": 2.11,
-   "vagas": 209
+   "vagas": 195
   },
   {
    "cod_curso": "1364413",
@@ -6622,7 +6622,7 @@
    "CPC_cont": 3.102,
    "ENADE_cont": 2.065,
    "IDD": 2.95,
-   "vagas": 184
+   "vagas": 181
   },
   {
    "cod_curso": "1364514",
@@ -6639,7 +6639,7 @@
    "CPC_cont": 2.649,
    "ENADE_cont": 2.199,
    "IDD": 2.235,
-   "vagas": 520
+   "vagas": 528
   },
   {
    "cod_curso": "1364739",
@@ -6656,7 +6656,7 @@
    "CPC_cont": 2.165,
    "ENADE_cont": 1.689,
    "IDD": 2.217,
-   "vagas": 50
+   "vagas": 64
   },
   {
    "cod_curso": "1365304",
@@ -6673,7 +6673,7 @@
    "CPC_cont": 2.751,
    "ENADE_cont": 1.737,
    "IDD": 2.536,
-   "vagas": 121
+   "vagas": 185
   },
   {
    "cod_curso": "1365529",
@@ -6690,7 +6690,7 @@
    "CPC_cont": 3.026,
    "ENADE_cont": 2.387,
    "IDD": 2.492,
-   "vagas": 22
+   "vagas": 35
   },
   {
    "cod_curso": "1365533",
@@ -6707,7 +6707,7 @@
    "CPC_cont": 2.738,
    "ENADE_cont": 2.501,
    "IDD": 2.619,
-   "vagas": 35
+   "vagas": 39
   },
   {
    "cod_curso": "1365534",
@@ -6724,7 +6724,7 @@
    "CPC_cont": 2.925,
    "ENADE_cont": 1.402,
    "IDD": 1.657,
-   "vagas": 62
+   "vagas": 63
   },
   {
    "cod_curso": "1365536",
@@ -6741,7 +6741,7 @@
    "CPC_cont": 1.85,
    "ENADE_cont": 1.527,
    "IDD": 1.462,
-   "vagas": 77
+   "vagas": 57
   },
   {
    "cod_curso": "1365548",
@@ -6758,7 +6758,7 @@
    "CPC_cont": 2.465,
    "ENADE_cont": 1.68,
    "IDD": 2.023,
-   "vagas": 262
+   "vagas": 267
   },
   {
    "cod_curso": "1365550",
@@ -6775,7 +6775,7 @@
    "CPC_cont": 3.071,
    "ENADE_cont": 3.139,
    "IDD": 3.687,
-   "vagas": 247
+   "vagas": 249
   },
   {
    "cod_curso": "1365555",
@@ -6809,7 +6809,7 @@
    "CPC_cont": 2.685,
    "ENADE_cont": 1.96,
    "IDD": 2.041,
-   "vagas": 63
+   "vagas": 205
   },
   {
    "cod_curso": "1365961",
@@ -6826,7 +6826,7 @@
    "CPC_cont": 0.816,
    "ENADE_cont": 0.298,
    "IDD": 0.534,
-   "vagas": 15
+   "vagas": 80
   },
   {
    "cod_curso": "1365979",
@@ -6843,7 +6843,7 @@
    "CPC_cont": 2.362,
    "ENADE_cont": 1.647,
    "IDD": 1.367,
-   "vagas": 72
+   "vagas": 51
   },
   {
    "cod_curso": "1365986",
@@ -6860,7 +6860,7 @@
    "CPC_cont": 3.901,
    "ENADE_cont": 3.709,
    "IDD": 3.218,
-   "vagas": 134
+   "vagas": 190
   },
   {
    "cod_curso": "1366236",
@@ -6894,7 +6894,7 @@
    "CPC_cont": 2.351,
    "ENADE_cont": 1.982,
    "IDD": 1.415,
-   "vagas": 114
+   "vagas": 103
   },
   {
    "cod_curso": "1366901",
@@ -6911,7 +6911,7 @@
    "CPC_cont": 3.217,
    "ENADE_cont": 2.962,
    "IDD": 3.085,
-   "vagas": 214
+   "vagas": 215
   },
   {
    "cod_curso": "1366926",
@@ -6928,7 +6928,7 @@
    "CPC_cont": 3.625,
    "ENADE_cont": 2.64,
    "IDD": 3.65,
-   "vagas": 133
+   "vagas": 196
   },
   {
    "cod_curso": "1367013",
@@ -6945,7 +6945,7 @@
    "CPC_cont": 2.691,
    "ENADE_cont": 2.048,
    "IDD": 1.853,
-   "vagas": 117
+   "vagas": 78
   },
   {
    "cod_curso": "1368082",
@@ -6962,7 +6962,7 @@
    "CPC_cont": 2.044,
    "ENADE_cont": 0.942,
    "IDD": 0.939,
-   "vagas": 44
+   "vagas": 34
   },
   {
    "cod_curso": "1382982",
@@ -6979,7 +6979,7 @@
    "CPC_cont": 3.369,
    "ENADE_cont": 2.75,
    "IDD": 3.299,
-   "vagas": 106
+   "vagas": 105
   },
   {
    "cod_curso": "1382998",
@@ -6996,7 +6996,7 @@
    "CPC_cont": 3.293,
    "ENADE_cont": 2.527,
    "IDD": 2.657,
-   "vagas": 129
+   "vagas": 181
   },
   {
    "cod_curso": "1383143",
@@ -7013,7 +7013,7 @@
    "CPC_cont": 2.105,
    "ENADE_cont": 1.42,
    "IDD": 1.787,
-   "vagas": 93
+   "vagas": 80
   },
   {
    "cod_curso": "1383205",
@@ -7030,7 +7030,7 @@
    "CPC_cont": 2.845,
    "ENADE_cont": 2.176,
    "IDD": 2.21,
-   "vagas": 172
+   "vagas": 173
   },
   {
    "cod_curso": "1383331",
@@ -7047,7 +7047,7 @@
    "CPC_cont": 2.91,
    "ENADE_cont": 1.823,
    "IDD": 2.902,
-   "vagas": 64
+   "vagas": 46
   },
   {
    "cod_curso": "1385084",
@@ -7064,7 +7064,7 @@
    "CPC_cont": 2.667,
    "ENADE_cont": 1.959,
    "IDD": 2.156,
-   "vagas": 125
+   "vagas": 72
   },
   {
    "cod_curso": "1385121",
@@ -7081,7 +7081,7 @@
    "CPC_cont": 3.51,
    "ENADE_cont": 3.6,
    "IDD": 3.552,
-   "vagas": 132
+   "vagas": 120
   },
   {
    "cod_curso": "1385206",
@@ -7098,7 +7098,7 @@
    "CPC_cont": 2.138,
    "ENADE_cont": 0.641,
    "IDD": 1.405,
-   "vagas": 58
+   "vagas": 100
   },
   {
    "cod_curso": "1385341",
@@ -7115,7 +7115,7 @@
    "CPC_cont": 2.796,
    "ENADE_cont": 2.19,
    "IDD": 1.83,
-   "vagas": 100
+   "vagas": 140
   },
   {
    "cod_curso": "1385363",
@@ -7132,7 +7132,7 @@
    "CPC_cont": 1.642,
    "ENADE_cont": 1.083,
    "IDD": 1.57,
-   "vagas": 100
+   "vagas": 84
   },
   {
    "cod_curso": "1385698",
@@ -7149,7 +7149,7 @@
    "CPC_cont": 2.36,
    "ENADE_cont": 2.019,
    "IDD": 2.167,
-   "vagas": 150
+   "vagas": 133
   },
   {
    "cod_curso": "1385704",
@@ -7166,7 +7166,7 @@
    "CPC_cont": 2.429,
    "ENADE_cont": 1.512,
    "IDD": 1.525,
-   "vagas": 86
+   "vagas": 93
   },
   {
    "cod_curso": "1385781",
@@ -7183,7 +7183,7 @@
    "CPC_cont": 2.229,
    "ENADE_cont": 2.448,
    "IDD": 2.316,
-   "vagas": 62
+   "vagas": 69
   },
   {
    "cod_curso": "1386374",
@@ -7200,7 +7200,7 @@
    "CPC_cont": 2.835,
    "ENADE_cont": 2.487,
    "IDD": 3.067,
-   "vagas": 209
+   "vagas": 326
   },
   {
    "cod_curso": "1386539",
@@ -7217,7 +7217,7 @@
    "CPC_cont": 2.933,
    "ENADE_cont": 1.536,
    "IDD": 1.471,
-   "vagas": 139
+   "vagas": 145
   },
   {
    "cod_curso": "1386596",
@@ -7234,7 +7234,7 @@
    "CPC_cont": 3.757,
    "ENADE_cont": 2.497,
    "IDD": 3.449,
-   "vagas": 120
+   "vagas": 126
   },
   {
    "cod_curso": "1386642",
@@ -7268,7 +7268,7 @@
    "CPC_cont": 3.495,
    "ENADE_cont": 2.765,
    "IDD": 3.265,
-   "vagas": 284
+   "vagas": 273
   },
   {
    "cod_curso": "1386684",
@@ -7302,7 +7302,7 @@
    "CPC_cont": 2.171,
    "ENADE_cont": 1.819,
    "IDD": 1.849,
-   "vagas": 455
+   "vagas": 323
   },
   {
    "cod_curso": "1387306",
@@ -7319,7 +7319,7 @@
    "CPC_cont": 1.12,
    "ENADE_cont": 0.661,
    "IDD": 0.428,
-   "vagas": 150
+   "vagas": 160
   },
   {
    "cod_curso": "1388944",
@@ -7336,7 +7336,7 @@
    "CPC_cont": 2.3,
    "ENADE_cont": 1.773,
    "IDD": 1.74,
-   "vagas": 150
+   "vagas": 100
   },
   {
    "cod_curso": "1389271",
@@ -7353,7 +7353,7 @@
    "CPC_cont": 2.724,
    "ENADE_cont": 1.354,
    "IDD": 1.57,
-   "vagas": 159
+   "vagas": 235
   },
   {
    "cod_curso": "1390237",
@@ -7370,7 +7370,7 @@
    "CPC_cont": 2.904,
    "ENADE_cont": 2.182,
    "IDD": 3.265,
-   "vagas": 525
+   "vagas": 335
   },
   {
    "cod_curso": "1395901",
@@ -7404,7 +7404,7 @@
    "CPC_cont": 2.75,
    "ENADE_cont": 1.957,
    "IDD": 1.824,
-   "vagas": 121
+   "vagas": 125
   },
   {
    "cod_curso": "1397096",
@@ -7455,7 +7455,7 @@
    "CPC_cont": 3.037,
    "ENADE_cont": 1.73,
    "IDD": 2.685,
-   "vagas": 60
+   "vagas": 70
   },
   {
    "cod_curso": "1404573",
@@ -7472,7 +7472,7 @@
    "CPC_cont": 1.739,
    "ENADE_cont": 1.714,
    "IDD": 2.253,
-   "vagas": 101
+   "vagas": 103
   },
   {
    "cod_curso": "1404658",
@@ -7489,7 +7489,7 @@
    "CPC_cont": 2.064,
    "ENADE_cont": 0.541,
    "IDD": null,
-   "vagas": 148
+   "vagas": 139
   },
   {
    "cod_curso": "1404684",
@@ -7506,7 +7506,7 @@
    "CPC_cont": 2.481,
    "ENADE_cont": 1.92,
    "IDD": 2.037,
-   "vagas": 88
+   "vagas": 16
   },
   {
    "cod_curso": "1404687",
@@ -7523,7 +7523,7 @@
    "CPC_cont": 2.54,
    "ENADE_cont": 1.725,
    "IDD": 1.868,
-   "vagas": 103
+   "vagas": 104
   },
   {
    "cod_curso": "1404741",
@@ -7540,7 +7540,7 @@
    "CPC_cont": 3.417,
    "ENADE_cont": 2.29,
    "IDD": 3.021,
-   "vagas": 63
+   "vagas": 49
   },
   {
    "cod_curso": "1404784",
@@ -7557,7 +7557,7 @@
    "CPC_cont": 3.512,
    "ENADE_cont": 3.427,
    "IDD": 4.797,
-   "vagas": 132
+   "vagas": 128
   },
   {
    "cod_curso": "1404877",
@@ -7574,7 +7574,7 @@
    "CPC_cont": 1.415,
    "ENADE_cont": 0.947,
    "IDD": 1.544,
-   "vagas": 361
+   "vagas": 296
   },
   {
    "cod_curso": "1405034",
@@ -7591,7 +7591,7 @@
    "CPC_cont": 3.078,
    "ENADE_cont": 2.191,
    "IDD": 2.57,
-   "vagas": 316
+   "vagas": 300
   },
   {
    "cod_curso": "1405041",
@@ -7608,7 +7608,7 @@
    "CPC_cont": 2.552,
    "ENADE_cont": 2.084,
    "IDD": 1.605,
-   "vagas": 504
+   "vagas": 480
   },
   {
    "cod_curso": "1405196",
@@ -7625,7 +7625,7 @@
    "CPC_cont": 2.325,
    "ENADE_cont": 1.622,
    "IDD": 2.124,
-   "vagas": 580
+   "vagas": 700
   },
   {
    "cod_curso": "1405384",
@@ -7642,7 +7642,7 @@
    "CPC_cont": 2.745,
    "ENADE_cont": 1.635,
    "IDD": 2.328,
-   "vagas": 175
+   "vagas": 167
   },
   {
    "cod_curso": "1405553",
@@ -7659,7 +7659,7 @@
    "CPC_cont": 2.26,
    "ENADE_cont": 1.089,
    "IDD": 1.075,
-   "vagas": 528
+   "vagas": 126
   },
   {
    "cod_curso": "1405914",
@@ -7676,7 +7676,7 @@
    "CPC_cont": 2.877,
    "ENADE_cont": 2.508,
    "IDD": 3.057,
-   "vagas": 380
+   "vagas": 313
   },
   {
    "cod_curso": "1406014",
@@ -7693,7 +7693,7 @@
    "CPC_cont": 3.212,
    "ENADE_cont": 1.779,
    "IDD": 2.357,
-   "vagas": 80
+   "vagas": 70
   },
   {
    "cod_curso": "1406045",
@@ -7727,7 +7727,7 @@
    "CPC_cont": 2.949,
    "ENADE_cont": 2.377,
    "IDD": 3.122,
-   "vagas": 160
+   "vagas": 85
   },
   {
    "cod_curso": "1440199",
@@ -7744,7 +7744,7 @@
    "CPC_cont": 2.854,
    "ENADE_cont": 2.351,
    "IDD": 2.351,
-   "vagas": 100
+   "vagas": 50
   },
   {
    "cod_curso": "1441221",
@@ -7761,7 +7761,7 @@
    "CPC_cont": 3.086,
    "ENADE_cont": 2.344,
    "IDD": 2.625,
-   "vagas": 46
+   "vagas": 26
   },
   {
    "cod_curso": "1441244",
@@ -7778,7 +7778,7 @@
    "CPC_cont": 3.044,
    "ENADE_cont": 2.351,
    "IDD": 2.459,
-   "vagas": 144
+   "vagas": 136
   },
   {
    "cod_curso": "1441317",
@@ -7795,7 +7795,7 @@
    "CPC_cont": 2.225,
    "ENADE_cont": 1.532,
    "IDD": 1.201,
-   "vagas": 150
+   "vagas": 120
   },
   {
    "cod_curso": "1441414",
@@ -7812,7 +7812,7 @@
    "CPC_cont": 3.144,
    "ENADE_cont": 3.28,
    "IDD": 3.132,
-   "vagas": 150
+   "vagas": 204
   },
   {
    "cod_curso": "1441447",
@@ -7829,7 +7829,7 @@
    "CPC_cont": 1.83,
    "ENADE_cont": 0.941,
    "IDD": 1.359,
-   "vagas": 444
+   "vagas": 481
   },
   {
    "cod_curso": "1441586",
@@ -7846,7 +7846,7 @@
    "CPC_cont": 2.63,
    "ENADE_cont": 1.025,
    "IDD": 1.576,
-   "vagas": 110
+   "vagas": 80
   },
   {
    "cod_curso": "1441840",
@@ -7863,7 +7863,7 @@
    "CPC_cont": 2.1,
    "ENADE_cont": 1.18,
    "IDD": 1.189,
-   "vagas": 534
+   "vagas": 567
   },
   {
    "cod_curso": "1441849",
@@ -7880,7 +7880,7 @@
    "CPC_cont": 2.278,
    "ENADE_cont": 1.787,
    "IDD": 2.064,
-   "vagas": 580
+   "vagas": 591
   },
   {
    "cod_curso": "1441850",
@@ -7897,7 +7897,7 @@
    "CPC_cont": 2.603,
    "ENADE_cont": 1.585,
    "IDD": 2.285,
-   "vagas": 380
+   "vagas": 142
   },
   {
    "cod_curso": "1441876",
@@ -7914,7 +7914,7 @@
    "CPC_cont": 2.024,
    "ENADE_cont": 1.373,
    "IDD": 1.958,
-   "vagas": 120
+   "vagas": 100
   },
   {
    "cod_curso": "1441921",
@@ -7931,7 +7931,7 @@
    "CPC_cont": 3.761,
    "ENADE_cont": 2.875,
    "IDD": 3.746,
-   "vagas": 170
+   "vagas": 140
   },
   {
    "cod_curso": "1441988",
@@ -7948,7 +7948,7 @@
    "CPC_cont": 3.307,
    "ENADE_cont": 2.528,
    "IDD": 2.7,
-   "vagas": 100
+   "vagas": 75
   },
   {
    "cod_curso": "1442187",
@@ -7965,7 +7965,7 @@
    "CPC_cont": 2.795,
    "ENADE_cont": 1.569,
    "IDD": 2.274,
-   "vagas": 104
+   "vagas": 105
   },
   {
    "cod_curso": "1443904",
@@ -7982,7 +7982,7 @@
    "CPC_cont": 2.638,
    "ENADE_cont": 1.924,
    "IDD": 1.78,
-   "vagas": 155
+   "vagas": 97
   },
   {
    "cod_curso": "1454327",
@@ -7999,7 +7999,7 @@
    "CPC_cont": null,
    "ENADE_cont": null,
    "IDD": null,
-   "vagas": 63
+   "vagas": 59
   },
   {
    "cod_curso": "1467084",
@@ -8016,7 +8016,7 @@
    "CPC_cont": 3.144,
    "ENADE_cont": 3.173,
    "IDD": 2.777,
-   "vagas": 80
+   "vagas": 90
   },
   {
    "cod_curso": "1468017",
@@ -8050,7 +8050,7 @@
    "CPC_cont": 3.634,
    "ENADE_cont": 2.558,
    "IDD": 2.992,
-   "vagas": 75
+   "vagas": 80
   },
   {
    "cod_curso": "2500102",
@@ -8067,7 +8067,7 @@
    "CPC_cont": 2.3,
    "ENADE_cont": 1.637,
    "IDD": 1.336,
-   "vagas": 61
+   "vagas": 80
   },
   {
    "cod_curso": "5000552",
@@ -8084,7 +8084,7 @@
    "CPC_cont": 3.899,
    "ENADE_cont": 3.32,
    "IDD": 4.32,
-   "vagas": 533
+   "vagas": 380
   },
   {
    "cod_curso": "5000572",
@@ -8101,7 +8101,7 @@
    "CPC_cont": 2.536,
    "ENADE_cont": 1.573,
    "IDD": 1.468,
-   "vagas": 721
+   "vagas": 459
   },
   {
    "cod_curso": "5000759",
@@ -8118,7 +8118,7 @@
    "CPC_cont": 3.559,
    "ENADE_cont": 2.941,
    "IDD": 3.96,
-   "vagas": 90
+   "vagas": 110
   },
   {
    "cod_curso": "5000816",
@@ -8135,7 +8135,7 @@
    "CPC_cont": 3.277,
    "ENADE_cont": 2.478,
    "IDD": 3.126,
-   "vagas": 138
+   "vagas": 141
   },
   {
    "cod_curso": "5001168",
@@ -8169,7 +8169,7 @@
    "CPC_cont": 3.492,
    "ENADE_cont": 3.596,
    "IDD": 3.822,
-   "vagas": 125
+   "vagas": 108
   },
   {
    "cod_curso": "5001421",
@@ -8186,7 +8186,7 @@
    "CPC_cont": 3.084,
    "ENADE_cont": 2.82,
    "IDD": 2.59,
-   "vagas": 114
+   "vagas": 110
   }
  ]
 }
