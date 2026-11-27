@@ -235,6 +235,21 @@ def _agregar_normalizado(z, ano, rotulo, alvo, alvo_ies):
                 "publicado, com nota de não comparabilidade —, ou a leitura "
                 "está errada. Escolher em silêncio é que não serve.")
 
+    # UF QUE SÓ TEM POLO TAMBÉM É UF.
+    #
+    # O conjunto `ufs` vem das linhas de CURSO; os polos vêm de outra tabela.
+    # Uma UF pode ter polo e nenhum curso próprio, e montar a saída só sobre
+    # `ufs` fazia esses polos desaparecerem da série — publicando um total
+    # nacional de polos abaixo do da página, com o mesmo nome de campo e sem
+    # explicação. A página não tem esse problema porque o conjunto de UFs dela
+    # vem do IBGE.
+    #
+    # As quantidades de curso dessa UF ficam em ZERO, e zero aqui é medida: ela
+    # foi lida e não tem curso.
+    for sigla in set(polos_reg) | set(polos_mun):
+        if sigla not in ufs:
+            ufs[sigla]
+
     saida = {}
     for sigla, d in ufs.items():
         saida[sigla] = {
@@ -298,7 +313,12 @@ def _polos_da_fatia(ano, rotulo):
                 continue
             if situacao and situacao.get(cod_curso) != "1":
                 continue
-            registros[sigla].add((linha.get("CO_LOCAL_OFERTA") or "").strip())
+            # Mesma regra do pipeline: código vazio não é um local, e
+            # colapsá-lo no conjunto inventaria um polo por UF. O município
+            # continua contando, porque ele é conhecido.
+            cod_local = (linha.get("CO_LOCAL_OFERTA") or "").strip()
+            if cod_local:
+                registros[sigla].add(cod_local)
             mun = (linha.get("CO_MUNICIPIO_LO") or "").strip()
             if mun:
                 municipios[sigla].add(mun)

@@ -47,6 +47,11 @@ POLOS_REGISTROS = 0
 POLOS_MUNICIPIOS = 0
 POLOS_SEM_UF_ATIVOS = 0
 POLOS_SEM_UF_EM_EXTINCAO = 0
+# Linhas de polo sem `CO_LOCAL_OFERTA`: zero aqui, como todo o resto da
+# contagem de polos. Publicado mesmo assim, porque campo que só aparece quando
+# há problema ensina o leitor a não procurá-lo.
+POLOS_SEM_CODIGO_ATIVOS = 0
+POLOS_SEM_CODIGO_EM_EXTINCAO = 0
 MATRICULAS = 164680
 CONCLUINTES = 26681
 INGRESSOS = 48873
@@ -215,6 +220,12 @@ def test_polos_ead():
               .get("polos_sem_uf") or {})
     assert sem_uf.get("ativos") == POLOS_SEM_UF_ATIVOS
     assert sem_uf.get("em_extincao") == POLOS_SEM_UF_EM_EXTINCAO
+    sem_codigo = ((_ler("bruto.json")["metadados"].get("sem_localizacao") or {})
+                  .get("polos_sem_codigo") or {})
+    assert sem_codigo.get("ativos") == POLOS_SEM_CODIGO_ATIVOS, (
+        f"linhas de polo ativo sem código de local: esperado "
+        f"{POLOS_SEM_CODIGO_ATIVOS}, veio {sem_codigo.get('ativos')}")
+    assert sem_codigo.get("em_extincao") == POLOS_SEM_CODIGO_EM_EXTINCAO
 
 
 def test_fluxo():

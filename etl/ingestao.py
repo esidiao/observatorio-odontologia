@@ -527,6 +527,7 @@ def agregar_normalizado(cursos, locais, alunos, ies, mun_por_uf,
     # a distância sem endereço, que é atribuída à UF-sede porque não tem
     # endereço por natureza.
     polos_sem_uf = {True: set(), False: set()}
+    polos_sem_codigo = {True: 0, False: 0}
     for linha in locais:
         if (linha.get("IN_LOCAL_OFERTA_POLO") or "").strip() != "1":
             continue
@@ -547,7 +548,21 @@ def agregar_normalizado(cursos, locais, alunos, ies, mun_por_uf,
         ativo = situacao_do_curso.get(cod_curso) == SITUACAO_ATIVIDADE
         alvo_polos = polos_por_uf if ativo else polos_ext_por_uf
         alvo_muns = polos_mun_por_uf if ativo else polos_ext_mun_por_uf
-        alvo_polos[uf].add(cod_local)
+        # SEM CÓDIGO DE LOCAL NÃO É UM LOCAL.
+        #
+        # Parte das linhas de polo vem com UF e município e sem
+        # `CO_LOCAL_OFERTA`. O código vazio entrava no conjunto como se fosse
+        # um local, então todas as linhas sem código de uma mesma UF
+        # colapsavam em UM polo — um polo inventado por UF afetada.
+        #
+        # A linha não é descartada: o município dela é conhecido e continua
+        # contando no alcance territorial, que é a pergunta que ela sabe
+        # responder. Contar cada linha como um polo distinto seria o erro
+        # oposto, porque a mesma unidade aparece uma vez por curso que atende.
+        if cod_local:
+            alvo_polos[uf].add(cod_local)
+        else:
+            polos_sem_codigo[ativo] += 1
         if cod_mun:
             alvo_muns[uf].add(cod_mun)
             if ativo:
@@ -576,6 +591,12 @@ def agregar_normalizado(cursos, locais, alunos, ies, mun_por_uf,
     sem_localizacao["polos_sem_uf"] = {
         "ativos": len(polos_sem_uf[True]),
         "em_extincao": len(polos_sem_uf[False]),
+    }
+    # Linhas de polo que a fonte traz sem identificar o local. O município
+    # delas conta; a identidade do polo, não. Publicado mesmo quando é zero.
+    sem_localizacao["polos_sem_codigo"] = {
+        "ativos": polos_sem_codigo[True],
+        "em_extincao": polos_sem_codigo[False],
     }
     _fechar(ufs, vagas_ies, vagas_mantenedora)
     return ufs, _fechar_municipios(municipios, nomes_municipio), sem_localizacao

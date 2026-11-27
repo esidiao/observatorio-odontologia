@@ -57,6 +57,10 @@
    "polos_sem_uf": {
     "ativos": 0,
     "em_extincao": 0
+   },
+   "polos_sem_codigo": {
+    "ativos": 0,
+    "em_extincao": 0
    }
   },
   "gerado_em": "2026-11-26"
