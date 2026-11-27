@@ -17,25 +17,51 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 DATA = REPO / "data"
 
-CENSO = 2024
+CENSO = 2025
 CICLO_CPC = "2023"
 COMPETENCIA_CNES = "202609"
 
-# ------------------------------------------------------- âncoras: Censo 2024
-REGISTROS_CENSO = 650
+# ------------------------------------------------------- âncoras: Censo 2025
+#
+# A EDIÇÃO MUDOU DE FORMA, E AQUI QUASE NADA MUDOU DE CONTEÚDO.
+#
+# O INEP normalizou os microdados em 2025: o cadastro único virou sete tabelas
+# e `TP_DIMENSAO` deixou de existir. `REGISTROS_CENSO` sobe de 650 para 676
+# porque passou a haver uma linha por curso — e, em Odontologia, já era
+# praticamente isso: sem EaD, não havia camada de polo nem de sede para
+# multiplicar as linhas.
+#
+# E o Decreto 12.456/2025, que encerrou a graduação em saúde inteiramente a
+# distância e virou a manchete dos observatórios irmãos, é um NÃO-EVENTO aqui.
+# Não porque se supôs: porque foi medido. Não há curso a distância nem
+# semipresencial em Odontologia, nem em 2024 nem em 2025.
+REGISTROS_CENSO = 676            # cursos, não mais curso × camada
 UFS_COM_PRESENCIAL = 27
-MUNICIPIOS_COM_OFERTA = 303
-CURSOS_PRESENCIAIS = 650
-VAGAS_PRESENCIAL = 118747
+MUNICIPIOS_COM_OFERTA = 308
+CURSOS_PRESENCIAIS = 673         # em atividade; três estão em extinção
+VAGAS_PRESENCIAL = 131644
+VAGAS_SEMIPRESENCIAL = 0         # categoria nova, e vazia neste curso
 VAGAS_EAD = 0
+VAGAS_TOTAL_ATIVA = 131644       # só presencial
 POLOS_REGISTROS = 0
 POLOS_MUNICIPIOS = 0
-MATRICULAS = 162750
-CONCLUINTES = 26883
-IES_DISTINTAS = 576
+POLOS_SEM_UF_ATIVOS = 0
+POLOS_SEM_UF_EM_EXTINCAO = 0
+MATRICULAS = 164680
+CONCLUINTES = 26681
+INGRESSOS = 48873
+IES_DISTINTAS = 597             # soma por UF; distintas no país são 595
+
+# Situação de curso, coluna que só existe de 2025 em diante. Três cursos
+# presenciais declarados em extinção ou já extintos, com 120 vagas e UMA
+# matrícula. Pequeno, e publicado do mesmo jeito: a extinção é um processo, e
+# quem está matriculado tem direito a concluir.
+VAGAS_EM_EXTINCAO = 120
+CURSOS_EM_EXTINCAO = 3
+MATRICULAS_EM_EXTINCAO = 1
 
 # A ausência de EaD como fato estrutural: não há uma linha sequer de ensino a
-# distância no recorte — nem sede, nem polo. As 27 UFs valem zero.
+# distância no recorte. As 27 UFs valem zero.
 UFS_SEM_VAGA_EAD = 27
 UFS_SEM_POLO = 27
 
@@ -71,6 +97,11 @@ def _ler(nome):
         raise SystemExit(
             f"[ERRO] {caminho} ausente. Rode o pipeline antes dos testes.")
     return json.loads(caminho.read_text(encoding="utf-8"))
+
+
+def _esquema():
+    prov = _ler("_proveniencia.json").get("fontes", {}).get("censo", {})
+    return prov.get("esquema", "unico")
 
 
 def _soma(ufs, campo):
@@ -137,9 +168,26 @@ def test_vagas_presenciais_e_ead():
     ufs = _ler("nacional.json")["ufs"]
     presencial = _soma(ufs, "vagas_presencial")
     ead = _soma(ufs, "vagas_ead")
+    semi = _soma(ufs, "vagas_semipresencial")
+    extin = _soma(ufs, "vagas_em_extincao")
     assert presencial == VAGAS_PRESENCIAL, (
         f"vagas presenciais: esperado {VAGAS_PRESENCIAL}, veio {presencial}")
     assert ead == VAGAS_EAD, f"vagas EaD: esperado {VAGAS_EAD}, veio {ead}"
+    # O semipresencial é categoria NOVA do Censo 2025, e aqui vem vazia. Zero
+    # medido, não ausência: o campo existe, foi lido para as 27 UFs e vale
+    # zero em todas. Se um dia aparecer oferta semipresencial em Odontologia,
+    # é notícia — e esta linha falha para que ela não entre calada.
+    assert semi == VAGAS_SEMIPRESENCIAL, (
+        f"vagas semipresenciais: esperado {VAGAS_SEMIPRESENCIAL}, veio {semi}. "
+        "Se passou a existir oferta semipresencial em Odontologia, as âncoras "
+        "e as seções do site que declaram a ausência mudam junto.")
+    assert extin == VAGAS_EM_EXTINCAO, (
+        f"vagas em extinção: esperado {VAGAS_EM_EXTINCAO}, veio {extin}")
+    assert presencial + semi + ead == VAGAS_TOTAL_ATIVA, (
+        "a capacidade ativa publicada não é a soma dos formatos ativos")
+    assert _soma(ufs, "vagas_total") == VAGAS_TOTAL_ATIVA, (
+        f"capacidade ativa: esperado {VAGAS_TOTAL_ATIVA}, veio "
+        f"{_soma(ufs, 'vagas_total')}")
 
 
 def test_cursos_e_ies():
@@ -148,9 +196,25 @@ def test_cursos_e_ies():
 
 
 def test_polos_ead():
+    """
+    Zero polo, e o zero é medido.
+
+    Em 2025 a bandeira de polo mora na tabela de local de oferta, e ela marca
+    como polo até endereço de curso PRESENCIAL — 334 deles neste recorte. Esses
+    não são alcance de oferta a distância, e por isso ficam fora da contagem:
+    somá-los faria Odontologia aparecer com uma rede de polos que ela não tem.
+    """
     ufs = _ler("nacional.json")["ufs"]
-    assert _soma(ufs, "ead_polos_registros") == POLOS_REGISTROS
+    assert _soma(ufs, "ead_polos_registros") == POLOS_REGISTROS, (
+        f"polos: esperado {POLOS_REGISTROS}, veio "
+        f"{_soma(ufs, 'ead_polos_registros')}. Em Odontologia não há oferta a "
+        "distância; polo contado aqui é sinal de que endereço de curso "
+        "presencial entrou na conta.")
     assert _soma(ufs, "ead_polos_municipios") == POLOS_MUNICIPIOS
+    sem_uf = ((_ler("bruto.json")["metadados"].get("sem_localizacao") or {})
+              .get("polos_sem_uf") or {})
+    assert sem_uf.get("ativos") == POLOS_SEM_UF_ATIVOS
+    assert sem_uf.get("em_extincao") == POLOS_SEM_UF_EM_EXTINCAO
 
 
 def test_fluxo():
@@ -185,12 +249,23 @@ def test_nao_existe_camada_de_ead_no_recorte():
     """
     Confere na FONTE que a ausência de EaD é do dado, não da leitura.
 
-    O conjunto publicado não consegue provar isso sozinho: zero em
-    `vagas_ead` tanto pode significar "o Censo não tem linha de EaD" quanto
-    "o pipeline somou a camada errada e perdeu as vagas". A diferença só
-    aparece no recorte bruto, onde `TP_DIMENSAO` separa presencial (1), polo
-    (2) e sede EaD (3). Se um dia o INEP registrar oferta a distância em
-    Odontologia, é aqui que o observatório fica sabendo.
+    O conjunto publicado não consegue provar isso sozinho: zero em `vagas_ead`
+    tanto pode significar "o Censo não tem linha de EaD" quanto "o pipeline
+    somou a camada errada e perdeu as vagas". A diferença só aparece no recorte
+    bruto.
+
+    ESTE TESTE LIA UMA COLUNA QUE DEIXOU DE EXISTIR.
+
+    Até 2024 ele conferia `TP_DIMENSAO`, que separava presencial (1), polo (2)
+    e sede de EaD (3), e exigia que o recorte tivesse só a camada 1. Em 2025 o
+    INEP normalizou os microdados e essa coluna saiu: a pergunta continua
+    válida, mas tem de ser feita à coluna que a edição nova usa —
+    `TP_MODALIDADE_ENSINO`, que agora registra o formato de oferta, com 1
+    presencial, 2 a distância e 3 semipresencial.
+
+    Deixá-lo lendo a coluna antiga seria pior que apagá-lo: `set()` de valores
+    vazios não casa com `{"1"}`, então ele falharia por motivo errado — e, se
+    alguém "consertasse" o conjunto esperado, passaria a verificar nada.
     """
     import csv
     recorte = REPO / "etl" / "dados" / f"curso_odontologia_{CENSO}.csv"
@@ -199,15 +274,37 @@ def test_nao_existe_camada_de_ead_no_recorte():
               "rode etl/extrair_censo.py)")
         return
     csv.field_size_limit(1 << 24)
-    dimensoes = set()
+    coluna = "TP_MODALIDADE_ENSINO" if _esquema() == "normalizado" else "TP_DIMENSAO"
+    valores = set()
     with open(recorte, encoding="utf-8") as f:
-        for linha in csv.DictReader(f, delimiter=";"):
-            dimensoes.add((linha.get("TP_DIMENSAO") or "").strip())
-    assert dimensoes == {"1"}, (
-        f"o recorte tem as camadas {sorted(dimensoes)}. Se apareceu 2 (polo) "
-        "ou 3 (sede EaD), passou a existir oferta a distância em Odontologia: "
-        "é notícia, e todas as âncoras de EaD mudam junto — inclusive as "
-        "seções do site que hoje declaram a ausência.")
+        leitor = csv.DictReader(f, delimiter=";")
+        assert coluna in (leitor.fieldnames or []), (
+            f"a coluna {coluna} não está no recorte. Colunas que existem: "
+            f"{(leitor.fieldnames or [])[:12]}... Se o INEP renomeou outra "
+            "vez, este teste tem de ser reescrito, não afrouxado.")
+        for linha in leitor:
+            valores.add((linha.get(coluna) or "").strip())
+    assert valores == {"1"}, (
+        f"o recorte tem {coluna} = {sorted(valores)}. Se apareceu 2 ou 3, "
+        "passou a existir oferta a distância ou semipresencial em "
+        "Odontologia: é notícia, e todas as âncoras de EaD mudam junto — "
+        "inclusive as seções do site que hoje declaram a ausência.")
+
+
+def test_o_esquema_declarado_bate_com_a_edicao():
+    """
+    O teste acima escolhe a coluna pelo esquema declarado. Esta garante que o
+    esquema declarado é o certo.
+
+    Sem ela, bastaria a proveniência trazer a chave errada para a conferência
+    da camada passar a olhar uma coluna que não existe, e para o teste se
+    desligar sozinho continuando verde. Teste que se desliga e não avisa é
+    pior que teste ausente, porque dá a impressão de cobertura.
+    """
+    esperado = "normalizado" if CENSO >= 2025 else "unico"
+    assert _esquema() == esperado, (
+        f"o Censo publicado é {CENSO} e a proveniência declara esquema "
+        f"{_esquema()!r}; esperado {esperado!r}.")
 
 
 def test_zero_de_ead_e_medida_nao_ausencia():

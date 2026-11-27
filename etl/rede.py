@@ -32,6 +32,7 @@ erro regrediu duas vezes no projeto de Farmácia; aqui ele é difícil de comete
 por acidente porque `sondar` nunca devolve booleano puro.
 """
 import io
+import pathlib
 import json
 import socket
 import ssl
@@ -185,20 +186,38 @@ class _FluxoBlocos(io.RawIOBase):
     def __init__(self, gerador):
         self._gerador = gerador
         self._buffer = b""
+        # Cursor DENTRO do bloco, em vez de refatiar o bloco a cada leitura.
+        #
+        # A versão anterior fazia `self._buffer = self._buffer[n:]` depois de
+        # entregar n bytes — o que COPIA todo o resto do bloco. Os blocos aqui
+        # são grandes de propósito (8 MB comprimidos do ZIP viram perto de 60
+        # MB de CSV) e quem lê pede de 8 KB em 8 KB, então consumir um bloco
+        # custava ~7.500 cópias de ~60 MB: centenas de gigabytes de memcpy
+        # para mover 60 MB de dados úteis.
+        #
+        # O custo crescia com o QUADRADO do tamanho do bloco, e por isso não
+        # aparecia em arquivo pequeno: a tabela de local de oferta do Censo
+        # 2025, com 1,6 GB, levava horas; medido, o processo gastava 12 s de
+        # CPU a cada 30 s de parede sem ler um byte novo do disco.
+        self._pos = 0
         self._fim = False
 
     def readable(self):
         return True
 
     def readinto(self, destino):
-        while not self._buffer and not self._fim:
+        while self._pos >= len(self._buffer) and not self._fim:
             try:
                 self._buffer = next(self._gerador)
+                self._pos = 0
             except StopIteration:
                 self._fim = True
-        n = min(len(destino), len(self._buffer))
-        destino[:n] = self._buffer[:n]
-        self._buffer = self._buffer[n:]
+        disponivel = len(self._buffer) - self._pos
+        if disponivel <= 0:
+            return 0
+        n = min(len(destino), disponivel)
+        destino[:n] = self._buffer[self._pos:self._pos + n]
+        self._pos += n
         return n
 
 
@@ -378,6 +397,39 @@ class ZipRemotoHTTP(ZipRemoto):
             if tentativa < self.tentativas - 1:
                 time.sleep(ESPERA_BASE * (tentativa + 1))
         raise RuntimeError(f"falha ao ler {self.url} em {inicio}+{quantidade}: {ultimo}")
+
+
+class ZipLocal(ZipRemoto):
+    """
+    ZIP lido de um arquivo no disco, com a interface do leitor remoto.
+
+    Existe para o espelho local do Censo: a família de observatórios lê o mesmo
+    arquivo do INEP, e baixá-lo uma vez por repositório é tráfego repetido sem
+    ganho nenhum. Só as duas primitivas mudam; índice, fluxo e fatiamento são
+    os mesmos do `ZipRemoto`, então não há um segundo caminho de leitura para
+    divergir do primeiro.
+    """
+
+    def __init__(self, caminho):
+        super().__init__()
+        self.caminho = pathlib.Path(caminho)
+        if not self.caminho.is_file():
+            raise SystemExit(f"[ERRO] espelho não é arquivo: {self.caminho}")
+
+    def tamanho(self):
+        if self._tamanho is None:
+            self._tamanho = self.caminho.stat().st_size
+        return self._tamanho
+
+    def _ler(self, inicio, quantidade):
+        with open(self.caminho, "rb") as f:
+            f.seek(inicio)
+            dados = f.read(quantidade)
+        if len(dados) != quantidade:
+            raise RuntimeError(
+                f"leitura curta no espelho {self.caminho} em "
+                f"{inicio}+{quantidade}: {len(dados)} bytes")
+        return dados
 
 
 class ZipRemotoFTP(ZipRemoto):

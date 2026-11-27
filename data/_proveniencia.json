@@ -1,19 +1,34 @@
 {
-  "gerado_em": "2026-10-23",
+  "gerado_em": "2026-11-26",
   "fontes": {
     "censo": {
       "presente": true,
       "fonte": "Censo da Educação Superior (INEP)",
-      "url": "https://download.inep.gov.br/microdados/microdados_censo_da_educacao_superior_2024.zip",
-      "ano_censo": 2024,
-      "membro_cursos": "microdados_censo_da_educacao_superior_2024/dados/MICRODADOS_CADASTRO_CURSOS_2024.CSV",
-      "membro_ies": "microdados_censo_da_educacao_superior_2024/dados/MICRODADOS_ED_SUP_IES_2024.CSV",
+      "url": "https://download.inep.gov.br/microdados/microdados_censo_educacao_superior_2025.zip",
+      "ano_censo": 2025,
+      "esquema": "normalizado",
+      "esquema_nota": "A partir de 2025 o INEP publica os microdados em tabelas separadas e a coluna TP_DIMENSAO deixou de existir. As camadas presencial/polo/sede viraram bandeiras na tabela de local de oferta, e o perfil do aluno saiu para tabela própria.",
+      "membro_cursos": "microdados_censo_educacao_superior_2025/dados/ces2025_microdados_tabela_curso.csv",
+      "membro_local_oferta": "microdados_censo_educacao_superior_2025/dados/ces2025_microdados_tabela_local_oferta.csv",
+      "membro_aluno": "microdados_censo_educacao_superior_2025/dados/ces2025_microdados_tabela_aluno.csv",
+      "membro_ies": "microdados_censo_educacao_superior_2025/dados/ces2025_microdados_tabela_ies.csv",
+      "codificacao": "utf-8-sig",
       "rotulo_cine": "Odontologia",
-      "md5_publicado": "dbe25e67857aa68b12beaeffa194f53f *MICRODADOS_CADASTRO_IES_2024.csv\r\n4ada15841c698a47ec19d6cb53ac2c13 *MICRODADOS_CADASTRO_CURSOS_2024.csv",
-      "linhas_cadastro": 720349,
-      "linhas_curso": 650,
-      "ies_cadastradas": 2561,
-      "extraido_em": "2026-09-11"
+      "md5_publicado": "34EE4CC0618F22C2F2854B0044B33775 *ces2025_microdados_tabela_ies.csv\r\nB3D7478FEFC6840935F653665667B6ED *ces2025_microdados_tabela_local_oferta.csv\r\n99FAD1478FD4B260C623870620C17424 *ces2025_microdados_tabela_biblioteca.csv\r\n6F35BA15EE7DB7FE2D160F45FC538E5C *ces2025_microdados_tabela_laboratorio.csv\r\n58184357908B88C495BFD9A95F77A795 *ces2025_microdados_tabela_docente.csv\r\n3B40DC27EF483FDC22A786FC0D0A81A2 *ces2025_microdados_tabela_curso.csv\r\n74E3AA0C99693E8AA4D9D855A0184D15 *ces2025_microdados_tabela_aluno.csv",
+      "linhas_cadastro": null,
+      "fatias_reaproveitadas": true,
+      "linhas_curso": 676,
+      "linhas_local_oferta": 676,
+      "linhas_aluno_nivel_curso": 676,
+      "aluno_niveis_na_fatia": {
+        "2": 676
+      },
+      "aluno_niveis_na_fonte": null,
+      "aluno_nivel_usado": "2",
+      "aluno_nivel_nota": "A tabela de aluno conta a MESMA pessoa em três níveis de agregação (1 IES, 2 curso, 3 local de oferta). Só o nível 2 é lido; somar a tabela inteira triplicaria o país. No nível 3 o INEP suprime contagens de até três por proteção de dado pessoal, então perfil por local de oferta teria buraco nos lugares pequenos.",
+      "ies_cadastradas": 2550,
+      "extraido_em": "2026-11-26",
+      "lido_de": "INEP por Range"
     },
     "cpc": {
       "presente": true,
@@ -26,7 +41,7 @@
       "componente_q_do_iaf": "CPC (Faixa), escala 1 a 5",
       "cursos_avaliados": 452,
       "ufs_avaliadas": 27,
-      "extraido_em": "2026-09-11"
+      "extraido_em": "2026-11-26"
     },
     "cnes": {
       "presente": true,
@@ -160,7 +175,7 @@
     }
   },
   "limitacoes_conhecidas": [
-    "Não existe oferta de Odontologia a distância no Censo 2024: as 650 ofertas do recorte são presenciais, com 0 vaga EaD e nenhum polo em 27 das 27 UFs. Esse zero é MEDIDO — o Censo varreu as três camadas de TP_DIMENSAO e não encontrou linha alguma de EaD —, não é lacuna de apuração. Os indicadores de EaD continuam publicados no conjunto de dados, valendo zero, e o site declara a ausência numa seção própria em vez de espalhar colunas vazias pelas páginas.",
+    "Não existe oferta de Odontologia a distância no Censo 2024: as 673 ofertas do recorte são presenciais, com 0 vaga EaD e nenhum polo em 27 das 27 UFs. Esse zero é MEDIDO — o Censo varreu as três camadas de TP_DIMENSAO e não encontrou linha alguma de EaD —, não é lacuna de apuração. Os indicadores de EaD continuam publicados no conjunto de dados, valendo zero, e o site declara a ausência numa seção própria em vez de espalhar colunas vazias pelas páginas.",
     "Como pct_ead é constante em zero, ele fica FORA da matriz de correlação: variável sem variância não tem correlação fraca, tem correlação indefinida. Calculá-la assim mesmo devolveria ruído com aparência de resultado.",
     "Todas as 27 UFs têm curso avaliado no ciclo do CPC 2023. A cobertura de indicador, porém, não é total: parte dos cursos avaliados sai sem CPC contínuo e sem IDD, e esses ficam fora das médias ponderadas em vez de entrarem como zero.",
     "A rede especializada é medida pelo SERVIÇO 114 declarado no CNES (atenção especializada à saúde bucal), não pela habilitação de Centro de Especialidades Odontológicas: os códigos de habilitação existem na tabela de domínio, e nenhuma tabela-fato desta base os relaciona a estabelecimento. Por isso o indicador não se chama CEO — chamá-lo assim afirmaria uma habilitação que não foi lida.",

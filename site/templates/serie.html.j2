@@ -27,6 +27,37 @@
   {% endif %}
 </section>
 
+{% if serie and serie.anos and '2025' in serie.anos %}
+{#
+  Nota de não comparabilidade. O texto é escolhido pelo que a MEDIÇÃO deste
+  curso mostra, não por um ramo genérico: ver o commit que a introduziu.
+#}
+<section class="secao">
+  <h2 class="secao-titulo">O que mudou de definição em 2025</h2>
+  <p class="secao-lede">
+    A edição de 2025 encosta no limite da comparação. O dicionário do INEP diz
+    que até 2024 a variável de modalidade representa a <em>modalidade de
+    ensino</em> do curso e que a partir de 2025 ela representa o <em>formato de
+    oferta</em>, conforme o Decreto 12.456/2025 — que também criou a categoria
+    <strong>semipresencial</strong>, inexistente nas edições anteriores.
+    O mesmo decreto encerrou a graduação em saúde inteiramente a distância.
+    Em Odontologia isso não mudou nada, e a afirmação é medida, não suposta:
+    <strong>nunca houve oferta a distância neste curso</strong> — nem antes nem
+    depois da mudança —, e a categoria semipresencial também veio vazia. A
+    linha de vagas a distância vale zero em todas as edições porque foi lida e
+    deu zero, não porque falte dado.
+  </p>
+  <p class="nota">
+    A capacidade de 2025 é a <strong>ativa</strong>: exclui o que a instituição
+    declarou em extinção, que não desaparece — aparece em campo próprio, porque
+    esses cursos continuam com estudante matriculado e, no ano da virada, ainda
+    receberam ingressante. Antes de 2025 a fonte não distinguia situação de
+    curso, então os campos de extinção e de semipresencial são
+    <span class="sem-dados">sem dados</span> naquelas edições, nunca zero.
+  </p>
+</section>
+{% endif %}
+
 {% if serie and serie.anos %}
 
 <section class="secao">

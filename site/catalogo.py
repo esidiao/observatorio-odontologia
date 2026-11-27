@@ -181,11 +181,97 @@ INDICADORES = [
     # zeros pelas tabelas principais como se fossem lacunas.
     _i("vagas_ead", "Vagas EaD", "Vagas a distância", "Ensino a distância",
        "Vagas anuais em cursos a distância, registradas na sede da "
-       "mantenedora. Em Odontologia são ZERO no país inteiro, contra 118.747 "
+       "mantenedora. Em Odontologia são ZERO no país inteiro, contra 131.644 "
        "presenciais. Zero aqui significa que o estado foi medido e não tem "
        "nenhuma vaga EaD — é medida, não lacuna. O campo continua publicado "
        "justamente para que a ausência seja verificável.",
        "vagas/ano", "contextual", "Censo INEP", dec=0, aliases=["vagas ead"]),
+
+    # ------------------------------------------- Censo 2025: formato e situação
+    #
+    # O Decreto 12.456/2025 reorganizou a oferta: criou o formato
+    # semipresencial e encerrou a graduação inteiramente a distância nos cursos
+    # da área da saúde. O Censo 2025 registra as duas mudanças em colunas
+    # novas, e estes verbetes existem para que o leitor entenda por que a série
+    # muda de forma justamente aqui.
+
+    _i("pct_nao_presencial", "% não presencial",
+       "Participação da oferta que não exige presença integral", "Ensino a distância",
+       "Fatia da capacidade ativa em cursos que não são inteiramente "
+       "presenciais. Até o Censo 2024 isso é a própria EaD; de 2025 em diante "
+       "inclui o semipresencial, formato criado pelo Marco Regulatório. O "
+       "indicador atravessa a mudança de lei porque faz a mesma pergunta nas "
+       "duas edições: que parte da oferta dispensa presença integral.",
+       "%", "contextual", "Censo INEP", dec=1, min=0, max=100,
+       aliases=["pct nao presencial"]),
+
+    _i("vagas_semipresencial", "Vagas semipres.", "Vagas em cursos semipresenciais",
+       "Ensino a distância",
+       "Vagas anuais em cursos de formato semipresencial, categoria criada "
+       "pelo Marco Regulatório de 2025. O semipresencial combina ensino a "
+       "distância com atividade presencial obrigatória, e por isso ocupa um "
+       "município de verdade — diferente do curso inteiramente a distância, "
+       "que é registrado na sede da mantenedora.",
+       "vagas/ano", "contextual", "Censo INEP", dec=0,
+       aliases=["vagas semipresencial", "semipresencial"]),
+
+    _i("n_cursos_semipresencial", "Cursos semipres.", "Cursos semipresenciais",
+       "Ensino a distância",
+       "Número de cursos no formato semipresencial em atividade.",
+       "cursos", "contextual", "Censo INEP", dec=0),
+
+    _i("matriculas_semipresencial", "Mat. semipres.",
+       "Matrículas em cursos semipresenciais", "Fluxo",
+       "Estudantes matriculados em cursos de formato semipresencial.",
+       "matrículas", "contextual", "Censo INEP", dec=0),
+
+    _i("polos_em_extincao", "Polos em extinção",
+       "Polos de apoio de cursos em extinção", "Território",
+       "Locais de apoio presencial que atendem cursos declarados em extinção. "
+       "São a rede que a regulação está desmontando, e continuam recebendo "
+       "estudante enquanto as turmas existentes não se formam. Contados por "
+       "local distinto, não por linha: a fonte tem uma linha por local e "
+       "curso, e um polo que atende três cursos apareceria três vezes.",
+       "polos", "contextual", "Censo INEP", dec=0),
+
+    _i("polos_em_extincao_municipios", "Munic. com polo em extinção",
+       "Municípios alcançados por polo de curso em extinção", "Território",
+       "Municípios que têm ao menos um polo de apoio de curso em extinção. "
+       "Publicado ao lado do alcance ativo porque a diferença entre os dois é "
+       "o tamanho do recuo territorial que a mudança de regulação provoca.",
+       "municípios", "contextual", "Censo INEP", dec=0),
+
+    _i("vagas_em_extincao", "Vagas em extinção",
+       "Vagas em cursos em extinção", "Ensino a distância",
+       "Vagas de cursos que a instituição declarou em extinção, ou que já "
+       "constam como extintos. Não entram na capacidade ativa: são oferta que "
+       "a regulação encerrou. Ficam publicadas à parte porque, no ano da "
+       "virada, esses cursos ainda receberam ingressantes — a extinção é um "
+       "processo, não um fato consumado.",
+       "vagas/ano", "contextual", "Censo INEP", dec=0,
+       aliases=["vagas em extincao"]),
+
+    _i("n_cursos_em_extincao", "Cursos em extinção", "Cursos em extinção",
+       "Ensino a distância",
+       "Número de cursos declarados em extinção ou já extintos. Onde o "
+       "Decreto 12.456/2025 encerrou a graduação a distância, são justamente "
+       "os cursos daquela modalidade.",
+       "cursos", "contextual", "Censo INEP", dec=0),
+
+    _i("matriculas_em_extincao", "Mat. em extinção",
+       "Matrículas em cursos em extinção", "Fluxo",
+       "Estudantes matriculados em cursos em extinção. São pessoas que estão "
+       "matriculadas agora e têm direito a concluir no formato em que "
+       "ingressaram, por isso entram no total de matrículas — ao contrário "
+       "das vagas, que não entram na capacidade ativa.",
+       "matrículas", "contextual", "Censo INEP", dec=0),
+
+    _i("ingressos_em_extincao", "Ingressos em extinção",
+       "Ingressantes em cursos em extinção", "Fluxo",
+       "Pessoas que ingressaram no ano em curso já declarado em extinção. O "
+       "número existe porque o encerramento tem prazo: enquanto ele não "
+       "chega, a matrícula continua sendo possível.",
+       "ingressantes", "contextual", "Censo INEP", dec=0),
 
     _i("pct_ead", "% EaD", "Participação da EaD na capacidade",
        "Ensino a distância",

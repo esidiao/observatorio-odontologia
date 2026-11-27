@@ -368,7 +368,11 @@ def main():
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--check-only", action="store_true",
                    help="só verifica se as fontes têm edição nova")
-    p.add_argument("--ano", type=int, default=2024, help="ano do Censo")
+    # O ano padrão acompanha a edição PUBLICADA, não a anterior: deixar
+    # 2024 aqui depois de publicar 2025 faz um `python etl/pipeline.py`
+    # sem argumento REGREDIR o conjunto para a edição antiga, com todos
+    # os portões passando.
+    p.add_argument("--ano", type=int, default=2025, help="ano do Censo")
     p.add_argument("--competencia", help="competência do CNES (AAAAMM)")
     p.add_argument("--pular-cnes", action="store_true",
                    help="não reextrai o CNES (demorado); a cobertura fica nula")

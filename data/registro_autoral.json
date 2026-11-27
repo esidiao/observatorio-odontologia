@@ -8,8 +8,8 @@
     "obra": "Observatório Nacional da Formação em Odontologia",
     "descricao": "Sítio estático data-driven com indicadores de acesso territorial, qualidade e cobertura assistencial dos cursos de Odontologia no Brasil: formulação e cálculo dos índices ICT, E, IAF, ICAB, ICRE e ICSB, catálogo de indicadores, textos e desenho editorial."
   },
-  "registrado_em": "2026-10-24T12:11:53+00:00",
-  "git_commit_ancora": "df9d9f4cf88e97c765a1c0982b49c4f114c4f0d1",
+  "registrado_em": "2026-11-26T23:52:40+00:00",
+  "git_commit_ancora": "55fc6a5d8cabd8cfa244d315cf074dd63da6c71d",
   "algoritmo": "SHA-256 sobre o conteúdo com fim de linha normalizado em LF",
   "fundamento": "Lei 9.610/1998 (direitos autorais) e Lei 9.609/1998 (programa de computador). O resumo combinado é impressão digital única do conjunto; o commit Git ancora a data no histórico versionado.",
   "como_verificar": [
@@ -22,9 +22,9 @@
   ],
   "natureza": "Declaração datada de conteúdo, com anterioridade ancorada no histórico do repositório. Permite comparar uma cópia com o original arquivo a arquivo. Não é registro em cartório nem depósito no INPI, e não substitui nenhum dos dois.",
   "escopo": "Apenas material autoral: código, textos, templates e o desenho dos índices. Não inclui os dados públicos (INEP, DATASUS, IBGE), que pertencem às respectivas fontes, nem bibliotecas de terceiros.",
-  "n_arquivos": 39,
-  "bytes_totais": 521139,
-  "sha256_combinado": "f3d66e4d128186586e322fc976eabf6fd3a6505a81f80ef8f485334ee396a1f9",
+  "n_arquivos": 41,
+  "bytes_totais": 613555,
+  "sha256_combinado": "c42489fb62b180b8af5d9a18de340ad48fc787b08c5a52039f6a26a6b4bc778f",
   "arquivos": [
     {
       "arquivo": "README.md",
@@ -58,9 +58,9 @@
     },
     {
       "arquivo": "etl/extrair_censo.py",
-      "bytes": 9477,
-      "linhas": 225,
-      "sha256": "c2ac9360dc2ef0f8dcac63d3ad93bc7af2b26a0aeecc95dba1da432fb141b497"
+      "bytes": 32597,
+      "linhas": 716,
+      "sha256": "8e6b87882f1a9880c1fc847e817e47e074cb612bae87a1b358e2d5ec2e098351"
     },
     {
       "arquivo": "etl/extrair_cnes.py",
@@ -82,21 +82,21 @@
     },
     {
       "arquivo": "etl/ingestao.py",
-      "bytes": 18162,
-      "linhas": 443,
-      "sha256": "a625a6f5bbb25a4e1e149dd6566b0d662033d6ea377b90cb7087e8a52592ea84"
+      "bytes": 35563,
+      "linhas": 797,
+      "sha256": "96d01161b2c8ddb8e63c99779fe09ffc7ec58f7c465eac4b653fa2bda3babf86"
     },
     {
       "arquivo": "etl/pipeline.py",
-      "bytes": 14315,
-      "linhas": 364,
-      "sha256": "3f033b5df8a419d9fcc67533a8d104b3d050f399d9b2c79403d9c48a0c547b4d"
+      "bytes": 15811,
+      "linhas": 394,
+      "sha256": "0a0a62556bc63fb1f05c6e99d31bf605e82759f12375c251ea98c709bce66796"
     },
     {
       "arquivo": "etl/rede.py",
-      "bytes": 19894,
-      "linhas": 506,
-      "sha256": "edf5b61d4d2c7f32ed2921537619375a86447aa3a4a2781b0e838b4a859c4506"
+      "bytes": 22111,
+      "linhas": 558,
+      "sha256": "8cbe656ede33d7dbf782595a2385a91abcf098029d2a40e30733db536f283fed"
     },
     {
       "arquivo": "etl/registro_autoral.py",
@@ -106,21 +106,21 @@
     },
     {
       "arquivo": "etl/serie.py",
-      "bytes": 11442,
-      "linhas": 275,
-      "sha256": "6ff2a66d49e4ca5bcfeafe7a42e4f471728534a380aef9f67c21ece4247f1e54"
+      "bytes": 23326,
+      "linhas": 513,
+      "sha256": "8c8450fbc74a99c044685464ddb0c7ad6b8b787ece4a9cd6ef20b57c49868450"
     },
     {
       "arquivo": "site/build.py",
-      "bytes": 31842,
-      "linhas": 733,
-      "sha256": "949d0f745943df06c4ebccae577d265779bfda592dcb903bb16f7312934bef2e"
+      "bytes": 34945,
+      "linhas": 792,
+      "sha256": "ef5c135ec4ecf70b869620e677ed3e3ff39b9c3ccfe0031a1098faf99b60a179"
     },
     {
       "arquivo": "site/catalogo.py",
-      "bytes": 33272,
-      "linhas": 659,
-      "sha256": "a819a59c7d03d9b327191b07286147e045b021bbb2613d78519a6fc560f57cbf"
+      "bytes": 38220,
+      "linhas": 745,
+      "sha256": "d59a9e777904b629d0dec52e0b2eb7d979964e317909620202b54b2c048b552b"
     },
     {
       "arquivo": "site/estatistica.py",
@@ -202,9 +202,9 @@
     },
     {
       "arquivo": "site/templates/serie.html.j2",
-      "bytes": 7525,
-      "linhas": 209,
-      "sha256": "63d6e7bdcca9afecd9886d7b43be7076e1a3d3b7f6e107dd92f904a1d4615553"
+      "bytes": 7792,
+      "linhas": 214,
+      "sha256": "7b54c9701bee01a5504b0560f1e1ce290c8afbcde89db7d5ec3cd620bc3f3ab8"
     },
     {
       "arquivo": "site/templates/uf.html.j2",
@@ -226,9 +226,9 @@
     },
     {
       "arquivo": "tests/test_acessibilidade.py",
-      "bytes": 13881,
-      "linhas": 344,
-      "sha256": "dcd34fac32fa6314a76d2cae356a546baabb679c24da910a0dda066ff47c7807"
+      "bytes": 18110,
+      "linhas": 443,
+      "sha256": "9b2aadb99ae94ce4766bf2578792e812465781296e54465b78b19f1db57c9d70"
     },
     {
       "arquivo": "tests/test_catalogo.py",
@@ -238,9 +238,15 @@
     },
     {
       "arquivo": "tests/test_check_fontes.py",
-      "bytes": 8989,
+      "bytes": 8995,
       "linhas": 256,
-      "sha256": "3594e6ef48427727ce2469a63e5caae2ca4db536d55bd5391826b221e0f09d77"
+      "sha256": "5beccb291913a8e0985f42d91a8a319f0dbd945f68e8cacaaca2c4dc953a34cb"
+    },
+    {
+      "arquivo": "tests/test_conteudo_publicado.py",
+      "bytes": 10602,
+      "linhas": 254,
+      "sha256": "bce263da4c50bd508543b07b2b906c9180f0f7b5c520b92ca2ed5033d3bce805"
     },
     {
       "arquivo": "tests/test_links.py",
@@ -249,10 +255,16 @@
       "sha256": "37c4f21610aa9485585ff5d22d3dec7575069c8fc848d3ec52472dab049537db"
     },
     {
+      "arquivo": "tests/test_sem_vazamento.py",
+      "bytes": 8057,
+      "linhas": 171,
+      "sha256": "1fe4ef9dc14bb4b4194bf3779a8d1f2858166fc9620a85f1c6d3488bc2399cd1"
+    },
+    {
       "arquivo": "tests/test_validacao.py",
-      "bytes": 25445,
-      "linhas": 578,
-      "sha256": "d1f7d04465e58bb28a310b413a98e3dec40bee3c4ed530239f20e2feb3877217"
+      "bytes": 30531,
+      "linhas": 675,
+      "sha256": "7f6405f28fb7712348e41b1cd14a4ff7e9ba47aa018a1458353642a25c1d608b"
     },
     {
       "arquivo": ".github/workflows/ci.yml",

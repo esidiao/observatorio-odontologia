@@ -13,17 +13,19 @@ dependências.
 
 ## O que este observatório mede
 
-| | Odontologia (Censo 2024) | Psicologia, para escala |
+| | Odontologia (Censo 2025) | Psicologia, para escala |
 |---|---:|---:|
-| Registros no Censo, rótulo CINE exato | **650** | 1.372 |
+| Cursos no Censo, rótulo CINE exato | **676** | 1.319 |
 | UFs com oferta presencial | **27** de 27 | 27 |
-| Municípios com oferta presencial | **303** | 498 |
-| Vagas presenciais | **118.747** | 276.250 |
-| Vagas EaD | **0** | 549 |
-| Polos de EaD | **0** | 114 |
-| Matrículas | **162.750** | 375.574 |
-| Concluintes | **26.883** | 49.065 |
-| IES distintas | **576** | 1.032 |
+| Municípios com oferta presencial | **308** | 514 |
+| Vagas presenciais | **131.644** | 296.638 |
+| Vagas **a distância** | **0** | 591 |
+| Vagas **semipresenciais** | **0** | 0 |
+| Polos | **0** | 2.510 |
+| Vagas em cursos encerrados ou em extinção | **120** (3 cursos) | 200 (1 curso) |
+| Matrículas | **164.680** | 410.621 |
+| Concluintes | **26.681** | 44.301 |
+| IES distintas no país | **595** | 1.080 |
 | Cursos avaliados | **452** (CPC 2023) | 746 (CPC 2022) |
 | Municípios com cirurgião-dentista no SUS | **5.565** de 5.571 | 5.528 |
 | Cirurgiões-dentistas no SUS | **96.748** | 72.751 |
@@ -32,16 +34,36 @@ dependências.
 
 ### A manchete é uma ausência
 
-**Não existe Odontologia a distância no Brasil.** As 650 ofertas registradas no
-Censo 2024 são presenciais — nenhuma vaga de EaD, nenhum polo, em nenhuma
-unidade da federação —, e os 452 cursos avaliados no CPC 2023 também são todos
-presenciais.
+**Não existe Odontologia a distância no Brasil.** Os 676 cursos registrados no
+Censo 2025 são presenciais — nenhuma vaga a distância, nenhuma semipresencial,
+nenhum polo, em nenhuma unidade da federação —, e os 452 cursos avaliados no
+CPC 2023 também são todos presenciais.
 
-Esse zero é **medido, não presumido**. O cadastro do Censo separa a oferta em
-três camadas (`TP_DIMENSAO`: presencial, polo de EaD, sede de EaD) e as três
-foram lidas: só a primeira tem linha. Nos observatórios irmãos a modalidade vai
-de 0,2% da capacidade em Psicologia a 66,9% em Administração — aqui ela é
-exatamente nada.
+Esse zero é **medido, não presumido**. Até 2024 a verificação era feita em
+`TP_DIMENSAO`, a coluna que separava presencial, polo de EaD e sede de EaD: as
+três camadas eram lidas e só a primeira tinha linha. Em 2025 essa coluna
+**deixou de existir** — o INEP normalizou os microdados —, e a mesma pergunta
+passou a ser feita a `TP_MODALIDADE_ENSINO`, que agora registra o formato de
+oferta (1 presencial, 2 a distância, 3 semipresencial). O teste que faz essa
+conferência foi reescrito para a coluna nova em vez de ser apagado: ele é o
+único jeito de distinguir "não existe oferta a distância" de "o pipeline somou
+a tabela errada".
+
+### O decreto que mudou a família não mudou nada aqui
+
+O Decreto 12.456/2025 encerrou a graduação em saúde inteiramente a distância, e
+isso virou a manchete dos observatórios irmãos: em Fisioterapia são 302.594
+vagas em extinção, em Fonoaudiologia 39.580. Em Odontologia o decreto é um
+**não-evento**, e a afirmação é medida, não suposta: não havia oferta a
+distância para encerrar.
+
+O que a edição nova trouxe foi a coluna `TP_SITUACAO`, que declara curso
+extinto ou em extinção. Em Odontologia são **três cursos presenciais, com 120
+vagas e uma matrícula** — pequeno, e publicado do mesmo jeito, porque a
+extinção é um processo e quem está matriculado tem direito a concluir.
+
+Nos observatórios irmãos a oferta não presencial vai de 0,2% da capacidade em
+Psicologia a dois terços em Administração — aqui ela é exatamente nada.
 
 A consequência é de produto, não só de dado: como `pct_ead` é constante,
 **ele fica fora da matriz de correlação** (variável sem variância não tem
@@ -52,7 +74,7 @@ informa alguma coisa.
 
 ### O rótulo CINE não tem vizinho, e o critério exato continua
 
-Medido no Censo 2024: `Odontologia` é o **único** rótulo que contém "odont".
+Medido no Censo 2025: `Odontologia` é o **único** rótulo que contém "odont".
 Diferente de `Psicologia`, que convive com `Psicopedagogia` (6.083 registros),
 ou de `Administração`, ao lado de `Administração pública` (3.530).
 
@@ -62,7 +84,7 @@ passou a usar substring porque "dava no mesmo" somaria o curso novo sem avisar.
 O diagnóstico refaz a verificação em qualquer edição:
 
 ```bash
-python etl/extrair_censo.py --ano 2024 --listar-rotulos odont
+python etl/extrair_censo.py --ano 2025 --listar-rotulos odont
 ```
 
 ## Estrutura
@@ -82,7 +104,7 @@ python etl/extrair_censo.py --ano 2024 --listar-rotulos odont
 
 | Indicador | Fonte | Acesso |
 |---|---|---|
-| Oferta, vagas, matrículas | Censo da Educação Superior 2024 (INEP) | HTTPS, ZIP lido por `Range` |
+| Oferta, vagas, matrículas | Censo da Educação Superior 2025 (INEP) | HTTPS, ZIP lido por `Range` (ou espelho local conferido) |
 | CPC, IDD, ENADE, perfil docente | **CPC 2023** (INEP), área ODONTOLOGIA | HTTPS |
 | Cirurgiões-dentistas no SUS | CNES — vínculos com CBO `2232xx` | FTP DATASUS |
 | Rede especializada | CNES — serviço **114**, atenção especializada à saúde bucal | FTP DATASUS |
@@ -216,9 +238,9 @@ prova.
 
 ```bash
 python etl/pipeline.py --check-only     # só verifica se as fontes mudaram
-python etl/pipeline.py --ano 2024       # extrai, calcula, valida, publica
+python etl/pipeline.py --ano 2025       # extrai, calcula, valida, publica
 python etl/pipeline.py --so-riqueza     # só a guarda de riqueza
-python etl/serie.py --anos 2021 2022 2023 2024
+python etl/serie.py --anos 2021 2022 2023 2024 2025
 ```
 
 A extração do CNES leva perto de uma hora, porque o FTP do DATASUS derruba a

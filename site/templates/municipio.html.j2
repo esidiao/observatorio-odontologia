@@ -26,8 +26,10 @@
   <h2 class="secao-titulo">Formação</h2>
   <div class="kpis kpis-compacto" data-cartoes>
     {# Sem `polos_ead` e `matriculas_ead`: não há EaD em Odontologia, e dois
-       cartões sempre em zero em cada uma das 303 páginas municipais é ruído,
-       não informação. A ausência está declarada na home, uma vez. #}
+       cartões sempre em zero em cada página municipal é ruído, não
+       informação. A ausência está declarada na home, uma vez. (A contagem de
+       páginas estava escrita aqui e envelheceu numa edição: eram 303, são
+       308.) #}
     {% for campo in ['vagas_presencial', 'cursos_presencial', 'n_ies',
                      'matriculas', 'concluintes'] %}
     <div class="kpi" data-campo="{{ campo }}"
